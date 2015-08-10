@@ -83,7 +83,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 			 */
 			
 			wp_enqueue_script(
-				Plugin_Name::PLUGIN_ID,
+				Plugin_Name::PLUGIN_ID . '_admin-js',
 				Plugin_Name::get_plugin_url() . 'views/admin/js/' . Plugin_Name::PLUGIN_ID . '-admin.js',
 				array( 'jquery' ),
 				Plugin_Name::PLUGIN_VERSION,
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 			 */
 
 			wp_enqueue_style(
-				Plugin_Name::PLUGIN_ID,
+				Plugin_Name::PLUGIN_ID . '_admin-css',
 				Plugin_Name::get_plugin_url() . 'views/admin/css/' . Plugin_Name::PLUGIN_ID . '-admin.css',
 				array(),
 				Plugin_Name::PLUGIN_VERSION,

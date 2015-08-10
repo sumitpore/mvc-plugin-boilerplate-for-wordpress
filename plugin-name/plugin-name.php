@@ -57,7 +57,7 @@ function plugin_name_requirements_met() {
  *
  * @since    1.0.0
  */
-function plugin_name_requirements_error() {
+function plugin_name_show_requirements_error() {
 
 	global $wp_version;
 	require_once( dirname( __FILE__ ) . '/views/admin/errors/requirements-error.php' );
@@ -97,7 +97,7 @@ function run_plugin_name() {
 
 	} else {
 
-		add_action( 'admin_notices', 'plugin_name_requirements_error' );
+		add_action( 'admin_notices', 'plugin_name_show_requirements_error' );
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		deactivate_plugins( plugin_basename( __FILE__ ) );
 

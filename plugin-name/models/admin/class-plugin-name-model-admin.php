@@ -11,21 +11,7 @@
 
 if ( ! class_exists( 'Plugin_Name_Model_Admin' ) ) {
 
-	class Plugin_Name_Model_Admin extends Plugin_Name_Model {
-
-		/**
-		 * Constructor
-		 *
-		 * @since    1.0.0
-		 */
-		protected function __construct() {}
-
-		/**
-		 * Register callbacks for actions and filters
-		 *
-		 * @since    1.0.0
-		 */
-		protected function register_hook_callbacks() {}
+	abstract class Plugin_Name_Model_Admin extends Plugin_Name_Model {
 
 	}
 

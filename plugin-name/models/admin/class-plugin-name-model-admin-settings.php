@@ -136,7 +136,7 @@ if ( ! class_exists( 'Plugin_Name_Model_Admin_Settings' ) ) {
 			if ( $setting_name ) {
 				static::get_settings();
 
-				unset( static::$settings[static::ADMIN_NOTICES_SETTINGS_NAME] );
+				unset( static::$settings[$setting_name] );
 
 				return static::update_settings( static::$settings );
 			}

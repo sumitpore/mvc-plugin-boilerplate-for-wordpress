@@ -35,7 +35,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 *
 		 * @since    1.0.0
 		 * @access   private
-		 * @var      string    $plugin_main_path    Main path.
+		 * @var      string    $plugin_path    Main path.
 		 */
 		private static $plugin_path;
 
@@ -44,7 +44,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 *
 		 * @since    1.0.0
 		 * @access   private
-		 * @var      string    $plugin_main_path    Main path.
+		 * @var      string    $plugin_url    Main path.
 		 */
 		private static $plugin_url;
 
