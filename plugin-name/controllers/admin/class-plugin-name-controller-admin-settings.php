@@ -61,8 +61,8 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 		public function plugin_menu() {
 
 			static::$hook_suffix = add_options_page(
-				__( Plugin_Name::PLUGIN_NAME ),        // Page Title
-				__( Plugin_Name::PLUGIN_NAME ),        // Menu Title
+				__( Plugin_Name::PLUGIN_NAME, Plugin_Name::PLUGIN_ID ),        // Page Title
+				__( Plugin_Name::PLUGIN_NAME, Plugin_Name::PLUGIN_ID ),        // Menu Title
 				static::REQUIRED_CAPABILITY,           // Capability
 				static::SETTINGS_PAGE_URL,             // Menu URL
 				array( $this, 'markup_settings_page' ) // Callback
@@ -149,7 +149,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 			// Add Settings Page Section
 			add_settings_section(
 				'plugin_name_section',                    // Section ID
-				__( 'Settings' ),                         // Section Title
+				__( 'Settings',Plugin_Name::PLUGIN_ID ),                         // Section Title
 				array( $this, 'markup_section_headers' ), // Section Callback
 				static::SETTINGS_PAGE_URL                 // Page URL
 			);
@@ -157,7 +157,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 			// Add Settings Page Field
 			add_settings_field(
 				'plugin_name_field',                        // Field ID
-				__( 'Plugin Name Field:' ),                 // Field Title 
+				__( 'Plugin Name Field:',Plugin_Name::PLUGIN_ID ),                 // Field Title 
 				array( $this, 'markup_fields' ),            // Field Callback
 				static::SETTINGS_PAGE_URL,                  // Page
 				'plugin_name_section',                      // Section ID
@@ -182,7 +182,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 				'page-settings/page-settings-section-headers.php',
 				array(
 					'section'      => $section,
-					'text_example' => __( 'This is a text example for section header' )
+					'text_example' => __( 'This is a text example for section header',Plugin_Name::PLUGIN_ID )
 				)
 			);
 		
@@ -222,7 +222,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 		 */
 		public function add_plugin_action_links( $links ) {
 
-			$settings_link = '<a href="options-general.php?page=' . static::SETTINGS_PAGE_URL . '">' . __( 'Settings' ) . '</a>';
+			$settings_link = '<a href="options-general.php?page=' . static::SETTINGS_PAGE_URL . '">' . __( 'Settings', Plugin_Name::PLUGIN_ID) . '</a>';
 			array_unshift( $links, $settings_link );
 
 			return $links;
