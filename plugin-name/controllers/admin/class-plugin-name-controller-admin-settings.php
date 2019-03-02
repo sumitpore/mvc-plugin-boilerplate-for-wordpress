@@ -124,7 +124,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 			if ( current_user_can( static::REQUIRED_CAPABILITY ) ) {
 
 				echo static::render_template(
-					'page-settings/page-settings.php',
+					'admin/page-settings/page-settings.php',
 					array(
 						'page_title' 	=> Plugin_Name::PLUGIN_NAME,
 						'settings_name' => Plugin_Name_Model_Admin_Settings::SETTINGS_NAME
@@ -179,7 +179,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 		public function markup_section_headers( $section ) {
 
 			echo static::render_template(
-				'page-settings/page-settings-section-headers.php',
+				'admin/page-settings/page-settings-section-headers.php',
 				array(
 					'section'      => $section,
 					'text_example' => __( 'This is a text example for section header',Plugin_Name::PLUGIN_ID )
@@ -201,7 +201,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 			$settings_value = static::get_model()->get_settings( $field_id );
 
 			echo static::render_template(
-				'page-settings/page-settings-fields.php',
+				'admin/page-settings/page-settings-fields.php',
 				array(
 					'field_id'       => esc_attr( $field_id ),
 					'settings_name'  => Plugin_Name_Model_Admin_Settings::SETTINGS_NAME,
