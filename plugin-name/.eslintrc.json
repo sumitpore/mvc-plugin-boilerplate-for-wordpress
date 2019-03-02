@@ -1,0 +1,15 @@
+{
+    "env": {
+        "browser": true
+    },
+    "extends": ["airbnb", "prettier"],
+    "plugins": ["prettier"],
+    "rules": {
+        "prettier/prettier": ["error"],
+        "no-param-reassign": ["error",
+			{
+				"props": true
+			}
+        ]
+    }
+}

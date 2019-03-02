@@ -55,7 +55,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Notices' ) ) {
 		public static function add_admin_notice( $notice_text ) {
 
 			$notice = static::render_template(
-				'errors/admin-notice.php',
+				'admin/errors/admin-notice.php',
 				array(
 					'admin_notice' => esc_attr( $notice_text )
 				)
