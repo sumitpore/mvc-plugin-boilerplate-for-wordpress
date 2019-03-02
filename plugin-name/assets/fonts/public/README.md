@@ -1,0 +1,1 @@
+Fonts required on Frontend
