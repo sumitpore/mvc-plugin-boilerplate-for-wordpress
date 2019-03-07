@@ -86,22 +86,6 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		const PLUGIN_PREFIX 	= 'plugin-name-';
 
 		/**
-		 * Provides access to a single instance of a module using the singleton pattern
-		 *
-		 * @return object
-		 *
-		 * @since    1.0.0
-		 */
-		public static function get_instance($router_class_name, $routes) {
-
-			if ( null === self::$instance ) {
-				self::$instance = new self($router_class_name, $routes);
-			}
-			return self::$instance;
-
-		}
-
-		/**
 		 * Define the core functionality of the plugin.
 		 *
 		 * Load the dependencies, define the locale, and set the hooks for the admin area and
@@ -127,8 +111,11 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 			require_once( self::$plugin_path . 'includes/class-' . self::PLUGIN_PREFIX . 'loader.php' );
 
 			$router = Plugin_Name_Router::get_instance();
+
+			Plugin_Name_Loader::get_instance();
 			Plugin_Name_Actions_Filters::init_actions_filters();
 
+			$this->set_locale();
 		}
 
 		/**
@@ -151,7 +138,10 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 					$folder .= 'public/';
 				}
 
-				if ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX . 'Controller' ) ) {
+				if ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX . 'View' ) ) {
+					$path = Plugin_Name::get_plugin_path() . 'views' . $folder . $classFileName;
+					require_once( $path );
+				} elseif ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX . 'Controller' ) ) {
 					$path = Plugin_Name::get_plugin_path() . 'controllers' . $folder . $classFileName;
 					require_once( $path );
 				} elseif ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX . 'Model' ) ) {
@@ -185,6 +175,23 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		public static function get_plugin_url() {
 
 			return isset( self::$plugin_url ) ? self::$plugin_url : plugin_dir_url( dirname( __FILE__ ) );
+
+		}
+
+		/**
+		 * Define the locale for this plugin for internationalization.
+		 *
+		 * Uses the Plugin_Name_i18n class in order to set the domain and to register the hook
+		 * with WordPress.
+		 *
+		 * @since    1.0.0.0
+		 */
+		private function set_locale() {
+
+			$plugin_i18n = new Plugin_Name_i18n();
+			$plugin_i18n->set_domain( Plugin_Name::PLUGIN_ID );
+
+			Plugin_Name_Actions_Filters::add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
 		}
 
