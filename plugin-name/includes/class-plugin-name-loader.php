@@ -65,56 +65,6 @@ if ( ! class_exists( 'Plugin_Name_Loader' ) ) {
 
 		}
 
-		/**
-		 * Register callbacks for actions and filters
-		 *
-		 * @since    1.0.0.0
-		 */
-		public function register_hook_callbacks() {
-
-			register_activation_hook(   Plugin_Name::get_plugin_path() . Plugin_Name::PLUGIN_ID . '.php', array( $this, 'activate' ) );
-			register_deactivation_hook( Plugin_Name::get_plugin_path() . Plugin_Name::PLUGIN_ID . '.php', array( $this, 'deactivate' ) );
-
-		}
-
-		/**
-		 * Prepares sites to use the plugin during single or network-wide activation
-		 *
-		 * @since    1.0.0
-		 * @param bool $network_wide
-		 */
-		public function activate( $network_wide ) {
-
-		}
-
-
-		/**
-		 * Rolls back activation procedures when de-activating the plugin
-		 *
-		 * @since    1.0.0
-		 */
-		public function deactivate() {
-
-			Plugin_Name_Model_Admin_Notices::remove_admin_notices();
-
-		}
-
-		/**
-		 * Fired when user uninstalls the plugin, called in unisntall.php file
-		 *
-		 * @since    1.0.0
-		 */
-		public static function uninstall_plugin() {
-
-			require_once dirname( plugin_dir_path( __FILE__ ) ) . '/includes/class-plugin-name.php';
-			require_once dirname( plugin_dir_path( __FILE__ ) ) . '/models/class-plugin-name-model.php';
-			require_once dirname( plugin_dir_path( __FILE__ ) ) . '/models/admin/class-plugin-name-model-admin.php';
-			require_once dirname( plugin_dir_path( __FILE__ ) ) . '/models/admin/class-plugin-name-model-admin-settings.php';
-
-			Plugin_Name_Model_Admin_Settings::delete_settings();
-
-		}
-
 	}
 
 }

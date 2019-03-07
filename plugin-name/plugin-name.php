@@ -65,6 +65,23 @@ function plugin_name_show_requirements_error() {
 }
 
 /**
+ * The code that runs during plugin activation.
+ * This action is documented in includes/class-plugin-name-activator.php
+ */
+function activate_plugin_name() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-activator.php';
+	Plugin_Name_Activator::activate();
+}
+/**
+ * The code that runs during plugin deactivation.
+ * This action is documented in includes/class-plugin-name-deactivator.php
+ */
+function deactivate_plugin_name() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-deactivator.php';
+	Plugin_Name_Deactivator::deactivate();
+}
+
+/**
  * Begins execution of the plugin.
  *
  * @since    1.0.0
@@ -77,6 +94,9 @@ function run_plugin_name() {
 	 * Otherwise older PHP installations could crash when trying to parse it.
 	 **/
 	if ( plugin_name_requirements_met() ) {
+
+		register_activation_hook( __FILE__, 'activate_plugin_name' );
+		register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
 
 		/**
 		 * The core plugin class that is used to define internationalization,
