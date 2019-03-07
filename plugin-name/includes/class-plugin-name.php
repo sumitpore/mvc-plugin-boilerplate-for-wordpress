@@ -84,7 +84,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 * @since    1.0.0
 		 */
 		const PLUGIN_PREFIX 	= 'plugin-name-';
-		
+
 		/**
 		 * Provides access to a single instance of a module using the singleton pattern
 		 *
@@ -92,10 +92,10 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		public static function get_instance() {
+		public static function get_instance($router_class_name, $routes) {
 
 			if ( null === self::$instance ) {
-				self::$instance = new self();
+				self::$instance = new self($router_class_name, $routes);
 			}
 			return self::$instance;
 
@@ -109,19 +109,60 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		public function __construct() {
+		public function __construct($router_class_name, $routes) {
+
+			if( !class_exists( $router_class_name ) ){
+				throw new \InvalidArgumentException( "Could not load {$router_class_name} class!");
+			}
+
+			if( !file_exists( $routes ) ){
+				throw new \InvalidArgumentException( "Routes file {$routes} not found! Please pass a valid file.");
+			}
+
+			spl_autoload_register( array( $this, 'load_dependencies' ) );
 
 			self::$plugin_path = plugin_dir_path( dirname( __FILE__ ) );
 			self::$plugin_url  = plugin_dir_url( dirname( __FILE__ ) );
 
 			require_once( self::$plugin_path . 'includes/class-' . self::PLUGIN_PREFIX . 'loader.php' );
 
-			self::$modules['Plugin_Name_Loader']                    = Plugin_Name_Loader::get_instance();
-			self::$modules['Plugin_Name_Controller_Public']         = Plugin_Name_Controller_Public::get_instance();
-			self::$modules['Plugin_Name_Controller_Admin_Settings'] = Plugin_Name_Controller_Admin_Settings::get_instance();
-			self::$modules['Plugin_Name_Controller_Admin_Notices']  = Plugin_Name_Controller_Admin_Notices::get_instance();
-			
+			$router = Plugin_Name_Router::get_instance();
 			Plugin_Name_Actions_Filters::init_actions_filters();
+
+		}
+
+		/**
+		 * Loads all Plugin dependencies
+		 *
+		 * @since    1.0.0
+		 */
+		private function load_dependencies( $class ) {
+
+			if ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX ) ) {
+
+				$classFileName = 'class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
+				$folder        = '/';
+
+				if ( false !== strpos( $class, '_Admin' ) ) {
+					$folder .= 'admin/';
+				}
+
+				if ( false !== strpos( $class, '_Public' ) ) {
+					$folder .= 'public/';
+				}
+
+				if ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX . 'Controller' ) ) {
+					$path = Plugin_Name::get_plugin_path() . 'controllers' . $folder . $classFileName;
+					require_once( $path );
+				} elseif ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX . 'Model' ) ) {
+					$path = Plugin_Name::get_plugin_path() . 'models' . $folder . $classFileName;
+					require_once( $path );
+				} else {
+					$path = Plugin_Name::get_plugin_path() . 'includes/' . $classFileName;
+					require_once( $path );
+				}
+
+			}
 
 		}
 

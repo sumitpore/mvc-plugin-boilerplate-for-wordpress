@@ -43,41 +43,8 @@ if ( ! class_exists( 'Plugin_Name_Loader' ) ) {
 		 */
 		protected function __construct() {
 
-			spl_autoload_register( array( $this, 'load_dependencies' ) );
-
 			$this->set_locale();
 			$this->register_hook_callbacks();
-
-		}
-
-		/**
-		 * Loads all Plugin dependencies
-		 *
-		 * @since    1.0.0
-		 */
-		private function load_dependencies( $class ) {
-
-			if ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX ) ) {
-
-				$classFileName = 'class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
-				$folder        = '/';
-
-				if ( false !== strpos( $class, '_Admin' ) ) {
-					$folder .= 'admin/';
-				}
-
-				if ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX . 'Controller' ) ) {
-					$path = Plugin_Name::get_plugin_path() . 'controllers' . $folder . $classFileName;
-					require_once( $path );
-				} elseif ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX . 'Model' ) ) {
-					$path = Plugin_Name::get_plugin_path() . 'models' . $folder . $classFileName;
-					require_once( $path );
-				} else {
-					$path = Plugin_Name::get_plugin_path() . 'includes/' . $classFileName;
-					require_once( $path );
-				}
-
-			}
 
 		}
 
@@ -143,7 +110,7 @@ if ( ! class_exists( 'Plugin_Name_Loader' ) ) {
 			require_once dirname( plugin_dir_path( __FILE__ ) ) . '/models/class-plugin-name-model.php';
 			require_once dirname( plugin_dir_path( __FILE__ ) ) . '/models/admin/class-plugin-name-model-admin.php';
 			require_once dirname( plugin_dir_path( __FILE__ ) ) . '/models/admin/class-plugin-name-model-admin-settings.php';
-			
+
 			Plugin_Name_Model_Admin_Settings::delete_settings();
 
 		}
