@@ -58,6 +58,15 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 		}
 
 		public function register_route_of_type($type){
+
+			if( in_array( $type, $this->late_frontend_route_types() ) && did_action('wp') ){
+				trigger_error(__('Late Routes can not be registered after `wp` hook is triggered. Register your route before `wp` hook is triggered.', Plugin_Name::PLUGIN_ID), E_USER_ERROR);
+			}
+
+			if( in_array( $type, $this->route_types() ) && did_action('init') ){
+				trigger_error(__('Non-Late Routes can not be registered after `init` hook is triggered. Register your route before `init` hook is triggered.', Plugin_Name::PLUGIN_ID), E_USER_ERROR);
+			}
+
 			$this->route_type_to_register = $type;
 			return $this;
 		}
