@@ -93,7 +93,9 @@ function run_plugin_name() {
 		 *
 		 * @since    1.0.0
 		 */
-		$plugin = Plugin_Name::get_instance();
+		$router_class_name = 'Plugin_Name_Router';
+		$routes = apply_filters('plugin_name_routes', plugin_dir_path( __FILE__ ) . 'routes.php');
+		$plugin = new Plugin_Name($router_class_name, $routes);
 
 	} else {
 
