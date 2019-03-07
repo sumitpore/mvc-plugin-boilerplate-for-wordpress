@@ -17,7 +17,7 @@ if ( ! trait_exists( 'Plugin_Name_Dependency_Loader' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		private function load_dependencies( $class ) {
+		public function load_dependencies( $class ) {
 
 			if ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX ) ) {
 
@@ -64,6 +64,16 @@ if ( ! trait_exists( 'Plugin_Name_Dependency_Loader' ) ) {
 			foreach ( glob( self::$plugin_path . "core/*.php") as $path) {
 				require_once $path;
 			}
+		}
+
+		/**
+		 * Method responsible to call all the dependencies
+		 *
+		 * @since 1.0.01
+		 */
+		private function autoload_dependencies(){
+			$this->load_core();
+			spl_autoload_register( array( $this, 'load_dependencies' ) );
 		}
 	}
 

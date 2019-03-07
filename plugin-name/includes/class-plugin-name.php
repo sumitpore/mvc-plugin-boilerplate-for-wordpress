@@ -105,19 +105,16 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 				throw new \InvalidArgumentException( "Routes file {$routes} not found! Please pass a valid file.");
 			}
 
-			spl_autoload_register( array( $this, 'load_dependencies' ) );
-
 			self::$plugin_path = plugin_dir_path( dirname( __FILE__ ) );
 			self::$plugin_url  = plugin_dir_url( dirname( __FILE__ ) );
 
-			require_once( self::$plugin_path . 'includes/class-' . self::PLUGIN_PREFIX . 'loader.php' );
+			$this->autoload_dependencies();
+			$this->set_locale();
+			$this->init_router();
 
-			$router = Plugin_Name_Router::get_instance();
-
-			Plugin_Name_Loader::get_instance();
 			Plugin_Name_Actions_Filters::init_actions_filters();
 
-			$this->set_locale();
+
 		}
 
 		/**
@@ -157,6 +154,18 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 
 			Plugin_Name_Actions_Filters::add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
+		}
+
+		/**
+		 * Init Router
+		 *
+		 * @since 1.0.0
+		 *
+		 * @return void
+		 */
+		private function init_router(){
+			$this->router = $router = new Plugin_Name_Router();
+			include_once($routes);
 		}
 
 	}
