@@ -18,15 +18,7 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 
 		private static $models = [];
 
-		public static function get_instance()
-		{
-			if (null === static::$instance) {
-				static::$instance = new static();
-			}
-			return static::$instance;
-		}
-
-		private function __construct(){
+		public function __construct(){
 			$this->register_hook_callbacks();
 		}
 
