@@ -1,8 +1,8 @@
 <?php
 
-if ( ! trait_exists( 'Plugin_Name_Registry_Trait' ) ) {
+if ( ! trait_exists( 'Plugin_Name_Registry' ) ) {
 
-	trait Plugin_Name_Registry_Trait {
+	trait Plugin_Name_Registry {
 
 		protected static $stored_objects = [];
 
