@@ -115,11 +115,8 @@ function run_plugin_name() {
 		 * @since    1.0.0
 		 */
 		$router_class_name = 'Plugin_Name_Router';
-		$routes = apply_filters('plugin_name_routes', plugin_dir_path( __FILE__ ) . 'routes.php');
-		$plugin = new Plugin_Name($router_class_name, $routes);
-
+		$GLOBALS['plugin_name'] = new Plugin_Name( $router_class_name, $routes );
 	} else {
-
 		add_action( 'admin_notices', 'plugin_name_show_requirements_error' );
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		deactivate_plugins( plugin_basename( __FILE__ ) );
