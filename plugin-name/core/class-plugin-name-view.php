@@ -1,49 +1,85 @@
-<?php
-
+<?php //Added Docblock after below guard condition. // @codingStandardsIgnoreLine.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 /**
  * Class Responsible for Loading Templates
  *
  * @since      1.0.0
  * @package    Plugin_Name
- * @subpackage Plugin_Name/controllers
- *
+ * @subpackage Plugin_Name/views
+ * @author     Sumit P <sumit.pore@gmail.com>
  */
-
-if ( ! class_exists( 'Plugin_Name_View' ) ) {
-
-	class Plugin_Name_View {
-		/**
-		 * Render a template
-		 *
-		 * @param  string $default_template_path The path to the template, relative to the plugin's `views` folder
-		 * @param  array  $variables             An array of variables to pass into the template's scope, indexed with the variable name so that it can be extract()-ed
-		 * @param  string $require               'once' to use require_once() | 'always' to use require()
-		 * @return string
-		 *
-		 * @since    1.0.0
-		 */
-		public static function render_template( $default_template_path = false, $variables = array(), $require = 'once' ){
-
-			if ( ! $template_path = locate_template( basename( $default_template_path ) ) ) {
-				$template_path = Plugin_Name::get_plugin_path() . '/templates/' . $default_template_path;
-			}
-
-			if ( is_file( $template_path ) ) {
-				extract( $variables );
-				ob_start();
-				if ( 'always' == $require ) {
-					require( $template_path );
-				} else {
-					require_once( $template_path );
-				}
-				$template_content = apply_filters( 'plugin_name_template_content', ob_get_clean(), $default_template_path, $template_path, $variables );
-			} else {
-				$template_content = '';
-			}
-
-			return $template_content;
+class Plugin_Name_View {
+	/**
+	 * Render Templates
+	 *
+	 * @access public
+	 * @param mixed   $template_name Template file to render.
+	 * @param array   $args Variables to make available inside template file.
+	 * @param string  $template_path Directory to search for template.
+	 * @param string  $default_path Fallback directory to search for template if not found at $template_path.
+	 * @return void
+	 */
+	public function render_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+		if ( $args && is_array( $args ) ) {
+			extract( $args ); // @codingStandardsIgnoreLine.
 		}
 
+		$located = $this->locate_template( $template_name, $template_path, $default_path );
+		if ( false == $located ) {
+			return;
+		}
+
+		ob_start();
+		do_action( 'plugin_name_before_template_render', $template_name, $template_path, $located, $args );
+		include( $located );
+		do_action( 'plugin_name_after_template_render', $template_name, $template_path, $located, $args );
+
+		return ob_get_clean(); // @codingStandardsIgnoreLine.
 	}
 
+	/**
+	 * Locate a template and return the path for inclusion.
+	 *
+	 * This is the load order:
+	 *
+	 *      yourtheme       /   $template_path  /   $template_name
+	 *      yourtheme       /   $template_name
+	 *      $default_path   /   $template_name
+	 *
+	 * @access public
+	 * @param mixed  $template_name Template file to locate.
+	 * @param string $template_path $template_path Directory to search for template.
+	 * @param string $default_path Fallback directory to search for template if not found at $template_path.
+	 * @return string
+	 */
+	private function locate_template( $template_name, $template_path = '', $default_path = '' ) {
+		if ( ! $template_path ) {
+			$template_path = 'plugin-name-templates/';
+		}
+		if ( ! $default_path ) {
+			$default_path = Plugin_Name::get_plugin_path() . 'templates/';
+		}
+
+		// Look within passed path within the theme - this is priority.
+		$template = locate_template(
+			array(
+				trailingslashit( $template_path ) . $template_name,
+				$template_name,
+			)
+		);
+
+		// Get default template.
+		if ( ! $template ) {
+			$template = $default_path . $template_name;
+		}
+
+		if ( file_exists( $template ) ) {
+			// Return what we found.
+			return apply_filters( 'plugin_name_locate_template', $template, $template_name, $template_path );
+		} else {
+			return false;
+		}
+	}
 }
