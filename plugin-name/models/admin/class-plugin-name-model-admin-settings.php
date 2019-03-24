@@ -6,7 +6,6 @@
  * @since      1.0.0
  * @package    Plugin_Name
  * @subpackage Plugin_Name/models/admin
- *
  */
 
 if ( ! class_exists( 'Plugin_Name_Model_Admin_Settings' ) ) {
@@ -24,10 +23,8 @@ if ( ! class_exists( 'Plugin_Name_Model_Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 */
 		protected function __construct() {
-
 			$this->register_hook_callbacks();
 			static::get_settings();
-
 		}
 
 		/**
@@ -36,9 +33,7 @@ if ( ! class_exists( 'Plugin_Name_Model_Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 */
 		protected function register_hook_callbacks() {
-
-			Plugin_Name_Actions_Filters::add_action( 'admin_init', $this, 'register_settings' );
-
+			add_action( 'admin_init', array( $this, 'register_settings' ) );
 		}
 
 		/**
@@ -54,7 +49,6 @@ if ( ! class_exists( 'Plugin_Name_Model_Admin_Settings' ) ) {
 				static::SETTINGS_NAME,     // Option Name
 				array( $this, 'sanitize' ) // Sanitize
 			);
-
 		}
 
 		/**
@@ -65,14 +59,12 @@ if ( ! class_exists( 'Plugin_Name_Model_Admin_Settings' ) ) {
 		 * @return array
 		 */
 		public function sanitize( $input ) {
-
 			$new_input = array();
-			if ( isset( $input ) && !empty( $input ) ) {
+			if ( isset( $input ) && ! empty( $input ) ) {
 				$new_input = $input;
 			}
 
 			return $new_input;
-
 		}
 
 
@@ -83,46 +75,38 @@ if ( ! class_exists( 'Plugin_Name_Model_Admin_Settings' ) ) {
 		 * @return array
 		 */
 		public static function get_settings( $setting_name = false ) {
-
 			if ( ! isset( static::$settings ) ) {
 				static::$settings = get_option( static::SETTINGS_NAME, array() );
 			}
 
 			if ( $setting_name ) {
-				return isset( static::$settings[$setting_name] ) ? static::$settings[$setting_name] : array();
+				return isset( static::$settings[ $setting_name ] ) ? static::$settings[ $setting_name ] : array();
 			}
 
 			return static::$settings;
-			
 		}
 
-		/** 
+		/**
 		 * Helper to update Plugin Settings
 		 *
 		 * @since    1.0.0
 		 * @return boolean
 		 */
 		protected static function update_settings( $new_value, $setting_name = false ) {
-
 			if ( isset( $new_value ) ) {
-
 				if ( $setting_name ) {
-
 					static::get_settings();
-					static::$settings[$setting_name] = $new_value;
+					static::$settings[ $setting_name ] = $new_value;
 
 					$new_value = static::$settings;
-
 				} else {
 					static::$settings = $new_value;
 				}
 
 				return update_option( static::SETTINGS_NAME, $new_value );
-
 			}
 
 			return false;
-
 		}
 
 		/**
@@ -132,17 +116,15 @@ if ( ! class_exists( 'Plugin_Name_Model_Admin_Settings' ) ) {
 		 * @return boolean
 		 */
 		public static function delete_settings( $setting_name = false ) {
-
 			if ( $setting_name ) {
 				static::get_settings();
 
-				unset( static::$settings[$setting_name] );
+				unset( static::$settings[ $setting_name ] );
 
 				return static::update_settings( static::$settings );
 			}
 
 			return delete_option( static::SETTINGS_NAME );
-
 		}
 
 	}
