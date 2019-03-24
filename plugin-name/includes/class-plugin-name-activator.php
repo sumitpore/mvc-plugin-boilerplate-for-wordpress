@@ -30,7 +30,6 @@ class Plugin_Name_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
 	}
 
 }

@@ -30,7 +30,6 @@ class Plugin_Name_Uninstaller {
 	 * @since    1.0.0
 	 */
 	public static function uninstall() {
-
 	}
 
 }
