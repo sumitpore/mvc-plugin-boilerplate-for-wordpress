@@ -6,11 +6,9 @@
  * @since      1.0.0
  * @package    Plugin_Name
  * @subpackage Plugin_Name/models
- *
  */
 
 if ( ! class_exists( 'Plugin_Name_Model' ) ) {
-
 	abstract class Plugin_Name_Model {
 
 		private static $instances = array();
@@ -22,14 +20,15 @@ if ( ! class_exists( 'Plugin_Name_Model' ) ) {
 		 * @return object
 		 */
 		public static function get_instance() {
-
 			$classname = get_called_class();
+			$instance = Plugin_Name_Controller_Registry::get( $classname );
 
-			if ( ! isset( self::$instances[ $classname ] ) ) {
-				self::$instances[ $classname ] = new $classname();
+			if ( $instance === null ) {
+				$instance = new $classname();
+				Plugin_Name_Model_Registry::set( $classname, $instance );
 			}
-			return self::$instances[ $classname ];
 
+			return $instance;
 		}
 
 		/**

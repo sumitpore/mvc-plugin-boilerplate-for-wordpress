@@ -6,14 +6,11 @@
  * @since      1.0.0
  * @package    Plugin_Name
  * @subpackage Plugin_Name/controllers
- *
  */
 
 if ( ! class_exists( 'Plugin_Name_Controller' ) ) {
-
 	abstract class Plugin_Name_Controller {
 
-		private static $instances = array();
 		protected $model;
 
 		/**
@@ -23,15 +20,18 @@ if ( ! class_exists( 'Plugin_Name_Controller' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		public static function get_instance() {
-
+		public static function get_instance( $model_class_name = false, $view_class_name = false ) {
 			$classname = get_called_class();
+			$key_in_registry = Plugin_Name_Controller_Registry::get_key( $classname, $model_class_name, $view_class_name );
 
-			if ( ! isset( self::$instances[ $classname ] ) ) {
-				self::$instances[ $classname ] = new $classname();
+			$instance = Plugin_Name_Controller_Registry::get( $key_in_registry );
+
+			if ( $instance === null ) {
+				$instance = new $classname( $model_class_name, $view_class_name );
+				Plugin_Name_Controller_Registry::set( $key_in_registry, $instance );
 			}
-			return self::$instances[ $classname ];
 
+			return $instance;
 		}
 
 		/**
@@ -41,10 +41,19 @@ if ( ! class_exists( 'Plugin_Name_Controller' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		protected static function get_model() {
+		protected function get_model() {
+			return $this->model;
+		}
 
-			return static::get_instance()->model;
-
+		/**
+		 * Get view
+		 *
+		 * @return object
+		 *
+		 * @since    1.0.0
+		 */
+		protected function get_view() {
+			return $this->view;
 		}
 
 		/**
@@ -66,18 +75,23 @@ if ( ! class_exists( 'Plugin_Name_Controller' ) ) {
 					$w3_total_cache->flush_all();
 				}
 			}
-
 		}
 
 		/**
 		 * Constructor
-		 *
 		 */
-		abstract protected function __construct();
+		protected function __construct( $model_class_name = false, $view_class_name = false ) {
+			if ( $model_class_name != false ) {
+				$this->model = $model_class_name::get_instance();
+			}
+
+			if ( $view_class_name != false ) {
+				$this->view = new $view_class_name;
+			}
+		}
 
 		/**
 		 * Register callbacks for actions and filters
-		 *
 		 */
 		abstract protected function register_hook_callbacks();
 
