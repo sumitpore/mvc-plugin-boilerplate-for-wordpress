@@ -25,8 +25,8 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define( 'PLUGIN_NAME_REQUIRED_PHP_VERSION', '5.3' ); // because of get_called_class()
-define( 'PLUGIN_NAME_REQUIRED_WP_VERSION',  '3.0' );
-define( 'PLUGIN_NAME_REQUIRED_WP_NETWORK',  false ); // because plugin is not compatible with WordPress multisite
+define( 'PLUGIN_NAME_REQUIRED_WP_VERSION', '3.0' );
+define( 'PLUGIN_NAME_REQUIRED_WP_NETWORK', false ); // because plugin is not compatible with WordPress multisite
 
 /**
  * Checks if the system requirements are met
@@ -35,7 +35,6 @@ define( 'PLUGIN_NAME_REQUIRED_WP_NETWORK',  false ); // because plugin is not co
  * @return bool True if system requirements are met, false if not
  */
 function plugin_name_requirements_met() {
-
 	global $wp_version;
 
 	if ( version_compare( PHP_VERSION, PLUGIN_NAME_REQUIRED_PHP_VERSION, '<' ) ) {
@@ -49,7 +48,6 @@ function plugin_name_requirements_met() {
 	}
 
 	return true;
-
 }
 
 /**
@@ -58,10 +56,8 @@ function plugin_name_requirements_met() {
  * @since    1.0.0
  */
 function plugin_name_show_requirements_error() {
-
 	global $wp_version;
 	require_once( dirname( __FILE__ ) . '/views/admin/errors/requirements-error.php' );
-
 }
 
 /**
@@ -92,9 +88,8 @@ function run_plugin_name() {
 	 * Check requirements and load main class
 	 * The main program needs to be in a separate file that only gets loaded if the plugin requirements are met.
 	 * Otherwise older PHP installations could crash when trying to parse it.
-	 **/
+	 */
 	if ( plugin_name_requirements_met() ) {
-
 		register_activation_hook( __FILE__, 'activate_plugin_name' );
 		register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
 
@@ -115,13 +110,12 @@ function run_plugin_name() {
 		 * @since    1.0.0
 		 */
 		$router_class_name = 'Plugin_Name_Router';
+		$routes = apply_filters( 'plugin_name_routes', plugin_dir_path( __FILE__ ) . 'routes.php' );
 		$GLOBALS['plugin_name'] = new Plugin_Name( $router_class_name, $routes );
 	} else {
 		add_action( 'admin_notices', 'plugin_name_show_requirements_error' );
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		deactivate_plugins( plugin_basename( __FILE__ ) );
-
 	}
-
 }
 run_plugin_name();

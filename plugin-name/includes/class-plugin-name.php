@@ -6,7 +6,6 @@
  * @since      1.0.0
  * @package    Plugin_Name
  * @subpackage Plugin_Name/includes
- *
  */
 
 if ( ! class_exists( 'Plugin_Name' ) ) {
@@ -56,14 +55,14 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		const PLUGIN_ID 		= 'plugin-name';
+		const PLUGIN_ID         = 'plugin-name';
 
 		/**
 		 * The name identifier of this plugin.
 		 *
 		 * @since    1.0.0
 		 */
-		const PLUGIN_NAME 		= 'Plugin Name';
+		const PLUGIN_NAME       = 'Plugin Name';
 
 
 		/**
@@ -71,21 +70,21 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		const PLUGIN_VERSION 	= '1.0.0';
+		const PLUGIN_VERSION    = '1.0.0';
 
 		/**
 		 * The plugin prefix to referenciate classes inside the plugin
 		 *
 		 * @since    1.0.0
 		 */
-		const CLASS_PREFIX 		= 'Plugin_Name_';
+		const CLASS_PREFIX      = 'Plugin_Name_';
 
 		/**
 		 * The plugin prefix to referenciate files and prefixes inside the plugin
 		 *
 		 * @since    1.0.0
 		 */
-		const PLUGIN_PREFIX 	= 'plugin-name-';
+		const PLUGIN_PREFIX     = 'plugin-name-';
 
 		/**
 		 * Define the core functionality of the plugin.
@@ -95,26 +94,16 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		public function __construct($router_class_name, $routes) {
-
-			if( !class_exists( $router_class_name ) ){
-				throw new \InvalidArgumentException( "Could not load {$router_class_name} class!");
-			}
-
-			if( !file_exists( $routes ) ){
-				throw new \InvalidArgumentException( "Routes file {$routes} not found! Please pass a valid file.");
-			}
-
+		public function __construct( $router_class_name, $routes ) {
 			self::$plugin_path = plugin_dir_path( dirname( __FILE__ ) );
 			self::$plugin_url  = plugin_dir_url( dirname( __FILE__ ) );
 
 			$this->autoload_dependencies();
 			$this->set_locale();
-			$this->init_router();
+			$this->init_router( $router_class_name, $routes );
 
-			Plugin_Name_Actions_Filters::init_actions_filters();
-
-
+			$this->controllers = $this->get_all_controllers();
+			$this->models = $this->get_all_models();
 		}
 
 		/**
@@ -123,9 +112,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 * @since    1.0.0
 		 */
 		public static function get_plugin_path() {
-
 			return isset( self::$plugin_path ) ? self::$plugin_path : plugin_dir_path( dirname( __FILE__ ) );
-
 		}
 
 		/**
@@ -134,9 +121,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 * @since    1.0.0
 		 */
 		public static function get_plugin_url() {
-
 			return isset( self::$plugin_url ) ? self::$plugin_url : plugin_dir_url( dirname( __FILE__ ) );
-
 		}
 
 		/**
@@ -148,12 +133,10 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 * @since    1.0.0.0
 		 */
 		private function set_locale() {
-
 			$plugin_i18n = new Plugin_Name_i18n();
 			$plugin_i18n->set_domain( Plugin_Name::PLUGIN_ID );
 
-			Plugin_Name_Actions_Filters::add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
+			add_action( 'plugins_loaded', array( $plugin_i18n, 'load_plugin_textdomain' ) );
 		}
 
 		/**
@@ -163,11 +146,28 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 *
 		 * @return void
 		 */
-		private function init_router(){
-			$this->router = $router = new Plugin_Name_Router();
-			include_once($routes);
+		private function init_router( $router_class_name, $routes ) {
+			if ( ! class_exists( $router_class_name ) ) {
+				throw new \InvalidArgumentException( "Could not load {$router_class_name} class!" );
+			}
+
+			if ( ! file_exists( $routes ) ) {
+				throw new \InvalidArgumentException( "Routes file {$routes} not found! Please pass a valid file." );
+			}
+
+			$this->router = $router = new $router_class_name();
+			add_action( 'plugins_loaded', function() use($router, $routes){
+				include_once( $routes );
+			});
 		}
 
+		private function get_all_controllers() {
+			return (object) Plugin_Name_Controller_Registry::get_all_objects();
+		}
+
+		private function get_all_models() {
+			return (object) Plugin_Name_Model_Registry::get_all_objects();
+		}
 	}
 
 }

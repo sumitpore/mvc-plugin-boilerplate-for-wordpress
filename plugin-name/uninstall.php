@@ -30,5 +30,5 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-require_once ( plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-uninstaller.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-uninstaller.php' );
 Plugin_Name_Uninstaller::uninstall();
