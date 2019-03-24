@@ -18,9 +18,7 @@ if ( ! trait_exists( 'Plugin_Name_Dependency_Loader' ) ) {
 		 * @since    1.0.0
 		 */
 		public function load_dependencies( $class ) {
-
 			if ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX ) ) {
-
 				$classFileName = 'class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
 				$folder        = '/';
 
@@ -45,23 +43,30 @@ if ( ! trait_exists( 'Plugin_Name_Dependency_Loader' ) ) {
 					$path = Plugin_Name::get_plugin_path() . 'includes/' . $classFileName;
 					require_once( $path );
 				}
-
 			}
+		}
 
+		/**
+		 * Load All Registry Class Files
+		 *
+		 * @since    1.0.0
+		 * @return void
+		 */
+		private function load_registries() {
+			require_once( self::$plugin_path . 'core/registry/trait-plugin-name-registry.php' );
+			require_once( self::$plugin_path . 'core/registry/class-plugin-name-model-registry.php' );
+			require_once( self::$plugin_path . 'core/registry/class-plugin-name-controller-registry.php' );
 		}
 
 		/**
 		 * Load Core MVC Classes
 		 *
 		 * @since    1.0.0
+		 * @return void
 		 */
-		private function load_core(){
-
-			foreach ( glob( self::$plugin_path . "core/registry/*.php") as $path) {
-				require_once $path;
-			}
-
-			foreach ( glob( self::$plugin_path . "core/*.php") as $path) {
+		private function load_core() {
+			$this->load_registries();
+			foreach ( glob( self::$plugin_path . 'core/*.php' ) as $path ) {
 				require_once $path;
 			}
 		}
@@ -71,7 +76,7 @@ if ( ! trait_exists( 'Plugin_Name_Dependency_Loader' ) ) {
 		 *
 		 * @since 1.0.01
 		 */
-		private function autoload_dependencies(){
+		private function autoload_dependencies() {
 			$this->load_core();
 			spl_autoload_register( array( $this, 'load_dependencies' ) );
 		}
