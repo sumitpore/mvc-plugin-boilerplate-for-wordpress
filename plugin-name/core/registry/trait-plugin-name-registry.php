@@ -12,9 +12,8 @@ if ( ! trait_exists( 'Plugin_Name_Registry' ) ) {
 		 *
 		 * @return void
 		 */
-		public static function set(string $key, $value)
-		{
-			static::$stored_objects[$key] = $value;
+		public static function set( string $key, $value ) {
+			static::$stored_objects[ $key ] = $value;
 		}
 
 		/**
@@ -22,13 +21,21 @@ if ( ! trait_exists( 'Plugin_Name_Registry' ) ) {
 		 *
 		 * @return mixed
 		 */
-		public static function get(string $key)
-		{
-			if (!isset(static::$stored_objects[$key])) {
-				throw new \InvalidArgumentException('Invalid key given');
+		public static function get( string $key ) {
+			if ( ! isset( static::$stored_objects[ $key ] ) ) {
+				return null;
 			}
 
-			return static::$stored_objects[$key];
+			return static::$stored_objects[ $key ];
+		}
+
+		/**
+		 * Returns all objects
+		 *
+		 * @return array
+		 */
+		public static function get_all_objects() {
+			return static::$stored_objects;
 		}
 	}
 
