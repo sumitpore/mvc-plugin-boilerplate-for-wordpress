@@ -6,7 +6,6 @@
  * @since      1.0.0
  * @package    Plugin_Name
  * @subpackage Plugin_Name/controllers/admin
- *
  */
 
 if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
@@ -24,13 +23,11 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		protected function __construct() {
-
+		protected function __construct( $model_class_name = false, $view_class_name = false ) {
+			parent::__construct( $model_class_name, $view_class_name );
 			static::$hook_suffix = 'settings_page_' . Plugin_Name::PLUGIN_ID;
 
 			$this->register_hook_callbacks();
-			$this->model = Plugin_Name_Model_Admin_Settings::get_instance();
-
 		}
 
 		/**
@@ -39,27 +36,23 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 */
 		protected function register_hook_callbacks() {
+			add_action( 'admin_menu', array( $this, 'plugin_menu' ) );
+			add_action( 'admin_print_scripts-' . static::$hook_suffix, array( $this, 'enqueue_scripts' ) );
+			add_action( 'admin_print_styles-' . static::$hook_suffix, array( $this, 'enqueue_styles' ) );
+			add_action( 'load-' . static::$hook_suffix, array( $this, 'register_fields' ) );
 
-			Plugin_Name_Actions_Filters::add_action( 'admin_menu',                                  $this, 'plugin_menu' );
-			Plugin_Name_Actions_Filters::add_action( 'admin_print_scripts-' . static::$hook_suffix, $this, 'enqueue_scripts' );
-			Plugin_Name_Actions_Filters::add_action( 'admin_print_styles-' . static::$hook_suffix,  $this, 'enqueue_styles' );
-			Plugin_Name_Actions_Filters::add_action( 'load-' . static::$hook_suffix,                $this, 'register_fields' );
-
-			Plugin_Name_Actions_Filters::add_filter(
+			add_filter(
 				'plugin_action_links_' . Plugin_Name::PLUGIN_ID . '/' . Plugin_Name::PLUGIN_ID . '.php',
-				$this,
-				'add_plugin_action_links'
+				array( $this, 'add_plugin_action_links' )
 			);
-
 		}
 
-		/** 
+		/**
 		 * Create menu for Plugin inside Settings menu
 		 *
 		 * @since    1.0.0
 		 */
 		public function plugin_menu() {
-
 			static::$hook_suffix = add_options_page(
 				__( Plugin_Name::PLUGIN_NAME, Plugin_Name::PLUGIN_ID ),        // Page Title
 				__( Plugin_Name::PLUGIN_NAME, Plugin_Name::PLUGIN_ID ),        // Menu Title
@@ -67,7 +60,6 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 				static::SETTINGS_PAGE_URL,             // Menu URL
 				array( $this, 'markup_settings_page' ) // Callback
 			);
-
 		}
 
 		/**
@@ -79,9 +71,8 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 
 			/**
 			 * This function is provided for demonstration purposes only.
-			 *
 			 */
-			
+
 			wp_enqueue_script(
 				Plugin_Name::PLUGIN_ID . '_admin-js',
 				Plugin_Name::get_plugin_url() . 'views/admin/js/' . Plugin_Name::PLUGIN_ID . '-admin.js',
@@ -89,7 +80,6 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 				Plugin_Name::PLUGIN_VERSION,
 				true
 			);
-
 		}
 
 		/**
@@ -101,7 +91,6 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 
 			/**
 			 * This function is provided for demonstration purposes only.
-			 *
 			 */
 
 			wp_enqueue_style(
@@ -111,7 +100,6 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 				Plugin_Name::PLUGIN_VERSION,
 				'all'
 			);
-
 		}
 
 		/**
@@ -120,23 +108,16 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 */
 		public function markup_settings_page() {
-
 			if ( current_user_can( static::REQUIRED_CAPABILITY ) ) {
-
-				echo static::render_template(
-					'admin/page-settings/page-settings.php',
+				$this->view->admin_settings_page(
 					array(
-						'page_title' 	=> Plugin_Name::PLUGIN_NAME,
-						'settings_name' => Plugin_Name_Model_Admin_Settings::SETTINGS_NAME
+						'page_title'    => Plugin_Name::PLUGIN_NAME,
+						'settings_name' => Plugin_Name_Model_Admin_Settings::SETTINGS_NAME,
 					)
 				);
-
 			} else {
-
 				wp_die( __( 'Access denied.' ) );
-
 			}
-
 		}
 
 		/**
@@ -149,24 +130,23 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 			// Add Settings Page Section
 			add_settings_section(
 				'plugin_name_section',                    // Section ID
-				__( 'Settings',Plugin_Name::PLUGIN_ID ),                         // Section Title
+				__( 'Settings', Plugin_Name::PLUGIN_ID ), // Section Title
 				array( $this, 'markup_section_headers' ), // Section Callback
 				static::SETTINGS_PAGE_URL                 // Page URL
 			);
 
 			// Add Settings Page Field
 			add_settings_field(
-				'plugin_name_field',                        // Field ID
-				__( 'Plugin Name Field:',Plugin_Name::PLUGIN_ID ),                 // Field Title 
-				array( $this, 'markup_fields' ),            // Field Callback
-				static::SETTINGS_PAGE_URL,                  // Page
-				'plugin_name_section',                      // Section ID
-				array(                                      // Field args
+				'plugin_name_field',                        		// Field ID
+				__( 'Plugin Name Field:', Plugin_Name::PLUGIN_ID ), // Field Title
+				array( $this, 'markup_fields' ),            		// Field Callback
+				static::SETTINGS_PAGE_URL,                  		// Page
+				'plugin_name_section',                      		// Section ID
+				array(                                      		// Field args
 					'id'        => 'plugin_name_field',
-					'label_for' => 'plugin_name_field'
-				) 
+					'label_for' => 'plugin_name_field',
+				)
 			);
-
 		}
 
 		/**
@@ -177,15 +157,12 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 */
 		public function markup_section_headers( $section ) {
-
-			echo static::render_template(
-				'admin/page-settings/page-settings-section-headers.php',
+			$this->view->section_headers(
 				array(
 					'section'      => $section,
-					'text_example' => __( 'This is a text example for section header',Plugin_Name::PLUGIN_ID )
+					'text_example' => __( 'This is a text example for section header', Plugin_Name::PLUGIN_ID ),
 				)
 			);
-		
 		}
 
 		/**
@@ -196,20 +173,15 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 */
 		public function markup_fields( $field_args ) {
-
 			$field_id = $field_args['id'];
-			$settings_value = static::get_model()->get_settings( $field_id );
-
-			echo static::render_template(
-				'admin/page-settings/page-settings-fields.php',
+			$settings_value = $this->model->get_settings( $field_id );
+			$this->view->markup_fields(
 				array(
 					'field_id'       => esc_attr( $field_id ),
 					'settings_name'  => Plugin_Name_Model_Admin_Settings::SETTINGS_NAME,
-					'settings_value' => ! empty( $settings_value ) ? esc_attr( $settings_value ) : ''
-				),
-				'always'
+					'settings_value' => ! empty( $settings_value ) ? esc_attr( $settings_value ) : '',
+				)
 			);
-		
 		}
 
 		/**
@@ -221,12 +193,10 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 */
 		public function add_plugin_action_links( $links ) {
-
-			$settings_link = '<a href="options-general.php?page=' . static::SETTINGS_PAGE_URL . '">' . __( 'Settings', Plugin_Name::PLUGIN_ID) . '</a>';
+			$settings_link = '<a href="options-general.php?page=' . static::SETTINGS_PAGE_URL . '">' . __( 'Settings', Plugin_Name::PLUGIN_ID ) . '</a>';
 			array_unshift( $links, $settings_link );
 
 			return $links;
-
 		}
 
 	}
