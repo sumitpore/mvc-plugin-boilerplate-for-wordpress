@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define( 'PLUGIN_NAME_REQUIRED_PHP_VERSION', '5.3' ); // because of get_called_class()
-define( 'PLUGIN_NAME_REQUIRED_WP_VERSION', '3.0' );
+define( 'PLUGIN_NAME_REQUIRED_WP_VERSION', '4.8' );
 define( 'PLUGIN_NAME_REQUIRED_WP_NETWORK', false ); // because plugin is not compatible with WordPress multisite
 
 /**
