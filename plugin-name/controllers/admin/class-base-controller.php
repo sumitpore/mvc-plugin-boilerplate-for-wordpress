@@ -1,4 +1,7 @@
 <?php
+namespace Plugin_Name\Controllers\Admin;
+
+use \Plugin_Name\Core\Controller;
 
 /**
  * Defines/implements base methods for admin controller classes
@@ -8,8 +11,8 @@
  * @subpackage Plugin_Name/controllers/admin
  */
 
-if ( ! class_exists( 'Plugin_Name_Controller_Admin' ) ) {
-	abstract class Plugin_Name_Controller_Admin extends Plugin_Name_Controller {
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Base_Controller' ) ) {
+	abstract class Base_Controller extends Controller {
 		protected function __construct( $model_class_name = false, $view_class_name = false ) {
 			parent::__construct( $model_class_name, $view_class_name );
 		}

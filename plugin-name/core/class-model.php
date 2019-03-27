@@ -1,4 +1,7 @@
 <?php
+namespace Plugin_Name\Core;
+
+use \Plugin_Name\Core\Registry\Model as Model_Registry;
 
 /**
  * Abstract class to define/implement base methods for model classes
@@ -8,8 +11,8 @@
  * @subpackage Plugin_Name/models
  */
 
-if ( ! class_exists( 'Plugin_Name_Model' ) ) {
-	abstract class Plugin_Name_Model {
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Model' ) ) {
+	abstract class Model {
 
 		private static $instances = array();
 
@@ -21,11 +24,11 @@ if ( ! class_exists( 'Plugin_Name_Model' ) ) {
 		 */
 		public static function get_instance() {
 			$classname = get_called_class();
-			$instance = Plugin_Name_Controller_Registry::get( $classname );
+			$instance = Model_Registry::get( $classname );
 
 			if ( $instance === null ) {
 				$instance = new $classname();
-				Plugin_Name_Model_Registry::set( $classname, $instance );
+				Model_Registry::set( $classname, $instance );
 			}
 
 			return $instance;

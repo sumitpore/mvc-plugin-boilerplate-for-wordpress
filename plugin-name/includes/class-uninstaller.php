@@ -1,4 +1,5 @@
 <?php
+namespace Plugin_Name\Includes;
 
 /**
  * Fired during plugin uninstallation
@@ -20,7 +21,7 @@
  * @subpackage Plugin_Name/includes
  * @author     Your Name <email@example.com>
  */
-class Plugin_Name_Uninstaller {
+class Uninstaller {
 
 	/**
 	 * Short Description. (use period)

@@ -1,4 +1,7 @@
 <?php
+namespace Plugin_Name\Models\Admin;
+
+use \Plugin_Name\Core\Model;
 
 /**
  * Defines/implements base methods for admin model classes
@@ -8,9 +11,8 @@
  * @subpackage Plugin_Name/models/admin
  */
 
-if ( ! class_exists( 'Plugin_Name_Model_Public' ) ) {
-
-	class Plugin_Name_Model_Public extends Plugin_Name_Model {
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Base_Model' ) ) {
+	abstract class Base_Model extends Model {
 
 	}
 

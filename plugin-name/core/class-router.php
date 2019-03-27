@@ -1,5 +1,7 @@
 <?php
+namespace Plugin_Name\Core;
 
+use \Plugin_Name as Plugin_Name;
 /**
  * Class Responsible for registering Routes
  *
@@ -8,9 +10,9 @@
  * @subpackage Plugin_Name/controllers
  */
 
-if ( ! class_exists( 'Plugin_Name_Router' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 
-	class Plugin_Name_Router {
+	class Router {
 		private static $instance;
 
 		private static $mvc_components = [];
@@ -26,7 +28,7 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 			add_action( 'wp', array( $this, 'register_late_model_only_routes' ) );
 
 			add_action( 'init', array( $this, 'register_defined_routes' ) );
-			add_action( 'wp', array( $this, 'register_late_public_routes' ) );
+			add_action( 'wp', array( $this, 'register_late_frontend_routes' ) );
 		}
 
 		public function route_types() {
@@ -37,23 +39,23 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 					'admin_with_possible_ajax',
 					'ajax',
 					'cron',
-					'public',
-					'public_with_possible_ajax',
+					'frontend',
+					'frontend_with_possible_ajax',
 				]
 			);
 		}
 
-		public function late_public_route_types() {
+		public function late_frontend_route_types() {
 			return apply_filters(
-				'plugin_name_late_public_route_types', [
-					'late_public',
-					'late_public_with_possible_ajax',
+				'plugin_name_late_frontend_route_types', [
+					'late_frontend',
+					'late_frontend_with_possible_ajax',
 				]
 			);
 		}
 
 		public function register_route_of_type( $type ) {
-			if ( in_array( $type, $this->late_public_route_types() ) && did_action( 'wp' ) ) {
+			if ( in_array( $type, $this->late_frontend_route_types() ) && did_action( 'wp' ) ) {
 				trigger_error( __( 'Late Routes can not be registered after `wp` hook is triggered. Register your route before `wp` hook is triggered.', Plugin_Name::PLUGIN_ID ), E_USER_ERROR );
 			}
 
@@ -73,7 +75,6 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 		}
 
 		public function build_controller_unique_id( $controller ) {
-
 			$prefix = mt_rand() . '_';
 
 			if ( is_string( $controller ) ) {
@@ -90,24 +91,21 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 			if ( is_object( $controller[0] ) ) {
 				// Object Class Calling
 				return $prefix . spl_object_hash( $controller[0] ) . $controller[1];
-
 			}
 
 			if ( is_string( $controller[0] ) ) {
 				// Static Calling
 				return $prefix . $controller[0] . '::' . $controller[1];
 			}
-
 		}
 
 		public function with_controller( $controller ) {
-
 			if ( $controller === false ) {
 				return $this;
 			}
 			$this->current_controller = $this->build_controller_unique_id( $controller );
 
-			static::$mvc_components[ $this->route_type_to_register ][$this->current_controller] = [ 'controller' => $controller ];
+			static::$mvc_components[ $this->route_type_to_register ][ $this->current_controller ] = [ 'controller' => $controller ];
 
 			return $this;
 		}
@@ -126,18 +124,16 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 			return $this;
 		}
 
-		private function register_routes( $load_late_public_routes = false ) {
-
-			if( $load_late_public_routes ) {
-				$route_types = $this->late_public_route_types();
+		private function register_routes( $load_late_frontend_routes = false ) {
+			if ( $load_late_frontend_routes ) {
+				$route_types = $this->late_frontend_route_types();
 			} else {
 				$route_types = $this->route_types();
 			}
 
-			if( empty( $route_types ) ){
+			if ( empty( $route_types ) ) {
 				return;
 			}
-
 
 			foreach ( $route_types as $route_type ) {
 				if ( $this->is_request( $route_type ) && ! empty( static::$mvc_components[ $route_type ] ) ) {
@@ -148,8 +144,8 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 			}
 		}
 
-		private function register_model_routes( $load_late_public_routes = false ) {
-			if ( $load_late_public_routes && empty( $route_types = $this->late_public_route_types() ) ) {
+		private function register_model_routes( $load_late_frontend_routes = false ) {
+			if ( $load_late_frontend_routes && empty( $route_types = $this->late_frontend_route_types() ) ) {
 				return;
 			} elseif ( empty( $route_types = $this->route_types() ) ) {
 				return;
@@ -174,7 +170,7 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 			if ( is_callable( $mvc_component['controller'] ) ) {
 				$mvc_component['controller'] = call_user_func( $mvc_component['controller'] );
 
-				if( $mvc_component['controller'] === false ){
+				if ( $mvc_component['controller'] === false ) {
 					return;
 				}
 			}
@@ -199,7 +195,6 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 		}
 
 		private function dispatch_only_model( $model ) {
-
 			if ( $model === false ) {
 				return;
 			}
@@ -210,7 +205,6 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 				if ( $model === false ) {
 					return;
 				}
-
 			}
 
 			$model::get_instance();
@@ -221,17 +215,17 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 		}
 
 		public function register_late_model_only_routes() {
-			$load_late_public_routes = true;
-			$this->register_model_routes( $load_late_public_routes );
+			$load_late_frontend_routes = true;
+			$this->register_model_routes( $load_late_frontend_routes );
 		}
 
 		public function register_defined_routes() {
 			$this->register_routes();
 		}
 
-		public function register_late_public_routes() {
-			$load_late_public_routes = true;
-			$this->register_routes( $load_late_public_routes );
+		public function register_late_frontend_routes() {
+			$load_late_frontend_routes = true;
+			$this->register_routes( $load_late_frontend_routes );
 		}
 
 		private function is_request( $route_type ) {
@@ -245,12 +239,12 @@ if ( ! class_exists( 'Plugin_Name_Router' ) ) {
 					return defined( 'DOING_AJAX' );
 				case 'cron':
 					return defined( 'DOING_CRON' );
-				case 'public':
-				case 'public_with_possible_ajax':
+				case 'frontend':
+				case 'frontend_with_possible_ajax':
 					return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' ) && ! defined( 'REST_REQUEST' );
-				case 'late_public':
-				case 'late_public_with_possible_ajax':
-					return $this->is_request( 'public' ) || ( current_action() == 'wp' ) || ( did_action( 'wp' ) === 1 );
+				case 'late_frontend':
+				case 'late_frontend_with_possible_ajax':
+					return $this->is_request( 'frontend' ) || ( current_action() == 'wp' ) || ( did_action( 'wp' ) === 1 );
 			}
 		}
 	}

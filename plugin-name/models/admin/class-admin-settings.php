@@ -1,5 +1,8 @@
 <?php
+namespace Plugin_Name\Models\Admin;
 
+use \Plugin_Name\Models\Admin\Base_Model;
+use \Plugin_Name as Plugin_Name;
 /**
  * Model class that implements Plugin Admin Settings
  *
@@ -8,9 +11,9 @@
  * @subpackage Plugin_Name/models/admin
  */
 
-if ( ! class_exists( 'Plugin_Name_Model_Admin_Settings' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 
-	class Plugin_Name_Model_Admin_Settings extends Plugin_Name_Model_Admin {
+	class Admin_Settings extends Base_Model {
 
 		protected static $settings;
 

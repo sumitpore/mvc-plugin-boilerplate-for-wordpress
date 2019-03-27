@@ -1,5 +1,8 @@
 <?php
+namespace Plugin_Name\Views\Admin;
 
+use \Plugin_Name\Core\View;
+use \Plugin_Name as Plugin_Name;
 /**
  * View class to load all templates related to Plugin's Admin Settings Page
  *
@@ -8,8 +11,8 @@
  * @subpackage Plugin_Name/views/admin
  */
 
-if ( ! class_exists( 'Plugin_Name_View_Admin_Settings' ) ) {
-	class Plugin_Name_View_Admin_Settings extends Plugin_Name_View {
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
+	class Admin_Settings extends View {
 		public function admin_settings_page( $args = [] ) {
 			echo $this->render_template(
 				'admin/page-settings/page-settings.php',

@@ -1,4 +1,9 @@
 <?php
+use \Plugin_Name\Includes\i18n;
+use \Plugin_Name\Core\Registry\Controller as Controller_Registry;
+use \Plugin_Name\Core\Registry\Controller as Model_Registry;
+
+require_once plugin_dir_path( __FILE__ ) . '/trait-dependency-loader.php';
 
 /**
  * The core plugin class.
@@ -7,12 +12,11 @@
  * @package    Plugin_Name
  * @subpackage Plugin_Name/includes
  */
-
 if ( ! class_exists( 'Plugin_Name' ) ) {
 
 	class Plugin_Name {
 
-		use Plugin_Name_Dependency_Loader;
+		use Plugin_Name\Includes\Dependency_Loader;
 
 		/**
 		 *
@@ -73,24 +77,10 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		const PLUGIN_VERSION    = '1.0.0';
 
 		/**
-		 * The plugin prefix to referenciate classes inside the plugin
-		 *
-		 * @since    1.0.0
-		 */
-		const CLASS_PREFIX      = 'Plugin_Name_';
-
-		/**
-		 * The plugin prefix to referenciate files and prefixes inside the plugin
-		 *
-		 * @since    1.0.0
-		 */
-		const PLUGIN_PREFIX     = 'plugin-name-';
-
-		/**
 		 * Define the core functionality of the plugin.
 		 *
 		 * Load the dependencies, define the locale, and set the hooks for the admin area and
-		 * the public-facing side of the site.
+		 * the frontend-facing side of the site.
 		 *
 		 * @since    1.0.0
 		 */
@@ -127,13 +117,13 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		/**
 		 * Define the locale for this plugin for internationalization.
 		 *
-		 * Uses the Plugin_Name_i18n class in order to set the domain and to register the hook
+		 * Uses the i18n class in order to set the domain and to register the hook
 		 * with WordPress.
 		 *
 		 * @since    1.0.0.0
 		 */
 		private function set_locale() {
-			$plugin_i18n = new Plugin_Name_i18n();
+			$plugin_i18n = new i18n();
 			$plugin_i18n->set_domain( Plugin_Name::PLUGIN_ID );
 
 			add_action( 'plugins_loaded', array( $plugin_i18n, 'load_plugin_textdomain' ) );
@@ -156,17 +146,19 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 			}
 
 			$this->router = $router = new $router_class_name();
-			add_action( 'plugins_loaded', function() use($router, $routes){
-				include_once( $routes );
-			});
+			add_action(
+				'plugins_loaded', function() use ( $router, $routes ) {
+					include_once( $routes );
+				}
+			);
 		}
 
 		private function get_all_controllers() {
-			return (object) Plugin_Name_Controller_Registry::get_all_objects();
+			return (object) Controller_Registry::get_all_objects();
 		}
 
 		private function get_all_models() {
-			return (object) Plugin_Name_Model_Registry::get_all_objects();
+			return (object) Model_Registry::get_all_objects();
 		}
 	}
 
