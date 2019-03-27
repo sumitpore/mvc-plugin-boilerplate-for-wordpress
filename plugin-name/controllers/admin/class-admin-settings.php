@@ -1,4 +1,8 @@
 <?php
+namespace Plugin_Name\Controllers\Admin;
+
+use \Plugin_Name\Controllers\Admin\Base_Controller;
+use \Plugin_Name as Plugin_Name;
 
 /**
  * Controller class that implements Plugin Admin Settings configurations
@@ -8,9 +12,9 @@
  * @subpackage Plugin_Name/controllers/admin
  */
 
-if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 
-	class Plugin_Name_Controller_Admin_Settings extends Plugin_Name_Controller_Admin {
+	class Admin_Settings extends Base_Controller {
 
 		private static $hook_suffix = '';
 
@@ -112,7 +116,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 				$this->view->admin_settings_page(
 					array(
 						'page_title'    => Plugin_Name::PLUGIN_NAME,
-						'settings_name' => Plugin_Name_Model_Admin_Settings::SETTINGS_NAME,
+						'settings_name' => $this->get_model()::SETTINGS_NAME,
 					)
 				);
 			} else {
@@ -137,12 +141,12 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 
 			// Add Settings Page Field
 			add_settings_field(
-				'plugin_name_field',                        		// Field ID
+				'plugin_name_field',                                // Field ID
 				__( 'Plugin Name Field:', Plugin_Name::PLUGIN_ID ), // Field Title
-				array( $this, 'markup_fields' ),            		// Field Callback
-				static::SETTINGS_PAGE_URL,                  		// Page
-				'plugin_name_section',                      		// Section ID
-				array(                                      		// Field args
+				array( $this, 'markup_fields' ),                    // Field Callback
+				static::SETTINGS_PAGE_URL,                          // Page
+				'plugin_name_section',                              // Section ID
+				array(                                              // Field args
 					'id'        => 'plugin_name_field',
 					'label_for' => 'plugin_name_field',
 				)
@@ -178,7 +182,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Admin_Settings' ) ) {
 			$this->view->markup_fields(
 				array(
 					'field_id'       => esc_attr( $field_id ),
-					'settings_name'  => Plugin_Name_Model_Admin_Settings::SETTINGS_NAME,
+					'settings_name'  => get_class( $this->model )::SETTINGS_NAME,
 					'settings_value' => ! empty( $settings_value ) ? esc_attr( $settings_value ) : '',
 				)
 			);

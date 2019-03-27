@@ -1,7 +1,7 @@
-<?php //Added Docblock after below guard condition. // @codingStandardsIgnoreLine.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+<?php
+namespace Plugin_Name\Core;
+use \Plugin_Name as Plugin_Name;
+
 /**
  * Class Responsible for Loading Templates
  *
@@ -10,15 +10,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @subpackage Plugin_Name/views
  * @author     Sumit P <sumit.pore@gmail.com>
  */
-class Plugin_Name_View {
+class View {
 	/**
 	 * Render Templates
 	 *
 	 * @access public
-	 * @param mixed   $template_name Template file to render.
-	 * @param array   $args Variables to make available inside template file.
-	 * @param string  $template_path Directory to search for template.
-	 * @param string  $default_path Fallback directory to search for template if not found at $template_path.
+	 * @param mixed  $template_name Template file to render.
+	 * @param array  $args Variables to make available inside template file.
+	 * @param string $template_path Directory to search for template.
+	 * @param string $default_path Fallback directory to search for template if not found at $template_path.
 	 * @return void
 	 */
 	public function render_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {

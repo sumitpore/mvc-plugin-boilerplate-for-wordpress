@@ -65,16 +65,16 @@ function plugin_name_show_requirements_error() {
  * This action is documented in includes/class-plugin-name-activator.php
  */
 function activate_plugin_name() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-activator.php';
-	Plugin_Name_Activator::activate();
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-activator.php';
+	Plugin_Name\Includes\Activator::activate();
 }
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-plugin-name-deactivator.php
  */
 function deactivate_plugin_name() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name-deactivator.php';
-	Plugin_Name_Deactivator::deactivate();
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-deactivator.php';
+	Plugin_Name\Includes\Deactivator::deactivate();
 }
 
 /**
@@ -95,9 +95,8 @@ function run_plugin_name() {
 
 		/**
 		 * The core plugin class that is used to define internationalization,
-		 * admin-specific hooks, and public-facing site hooks.
+		 * admin-specific hooks, and frontend-facing site hooks.
 		 */
-		require_once plugin_dir_path( __FILE__ ) . 'includes/trait-plugin-name-dependency-loader.php';
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name.php';
 
 		/**
@@ -109,8 +108,8 @@ function run_plugin_name() {
 		 *
 		 * @since    1.0.0
 		 */
-		$router_class_name = 'Plugin_Name_Router';
-		$routes = apply_filters( 'plugin_name_routes', plugin_dir_path( __FILE__ ) . 'routes.php' );
+		$router_class_name = '\Plugin_Name\Core\Router';
+		$routes = apply_filters( 'plugin_name_routes_file', plugin_dir_path( __FILE__ ) . 'routes.php' );
 		$GLOBALS['plugin_name'] = new Plugin_Name( $router_class_name, $routes );
 	} else {
 		add_action( 'admin_notices', 'plugin_name_show_requirements_error' );

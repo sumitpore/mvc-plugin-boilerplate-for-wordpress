@@ -1,4 +1,7 @@
 <?php
+namespace Plugin_Name\Core;
+
+use \Plugin_Name\Core\Registry\Controller as Controller_Registry;
 
 /**
  * Abstract class to define/implement base methods for all controller classes
@@ -8,8 +11,8 @@
  * @subpackage Plugin_Name/controllers
  */
 
-if ( ! class_exists( 'Plugin_Name_Controller' ) ) {
-	abstract class Plugin_Name_Controller {
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
+	abstract class Controller {
 
 		protected $model;
 
@@ -22,13 +25,13 @@ if ( ! class_exists( 'Plugin_Name_Controller' ) ) {
 		 */
 		public static function get_instance( $model_class_name = false, $view_class_name = false ) {
 			$classname = get_called_class();
-			$key_in_registry = Plugin_Name_Controller_Registry::get_key( $classname, $model_class_name, $view_class_name );
+			$key_in_registry = Controller_Registry::get_key( $classname, $model_class_name, $view_class_name );
 
-			$instance = Plugin_Name_Controller_Registry::get( $key_in_registry );
+			$instance = Controller_Registry::get( $key_in_registry );
 
 			if ( $instance === null ) {
 				$instance = new $classname( $model_class_name, $view_class_name );
-				Plugin_Name_Controller_Registry::set( $key_in_registry, $instance );
+				Controller_Registry::set( $key_in_registry, $instance );
 			}
 
 			return $instance;
@@ -86,7 +89,7 @@ if ( ! class_exists( 'Plugin_Name_Controller' ) ) {
 			}
 
 			if ( $view_class_name != false ) {
-				$this->view = new $view_class_name;
+				$this->view = new $view_class_name();
 			}
 		}
 

@@ -1,16 +1,19 @@
 <?php
+namespace Plugin_Name\Controllers\Frontend;
 
+use \Plugin_Name\Controllers\Frontend\Base_Controller;
+use \Plugin_Name as Plugin_Name;
 /**
- * Controller class that implements Plugin public side controller class
+ * Controller class that implements Plugin frontend side controller class
  *
  * @since      1.0.0
  * @package    Plugin_Name
  * @subpackage Plugin_Name/controllers
  */
 
-if ( ! class_exists( 'Plugin_Name_Controller_Public_Sample_Shortcode' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Sample_Shortcode' ) ) {
 
-	class Plugin_Name_Controller_Public_Sample_Shortcode extends Plugin_Name_Controller_Public {
+	class Sample_Shortcode extends Base_Controller {
 
 		/**
 		 * Constructor
@@ -20,7 +23,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Public_Sample_Shortcode' ) ) {
 		protected function __construct( $model_class_name = false, $view_class_name = false ) {
 			parent::__construct( $model_class_name, $view_class_name );
 
-			add_shortcode( 'plugin_name_hello_world', array($this, 'hello_world_callback') );
+			add_shortcode( 'plugin_name_hello_world', array( $this, 'hello_world_callback' ) );
 
 			$this->register_hook_callbacks();
 		}
@@ -37,7 +40,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Public_Sample_Shortcode' ) ) {
 
 
 		/**
-		 * Register the stylesheets for the public-facing side of the site.
+		 * Register the stylesheets for the frontend-facing side of the site.
 		 *
 		 * @since    1.0.0
 		 */
@@ -57,7 +60,7 @@ if ( ! class_exists( 'Plugin_Name_Controller_Public_Sample_Shortcode' ) ) {
 		}
 
 		/**
-		 * Register the JavaScript for the public-facing side of the site.
+		 * Register the JavaScript for the frontend-facing side of the site.
 		 *
 		 * @since    1.0.0
 		 */
@@ -84,17 +87,19 @@ if ( ! class_exists( 'Plugin_Name_Controller_Public_Sample_Shortcode' ) ) {
 		 * @return string
 		 */
 		public function hello_world_callback( $atts ) {
-			$attributes = shortcode_atts( array(
-			   'name' => 'world'
-			), $atts );
 
+			$attributes = shortcode_atts(
+				array(
+					'name' => 'world',
+				), $atts
+			);
 
 			return $this->view->shortcode_html(
 				array(
-					'attributes' => $attributes
+					'attributes' => $attributes,
 				)
 			);
-		 }
+		}
 
 	}
 

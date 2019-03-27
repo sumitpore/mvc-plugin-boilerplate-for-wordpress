@@ -1,4 +1,5 @@
 <?php
+namespace Plugin_Name\Includes;
 
 /**
  * Define the internationalization functionality
@@ -13,7 +14,7 @@
  * @subpackage Plugin_Name/includes
  */
 
-class Plugin_Name_i18n {
+class i18n {
 
 	/**
 	 * The domain specified for this plugin.
