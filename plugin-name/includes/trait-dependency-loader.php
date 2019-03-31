@@ -38,10 +38,7 @@ if ( ! trait_exists( 'Dependency_Loader' ) ) {
 			$class_file_name = '/class-' . array_pop($parts) . '.php';
 
 			$file_path = Plugin_Name::get_plugin_path() . implode('/', $parts) . $class_file_name;
-			// if( $class == 'Plugin_Name\Includes\i18n' ){
-			// 	print_r($file_path);
-			// 	exit;
-			// }
+
 			if( \file_exists( $file_path ) ) {
 				require_once( $file_path );
 				return;
@@ -55,32 +52,6 @@ if ( ! trait_exists( 'Dependency_Loader' ) ) {
 				require_once( $file_path );
 			}
 
-			// if ( false === strpos( $class, 'Plugin_Name' ) ) {
-			// 	$classFileName = 'class-' . str_replace( '_', '-', strtolower( $class ) ) . '.php';
-			// 	$folder        = '/';
-
-			// 	if ( false !== strpos( $class, '_Admin' ) ) {
-			// 		$folder .= 'admin/';
-			// 	}
-
-			// 	if ( false !== strpos( $class, '_Frontend' ) ) {
-			// 		$folder .= 'frontend/';
-			// 	}
-
-			// 	if ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX . 'View' ) ) {
-			// 		$path = Plugin_Name::get_plugin_path() . 'views' . $folder . $classFileName;
-			// 		require_once( $path );
-			// 	} elseif ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX . 'Controller' ) ) {
-			// 		$path = Plugin_Name::get_plugin_path() . 'controllers' . $folder . $classFileName;
-			// 		require_once( $path );
-			// 	} elseif ( false !== strpos( $class, Plugin_Name::CLASS_PREFIX . 'Model' ) ) {
-			// 		$path = Plugin_Name::get_plugin_path() . 'models' . $folder . $classFileName;
-			// 		require_once( $path );
-			// 	} else {
-			// 		$path = Plugin_Name::get_plugin_path() . 'includes/' . $classFileName;
-			// 		require_once( $path );
-			// 	}
-			// }
 		}
 
 		/**
