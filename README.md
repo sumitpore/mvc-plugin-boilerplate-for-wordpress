@@ -1,6 +1,10 @@
 # MVC WordPress Plugin Boilerplate
 
-This is a standardized, organized, object-oriented foundation for building high-quality WordPress Plugins based on the [WordPress Plugin Boilerplate](https://github.com/DevinVinson/WordPress-Plugin-Boilerplate) project but implementing MVC pattern.
+WordPress being Event driven system, it is difficult to follow MVC Design Pattern while creating a WordPress Plugin.
+
+This project aims to help plugin developers achieve MVC pattern in their coding.
+
+If you are new to the term MVC and have never worked with MVC architecture before, I would highly recommend going through this course: https://www.udemy.com/php-mvc-from-scratch/
 
 ## Contents
 
