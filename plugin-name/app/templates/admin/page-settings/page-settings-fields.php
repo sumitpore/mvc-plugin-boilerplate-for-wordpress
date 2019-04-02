@@ -1,0 +1,1 @@
+<input type="text" id="<?php echo $field_id; ?>" name="<?php echo $settings_name . '[' . $field_id. ']'; ?>" value="<?php echo $settings_value; ?>" />
