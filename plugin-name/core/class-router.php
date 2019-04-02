@@ -138,7 +138,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 			foreach ( $route_types as $route_type ) {
 				if ( $this->is_request( $route_type ) && ! empty( static::$mvc_components[ $route_type ] ) ) {
 					foreach ( static::$mvc_components[ $route_type ] as $mvc_component ) {
-						$this->dispatch( $mvc_component );
+						$this->dispatch( $mvc_component, $route_type );
 					}
 				}
 			}
@@ -154,13 +154,13 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 			foreach ( $route_types as $route_type ) {
 				if ( $this->is_request( $route_type ) && ! empty( static::$models[ $route_type ] ) ) {
 					foreach ( static::$models[ $route_type ] as $model ) {
-						$this->dispatch_only_model( $model );
+						$this->dispatch_only_model( $model, $route_type );
 					}
 				}
 			}
 		}
 
-		private function dispatch( $mvc_component ) {
+		private function dispatch( $mvc_component, $route_type ) {
 			$model = $view = false;
 
 			if ( isset( $mvc_component['controller'] ) && $mvc_component['controller'] === false ) {
@@ -173,6 +173,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 				if ( $mvc_component['controller'] === false ) {
 					return;
 				}
+
 			}
 
 			if ( isset( $mvc_component['model'] ) && $mvc_component['model'] !== false ) {
@@ -180,7 +181,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 					$mvc_component['model'] = call_user_func( $mvc_component['model'] );
 				}
 
-				$model = $mvc_component['model'];
+				$model = $this->get_fully_qualified_class_name( $mvc_component['model'], 'model', $route_type );
 			}
 
 			if ( isset( $mvc_component['view'] ) && $mvc_component['view'] !== false ) {
@@ -188,13 +189,16 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 					$mvc_component['view'] = call_user_func( $mvc_component['view'] );
 				}
 
-				$view = $mvc_component['view'];
+				$view = $this->get_fully_qualified_class_name( $mvc_component['view'], 'view', $route_type );
 			}
 
-			$mvc_component['controller']::get_instance( $model, $view );
+			$controller = $this->get_fully_qualified_class_name( $mvc_component['controller'], 'controller', $route_type );
+
+			$controller::get_instance( $model, $view );
+
 		}
 
-		private function dispatch_only_model( $model ) {
+		private function dispatch_only_model( $model, $route_type ) {
 			if ( $model === false ) {
 				return;
 			}
@@ -207,7 +211,25 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 				}
 			}
 
+			$model = $this->get_fully_qualified_class_name( $model, 'model', $route_type );
 			$model::get_instance();
+		}
+
+		private function get_fully_qualified_class_name( $class, $mvc_component_type, $route_type ){
+
+			// If route type is admin or frontend
+			if( \strpos($route_type, 'admin') !== false || \strpos($route_type, 'frontend') !== false ) {
+
+				$fqcn = '\Plugin_Name\App\\';
+				$fqcn .= \ucfirst( $mvc_component_type ) . 's\\';
+				$fqcn .= \strpos($route_type, 'admin') !== false ? 'Admin\\' : 'Frontend\\';
+
+				if( class_exists( $fqcn . $class ) ){
+					return $fqcn . $class;
+				}
+			}
+
+			return $class;
 		}
 
 		public function register_model_only_routes() {
