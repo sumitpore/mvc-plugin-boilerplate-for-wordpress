@@ -59,7 +59,7 @@ class View {
 			$template_path = 'plugin-name-templates/';
 		}
 		if ( ! $default_path ) {
-			$default_path = Plugin_Name::get_plugin_path() . 'templates/';
+			$default_path = Plugin_Name::get_plugin_path() . 'app/templates/';
 		}
 
 		// Look within passed path within the theme - this is priority.
