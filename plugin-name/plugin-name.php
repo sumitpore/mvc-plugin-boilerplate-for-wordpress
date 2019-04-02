@@ -57,7 +57,7 @@ function plugin_name_requirements_met() {
  */
 function plugin_name_show_requirements_error() {
 	global $wp_version;
-	require_once( dirname( __FILE__ ) . '/views/admin/errors/requirements-error.php' );
+	require_once( dirname( __FILE__ ) . '/app/templates/admin/errors/requirements-error.php' );
 }
 
 /**
@@ -90,6 +90,7 @@ function run_plugin_name() {
 	 * Otherwise older PHP installations could crash when trying to parse it.
 	 */
 	if ( plugin_name_requirements_met() ) {
+
 		register_activation_hook( __FILE__, 'activate_plugin_name' );
 		register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
 
@@ -108,13 +109,18 @@ function run_plugin_name() {
 		 *
 		 * @since    1.0.0
 		 */
-		$router_class_name = '\Plugin_Name\Core\Router';
+		$router_class_name = apply_filters( 'plugin_name_router_class_name', '\Plugin_Name\Core\Router' );
 		$routes = apply_filters( 'plugin_name_routes_file', plugin_dir_path( __FILE__ ) . 'routes.php' );
 		$GLOBALS['plugin_name'] = new Plugin_Name( $router_class_name, $routes );
+
 	} else {
+
 		add_action( 'admin_notices', 'plugin_name_show_requirements_error' );
+
+		// Deactivate plugin immediately if requirements are not met
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		deactivate_plugins( plugin_basename( __FILE__ ) );
+
 	}
 }
 run_plugin_name();
