@@ -82,3 +82,10 @@ jspm_packages/
 
 # dotenv environment variables file
 .env
+
+# Postpone support for phpunit, until I learn how to write unit tests correctly
+.travis.yml
+phpunit.xml.dist
+install-wp-tests.sh
+bootstrap.php
+test-sample.php
