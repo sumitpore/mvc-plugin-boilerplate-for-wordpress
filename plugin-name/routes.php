@@ -17,18 +17,18 @@ $router
 		function() {
 				// Load controller only if current post id is 3367
 			if ( get_the_ID() == '3367' ) {
-				  return 'Plugin_Name\Controllers\Frontend\Sample_Shortcode';
+				  return 'Plugin_Name\App\Controllers\Frontend\Sample_Shortcode';
 			}
 			return false;
 		}
 	)
-	->with_view( 'Plugin_Name\Views\Frontend\Sample_Shortcode' );
+	->with_view( 'Plugin_Name\App\Views\Frontend\Sample_Shortcode' );
 
 $router
 	->register_route_of_type( 'admin' )
-	->with_controller( 'Plugin_Name\Controllers\Admin\Admin_Settings' )
-	->with_model( 'Plugin_Name\Models\Admin\Admin_Settings' )
-	->with_view( 'Plugin_Name\Views\Admin\Admin_Settings' );
+	->with_controller( 'Plugin_Name\App\Controllers\Admin\Admin_Settings' )
+	->with_model( 'Plugin_Name\App\Models\Admin\Admin_Settings' )
+	->with_view( 'Plugin_Name\App\Views\Admin\Admin_Settings' );
 
 
 // If you want to load only model for specific route, you can use with_just_model
