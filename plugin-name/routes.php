@@ -1,4 +1,6 @@
 <?php
+
+use \Plugin_Name\Core\Route_Type as Route_Type;
 /**
  * Types of Possible route types:
  * any - To be used if model/controller is required on all pages admin as well as frontend
@@ -13,24 +15,23 @@
  */
 
 $router
-	->register_route_of_type( 'admin' )
+	->register_route_of_type( ROUTE_TYPE::ADMIN )
 	->with_controller( 'Admin_Settings' )
 	->with_model( 'Admin_Settings' )
 	->with_view( 'Admin_Settings' );
 
 // Loading Route with full class names
 // $router
-// 	->register_route_of_type( 'admin' )
+// 	->register_route_of_type( ROUTE_TYPE::ADMIN )
 // 	->with_controller( 'Plugin_Name\App\Controllers\Admin\Admin_Settings' )
 // 	->with_model( 'Plugin_Name\App\Models\Admin\Admin_Settings' )
 // 	->with_view( 'Plugin_Name\App\Views\Admin\Admin_Settings' );
 
 // Load controller if conditions match
 $router
-	->register_route_of_type( 'late_frontend' )
+	->register_route_of_type( ROUTE_TYPE::LATE_FRONTEND )
 	->with_controller(
 		function() {
-				// Load controller only if current post id is 3367
 			if ( get_the_ID() == '3367' ) {
 				  return 'Sample_Shortcode';
 			}
@@ -41,7 +42,7 @@ $router
 
 // Load controller if conditions match with full class names
 // $router
-// 	->register_route_of_type( 'late_frontend' )
+// 	->register_route_of_type( ROUTE_TYPE::LATE_FRONTEND )
 // 	->with_controller(
 // 		function() {
 // 				// Load controller only if current post id is 3367
@@ -54,4 +55,4 @@ $router
 // 	->with_view( 'Plugin_Name\App\Views\Frontend\Sample_Shortcode' );
 
 // If you want to load only model for specific route, you can use with_just_model
-// $router->register_route_of_type('admin')->with_just_model('Plugin_Name_Model_Admin_Settings');
+// $router->register_route_of_type( ROUTE_TYPE::ADMIN )->with_just_model('Plugin_Name_Model_Admin_Settings');
