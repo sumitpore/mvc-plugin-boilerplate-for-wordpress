@@ -27,15 +27,6 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		private static $instance;
 
 		/**
-		 * The modules variable holds all modules of the plugin.
-		 *
-		 * @since    1.0.0
-		 * @access   private
-		 * @var      object    $modules    Maintains all modules of the plugin.
-		 */
-		private static $modules = array();
-
-		/**
 		 * Main plugin path /wp-content/plugins/<plugin-folder>/.
 		 *
 		 * @since    1.0.0
@@ -133,7 +124,6 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 * Init Router
 		 *
 		 * @since 1.0.0
-		 *
 		 * @return void
 		 */
 		private function init_router( $router_class_name, $routes ) {
@@ -153,10 +143,22 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 			);
 		}
 
+		/**
+		 * Returns all controller objects used for current requests
+		 *
+		 * @since    1.0.0
+		 * @return object
+		 */
 		private function get_all_controllers() {
 			return (object) Controller_Registry::get_all_objects();
 		}
 
+		/**
+		 * Returns all model objecs used for current requests
+		 *
+		 * @since	1.0.0
+		 * @return object
+		 */
 		private function get_all_models() {
 			return (object) Model_Registry::get_all_objects();
 		}

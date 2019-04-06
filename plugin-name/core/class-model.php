@@ -14,8 +14,6 @@ use \Plugin_Name\Core\Registry\Model as Model_Registry;
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Model' ) ) {
 	abstract class Model {
 
-		private static $instances = array();
-
 		/**
 		 * Provides access to a single instance of a module using the singleton pattern
 		 *

@@ -14,13 +14,26 @@ use \Plugin_Name\Core\Registry\Controller as Controller_Registry;
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 	abstract class Controller {
 
+		/**
+		 * Holds Model object
+		 *
+		 * @var Object
+		 * @since 1.0.0
+		 */
 		protected $model;
+
+		/**
+		 * Holds View Object
+		 *
+		 * @var Object
+		 * @since 1.0.0
+		 */
+		protected $view;
 
 		/**
 		 * Provides access to a single instance of a module using the singleton pattern
 		 *
 		 * @return object
-		 *
 		 * @since    1.0.0
 		 */
 		public static function get_instance( $model_class_name = false, $view_class_name = false ) {
@@ -41,7 +54,6 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 		 * Get model
 		 *
 		 * @return object
-		 *
 		 * @since    1.0.0
 		 */
 		protected function get_model() {
@@ -52,7 +64,6 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 		 * Get view
 		 *
 		 * @return object
-		 *
 		 * @since    1.0.0
 		 */
 		protected function get_view() {
