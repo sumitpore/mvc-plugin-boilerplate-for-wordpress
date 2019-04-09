@@ -12,6 +12,7 @@ if ( ! trait_exists( 'Base_Registry' ) ) {
 		 * @param mixed  $value
 		 *
 		 * @return void
+		 * @since 1.0.0
 		 */
 		public static function set( string $key, $value ) {
 			static::$stored_objects[ $key ] = $value;
@@ -21,6 +22,7 @@ if ( ! trait_exists( 'Base_Registry' ) ) {
 		 * @param string $key
 		 *
 		 * @return mixed
+		 * @since 1.0.0
 		 */
 		public static function get( string $key ) {
 			if ( ! isset( static::$stored_objects[ $key ] ) ) {
@@ -34,6 +36,7 @@ if ( ! trait_exists( 'Base_Registry' ) ) {
 		 * Returns all objects
 		 *
 		 * @return array
+		 * @since 1.0.0
 		 */
 		public static function get_all_objects() {
 			return static::$stored_objects;
