@@ -21,12 +21,12 @@ class View {
 	 * @param string $default_path Fallback directory to search for template if not found at $template_path.
 	 * @return void
 	 */
-	public function render_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+	public static function render_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
 		if ( $args && is_array( $args ) ) {
 			extract( $args ); // @codingStandardsIgnoreLine.
 		}
 
-		$located = $this->locate_template( $template_name, $template_path, $default_path );
+		$located = static::locate_template( $template_name, $template_path, $default_path );
 		if ( false == $located ) {
 			return;
 		}
@@ -54,7 +54,7 @@ class View {
 	 * @param string $default_path Fallback directory to search for template if not found at $template_path.
 	 * @return string
 	 */
-	private function locate_template( $template_name, $template_path = '', $default_path = '' ) {
+	public static function locate_template( $template_name, $template_path = '', $default_path = '' ) {
 		if ( ! $template_path ) {
 			$template_path = 'plugin-name-templates/';
 		}
