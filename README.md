@@ -6,12 +6,138 @@ This project aims to help plugin developers achieve MVC pattern in their coding.
 
 If you are new to the term MVC and have never worked with MVC architecture before, I would highly recommend going through this course: https://www.udemy.com/php-mvc-from-scratch/
 
+## Why?
+The original [WordPress Plugin Boilerplate](https://github.com/DevinVinson/WordPress-Plugin-Boilerplate) is great starting 
+point for creating small plugins. So if your plugin is small, I definitely recommend using that boilerplate. However, as the plugin starts growing & we add more-n-more features to it, it somewhat becomes challenging to decide where a certain piece of code should go OR how/when to separate different functionalities.
+When these things are not clear in long term project to the developer, they end up creating GOD classes that try to do everything.
+
+The objective of this boilerplate is to separate concerns. Developer gets a chance to write individual `Model`, `View` & `Controller`. Also, the concern of whether to load a controller/model or not is delegated to `Router`, so that your controller & model can focus only on what they are supposed to do.
+
+> __NOTE: THIS IS NOT MVC FRAMEWORK. IT IS JUST A BOILERPLATE THAT GIVES THE DEVELOPER ABILITY TO WRITE CODE IN MVC STYLE.__ 
+
+## Architecture
+Here is a bird eye's view at the architecture
+
+![MVC Architecture](https://raw.githubusercontent.com/sumitpore/repo-assets/master/mvc-architecture.png)
+
+## Installation
+
+The Boilerplate can be installed directly into your plugins folder "as-is". You will want to rename it and the classes inside of it to fit your needs. For example, if your plugin is named 'example-me' then:
+
+* rename files from `plugin-name` to `example-me`
+* change `plugin_name` to `example_me`
+* change `plugin-name` to `example-me`
+* change `Plugin_Name` to `Example_Me`
+* change `PLUGIN_NAME_` to `EXAMPLE_ME_`
+
+It's safe to activate the plugin at this point. Because the Boilerplate has no real functionality there will be no menu items, meta boxes, or custom post types added until you write the code.
+
+In near future, I'll be writing a tool to do that rename & replace task automatically.
+
+## Getting Started
+
+We'll try to create a shortcode that prints 10 posts
+
+### Writing your first Router
+Routes can be defined inside `routes.php` file. Here is how a route can be defined for our examples
+```php
+
+// Full Class Name with Namespace
+$router
+    ->register_route_of_type( ROUTE_TYPE::FRONTEND )
+    ->with_controller( 'Plugin_Name\App\Controllers\Frontend\Sample_Shortcode' )
+    ->with_model( 'Plugin_Name\App\Models\Frontend\Sample_Shortcode' )
+    ->with_view( 'Plugin_Name\App\Views\Frontend\Sample_Shortcode' );
+
+// ------------- OR --------------------
+
+// Class Name Without Namespace
+$router
+    ->register_route_of_type( ROUTE_TYPE::FRONTEND )
+    ->with_controller( 'Sample_Shortcode' )
+    ->with_model( 'Sample_Shortcode' )
+    ->with_view( 'Sample_Shortcode' );
+
+```
+> You can get to know list of all available route types in [`routes.php`](https://github.com/sumitpore/wordpress-mvc-plugin-boilerplate/blob/master/plugin-name/routes.php)
+
+### Writing your first Controller
+The boilerplate converts Class Name to a file name & loads that file automatically. 
+
+We have passed `Plugin_Name\App\Controllers\Frontend\Sample_Shortcode` as a controller in our `routes.php`. Boilerplate resolves this class name to file `plugin-name\app\controllers\frontend\class-sample-shortcode.php`
+
+Here is how this file would look for our example
+```
+<?php
+namespace Plugin_Name\App\Controllers\Frontend;
+
+use \Plugin_Name\App\Controllers\Frontend\Base_Controller;
+use \Plugin_Name as Plugin_Name;
+
+/**
+ * Controller class that handles Sample Shortcode
+ *
+ * @since      1.0.0
+ * @package    Plugin_Name
+ * @subpackage Plugin_Name/controllers
+ */
+
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Sample_Shortcode' ) ) {
+
+	class Sample_Shortcode extends Base_Controller {
+
+		/**
+		 * Constructor
+		 *
+		 * @since    1.0.0
+		 */
+		protected function __construct( $model_class_name = false, $view_class_name = false ) {
+			parent::__construct( $model_class_name, $view_class_name );
+
+            // Register Shortcode
+			add_shortcode( 'plugin_name_print_10_posts', array( $this, 'print_10_posts_callback' ) );
+
+			$this->register_hook_callbacks();
+		}
+
+		/**
+		 * Register callbacks for actions and filters
+		 *
+		 * @since    1.0.0
+		 */
+		protected function register_hook_callbacks() {
+            // Write all add_action here
+			// e.g. - add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		}
+
+
+		/**
+		 * Print 10 Posts Shortcode's Callback
+		 *
+		 * @param array $atts Arguments Array
+		 * @return string
+		 */
+		public function print_10_posts_callback( $atts ) {
+			return $this->view->shortcode_html(
+				array(
+					'results' => $this->model->get_posts( $atts );
+				)
+			);
+		}
+
+	}
+
+}
+
+```
+
 ## Contents
 
 The MVC WordPress Plugin Boilerplate includes the following files:
 
 * `.gitignore`. Used to exclude certain files from the repository.
 * `README.md`. The file that you’re currently reading.
+* `TODO.md` . Contains list of tasks to be completed in future.
 * A `plugin-name` directory that contains the source code - a fully executable WordPress plugin.
 
 ## Features
@@ -19,13 +145,6 @@ The MVC WordPress Plugin Boilerplate includes the following files:
 * The Boilerplate is based on the [Plugin API](http://codex.wordpress.org/Plugin_API), [Coding Standards](http://codex.wordpress.org/WordPress_Coding_Standards), and [Documentation Standards](http://make.wordpress.org/core/handbook/inline-documentation-standards/php-documentation-standards/).
 * All classes, functions, and variables are documented so that you know what you need to be changed.
 * The project includes a `.pot` file as a starting point for internationalization.
-
-## Installation
-
-The Boilerplate can be installed directly into your plugins folder "as-is". You will want to rename it and the classes inside of it to fit your needs.
-
-Note that this will activate the source code of the Boilerplate.
-The Boilerplate has no real functionality but implements a basic example which adds menu items, registers settings, adds a plugin settings page with a text input box and submit button, it also stores the data introduced into this input.
 
 ## Recommended Tools
 
@@ -57,7 +176,7 @@ A copy of the license is included in the root of the plugin’s directory. The f
 
 Note that if you include your own classes, or third-party libraries, there are three locations in which said files may go:
 
-* `plugin-name/includes` is where functionality shared between the models, controllers and views resides
+* `plugin-name/app` is where functionality shared between the models, controllers and views resides
 * `plugin-name/models` is for representing data objects, such as settings, values stored on the database, etc...
 * `plugin-name/models/admin` represents the admin side of the models.
 * `plugin-name/contollers` is for updating the state of the model (e.g. updating a setting), it can also send commands to its associated views to change the view's presentation of the model.
