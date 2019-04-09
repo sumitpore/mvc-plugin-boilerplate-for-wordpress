@@ -1,0 +1,9 @@
+- [ ] Implement ArrayAccess and Iterator interfaces in Router
+- [ ] Allow to load multiple models
+- [ ] Support Composer
+- [ ] View methods should be accessible without class instantiation
+- [ ] Verify Dependency unmet condition
+- [ ] Make Dependency loader a claa so that activator, deactivator & uninstaller can load classes
+- [ ] Verify get all controllers and get models return all running controllers and models
+- [ ] Change paths in dependency loader
+- [ ] Tool to replace plugin name with developers plugin name

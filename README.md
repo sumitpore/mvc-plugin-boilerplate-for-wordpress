@@ -1,4 +1,4 @@
-# MVC WordPress Plugin Boilerplate
+# MVC Plugin Boilerplate for WordPress
 
 WordPress being Event driven system, it is difficult to follow MVC Design Pattern while creating a WordPress Plugin.
 
@@ -18,7 +18,6 @@ The MVC WordPress Plugin Boilerplate includes the following files:
 
 * The Boilerplate is based on the [Plugin API](http://codex.wordpress.org/Plugin_API), [Coding Standards](http://codex.wordpress.org/WordPress_Coding_Standards), and [Documentation Standards](http://make.wordpress.org/core/handbook/inline-documentation-standards/php-documentation-standards/).
 * All classes, functions, and variables are documented so that you know what you need to be changed.
-* The Boilerplate uses a strict file organization scheme that correspond both to the WordPress Plugin Repository structure, and MVC pattern.
 * The project includes a `.pot` file as a starting point for internationalization.
 
 ## Installation
@@ -42,7 +41,7 @@ Any of the above tools should provide you with the proper tooling to internation
 
 ## License
 
-The WordPress Plugin Boilerplate is licensed under the GPL v2 or later.
+MVC Plugin Boilerplate for WordPress is licensed under the GPL v2 or later.
 
 > This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License, version 2, as published by the Free Software Foundation.
 
@@ -53,12 +52,6 @@ The WordPress Plugin Boilerplate is licensed under the GPL v2 or later.
 A copy of the license is included in the root of the plugin’s directory. The file is named `LICENSE`.
 
 ## Important Notes
-
-### Licensing
-
-The MVC WordPress Plugin Boilerplate is licensed under the GPL v2 or later; however, if you opt to use third-party code that is not compatible with v2, then you may need to switch to using code that is GPL v3 compatible.
-
-For reference, [here's a discussion](http://make.wordpress.org/themes/2013/03/04/licensing-note-apache-and-gpl/) that covers the Apache 2.0 License used by [Bootstrap](http://twitter.github.io/bootstrap/).
 
 ### Includes
 
@@ -75,6 +68,6 @@ Note that if you include your own classes, or third-party libraries, there are t
 
 # Credits
 
-The MVC WordPress Plugin Boilerplate is a version of the WordPress Plugin Boilerplate project started in 2011 by [Tom McFarlin](http://twitter.com/tommcfarlin/) and has since included a number of great contributions. In March of 2015 the project was handed over by Tom to Devin Vinson.
+The `MVC Plugin Boilerplate for WordPress` is a forked version of the `WordPress Plugin Boilerplate` project started by [Roger Rodrigo](https://ca.linkedin.com/in/rogerrodrigo) which also was a forked version of the `WordPress Plugin Boilerplate` project started in 2011 by [Tom McFarlin](http://twitter.com/tommcfarlin/) and has since included a number of great contributions. In March of 2015 the project was handed over by Tom to Devin Vinson.
 
-The MVC Boilerplate was developed and is being maintained by [Roger Rodrigo](https://ca.linkedin.com/in/rogerrodrigo).
+This `MVC Plugin Boilerplate for WordPress` was developed and is being maintained by [Sumit Pore](https://twitter.com/sumitpore)
