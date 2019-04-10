@@ -1,9 +1,10 @@
 <?php
 use \Plugin_Name\Includes\i18n;
+use \Plugin_Name\Includes\Dependency_Loader;
 use \Plugin_Name\Core\Registry\Controller as Controller_Registry;
 use \Plugin_Name\Core\Registry\Controller as Model_Registry;
 
-require_once plugin_dir_path( __FILE__ ) . '/trait-dependency-loader.php';
+require_once plugin_dir_path( __FILE__ ) . '/class-dependency-loader.php';
 
 /**
  * The core plugin class.
@@ -14,9 +15,7 @@ require_once plugin_dir_path( __FILE__ ) . '/trait-dependency-loader.php';
  */
 if ( ! class_exists( 'Plugin_Name' ) ) {
 
-	class Plugin_Name {
-
-		use Plugin_Name\Includes\Dependency_Loader;
+	class Plugin_Name extends  Dependency_Loader {
 
 		/**
 		 *
@@ -75,13 +74,16 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		public function __construct( $router_class_name, $routes ) {
+		public function __construct( $router_class_name = false, $routes = false ) {
 			self::$plugin_path = plugin_dir_path( dirname( __FILE__ ) );
 			self::$plugin_url  = plugin_dir_url( dirname( __FILE__ ) );
 
 			$this->autoload_dependencies();
 			$this->set_locale();
-			$this->init_router( $router_class_name, $routes );
+
+			if( $router_class_name !== false && $routes !== false ){
+				$this->init_router( $router_class_name, $routes );
+			}
 
 			$this->controllers = $this->get_all_controllers();
 			$this->models = $this->get_all_models();
