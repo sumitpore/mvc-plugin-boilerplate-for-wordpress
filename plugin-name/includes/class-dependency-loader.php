@@ -3,7 +3,7 @@ namespace Plugin_Name\Includes;
 
 use \Plugin_Name as Plugin_Name;
 
-if ( ! trait_exists( 'Dependency_Loader' ) ) {
+if ( ! class_exists( 'Dependency_Loader' ) ) {
 
 	/**
 	 * Includes all methods required for loading Plugin Dependencies
@@ -13,7 +13,7 @@ if ( ! trait_exists( 'Dependency_Loader' ) ) {
 	 * @subpackage Plugin_Name/includes
 	 * @author     Your Name <email@example.com>
 	 */
-	trait Dependency_Loader {
+	class Dependency_Loader {
 
 		/**
 		 * Loads all Plugin dependencies
@@ -60,10 +60,10 @@ if ( ! trait_exists( 'Dependency_Loader' ) ) {
 		 * @since    1.0.0
 		 * @return void
 		 */
-		private function load_registries() {
-			require_once( self::$plugin_path . 'core/registry/trait-base-registry.php' );
-			require_once( self::$plugin_path . 'core/registry/class-controller.php' );
-			require_once( self::$plugin_path . 'core/registry/class-model.php' );
+		protected function load_registries() {
+			require_once( Plugin_Name::get_plugin_path() . 'core/registry/trait-base-registry.php' );
+			require_once( Plugin_Name::get_plugin_path() . 'core/registry/class-controller.php' );
+			require_once( Plugin_Name::get_plugin_path() . 'core/registry/class-model.php' );
 		}
 
 		/**
@@ -72,9 +72,9 @@ if ( ! trait_exists( 'Dependency_Loader' ) ) {
 		 * @since    1.0.0
 		 * @return void
 		 */
-		private function load_core() {
+		protected function load_core() {
 			$this->load_registries();
-			foreach ( glob( self::$plugin_path . 'core/*.php' ) as $path ) {
+			foreach ( glob( Plugin_Name::get_plugin_path() . 'core/*.php' ) as $path ) {
 				require_once $path;
 			}
 		}
@@ -84,7 +84,7 @@ if ( ! trait_exists( 'Dependency_Loader' ) ) {
 		 *
 		 * @since 1.0.01
 		 */
-		private function autoload_dependencies() {
+		protected function autoload_dependencies() {
 			$this->load_core();
 			spl_autoload_register( array( $this, 'load_dependencies' ) );
 		}
