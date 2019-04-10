@@ -97,7 +97,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Sample_Shortcode' ) ) {
 		protected function __construct( $model_class_name = false, $view_class_name = false ) {
 			parent::__construct( $model_class_name, $view_class_name );
 
-            // Register Shortcode
+			// Register Shortcode
 			add_shortcode( 'plugin_name_print_10_posts', array( $this, 'print_10_posts_callback' ) );
 
 			$this->register_hook_callbacks();
@@ -109,7 +109,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Sample_Shortcode' ) ) {
 		 * @since    1.0.0
 		 */
 		protected function register_hook_callbacks() {
-            // Write all add_action here
+			// Write all add_action here
 			// e.g. - add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		}
 
