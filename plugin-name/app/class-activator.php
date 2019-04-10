@@ -1,6 +1,6 @@
 <?php
 namespace Plugin_Name\App;
-use \Plugin_Name\App\Models\Activator as Activator_Model;
+
 /**
  * Fired during plugin activation
  *
