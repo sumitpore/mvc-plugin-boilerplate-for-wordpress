@@ -1,9 +1,13 @@
 - [ ] Implement ArrayAccess and Iterator interfaces in Router
 - [ ] Allow to load multiple models
 - [ ] Support Composer
-- [ ] View methods should be accessible without class instantiation
+- [x] View methods should be accessible without class instantiation
 - [ ] Verify Dependency unmet condition
-- [ ] Make Dependency loader a claa so that activator, deactivator & uninstaller can load classes
+- [x] Make Dependency loader a class so that activator, deactivator & uninstaller can load classes available inside `app` directory
 - [ ] Verify get all controllers and get models return all running controllers and models
-- [ ] Change paths in dependency loader
-- [ ] Tool to replace plugin name with developers plugin name
+- [x] Change paths in dependency loader from self::plugin_path to Plugin_Name::get_plugin_path()
+- [x] Tool to replace plugin name with developers plugin name
+- [ ] Add information about how to access saved settings
+- [ ] Get settings from settings model
+- [ ] @ in the controller name & model name
+- [x] Proper place for activator, deactivator & uninstaller
