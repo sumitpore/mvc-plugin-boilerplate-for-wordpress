@@ -32,7 +32,10 @@ The Boilerplate can be installed directly into your plugins folder "as-is". You 
 
 It's safe to activate the plugin at this point. Because the Boilerplate has no real functionality there will be no menu items, meta boxes, or custom post types added until you write the code.
 
-In near future, I'll be writing a tool to do that rename & replace task automatically.
+If you don't want to do search & replace manually, you can download the generator script & execute it.
+```bash
+wget -O boilerplate-generator.sh https://raw.githubusercontent.com/sumitpore/mvc-plugin-boilerplate-for-wordpress/dev/boilerplate-generator.sh && bash boilerplate-generator.sh
+```
 
 ## Getting Started
 
