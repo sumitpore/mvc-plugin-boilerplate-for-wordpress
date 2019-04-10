@@ -30,5 +30,11 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-require_once( plugin_dir_path( __FILE__ ) . 'includes/class-uninstaller.php' );
-Plugin_Name\Includes\Uninstaller::uninstall();
+require_once( plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'app/class-uninstaller.php' );
+
+// Bootstrap Plugin without router
+new Plugin_Name();
+
+// Initiate Uninstall Procedure
+(new Plugin_Name\App\Uninstaller())->uninstall();

@@ -1,5 +1,5 @@
 <?php
-namespace Plugin_Name\Includes;
+namespace Plugin_Name\App;
 
 /**
  * Fired during plugin uninstallation
@@ -8,7 +8,7 @@ namespace Plugin_Name\Includes;
  * @since      1.0.0
  *
  * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @subpackage Plugin_Name/App
  */
 
 /**
@@ -18,7 +18,7 @@ namespace Plugin_Name\Includes;
  *
  * @since      1.0.0
  * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @subpackage Plugin_Name/App
  * @author     Your Name <email@example.com>
  */
 class Uninstaller {
@@ -30,7 +30,7 @@ class Uninstaller {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function uninstall() {
+	public function uninstall() {
 	}
 
 }

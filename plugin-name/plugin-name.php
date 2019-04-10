@@ -62,19 +62,15 @@ function plugin_name_show_requirements_error() {
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-plugin-name-activator.php
  */
 function activate_plugin_name() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-activator.php';
-	Plugin_Name\Includes\Activator::activate();
+	(new Plugin_Name\App\Activator())->activate();
 }
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-plugin-name-deactivator.php
  */
 function deactivate_plugin_name() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-deactivator.php';
-	Plugin_Name\Includes\Deactivator::deactivate();
+	(new Plugin_Name\App\Deactivator())->deactivate();
 }
 
 /**
@@ -90,9 +86,6 @@ function run_plugin_name() {
 	 * Otherwise older PHP installations could crash when trying to parse it.
 	 */
 	if ( plugin_name_requirements_met() ) {
-
-		register_activation_hook( __FILE__, 'activate_plugin_name' );
-		register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
 
 		/**
 		 * The core plugin class that is used to define internationalization,
@@ -112,6 +105,9 @@ function run_plugin_name() {
 		$router_class_name = apply_filters( 'plugin_name_router_class_name', '\Plugin_Name\Core\Router' );
 		$routes = apply_filters( 'plugin_name_routes_file', plugin_dir_path( __FILE__ ) . 'routes.php' );
 		$GLOBALS['plugin_name'] = new Plugin_Name( $router_class_name, $routes );
+
+		register_activation_hook( __FILE__, 'activate_plugin_name' );
+		register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
 
 	} else {
 
