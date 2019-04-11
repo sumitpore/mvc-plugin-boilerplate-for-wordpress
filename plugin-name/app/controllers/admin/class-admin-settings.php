@@ -4,6 +4,8 @@ namespace Plugin_Name\App\Controllers\Admin;
 use \Plugin_Name\App\Controllers\Admin\Base_Controller;
 use \Plugin_Name as Plugin_Name;
 
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
+
 /**
  * Controller class that implements Plugin Admin Settings configurations
  *
@@ -11,8 +13,6 @@ use \Plugin_Name as Plugin_Name;
  * @package    Plugin_Name
  * @subpackage Plugin_Name/controllers/admin
  */
-
-if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 
 	class Admin_Settings extends Base_Controller {
 
@@ -116,7 +116,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 				$this->view->admin_settings_page(
 					array(
 						'page_title'    => Plugin_Name::PLUGIN_NAME,
-						'settings_name' => $this->get_model()::SETTINGS_NAME,
+						'settings_name' => $this->get_model()->get_plugin_settings_option_key(),
 					)
 				);
 			} else {
@@ -178,11 +178,11 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 */
 		public function markup_fields( $field_args ) {
 			$field_id = $field_args['id'];
-			$settings_value = $this->model->get_settings( $field_id );
+			$settings_value = $this->get_model()->get_setting( $field_id );
 			$this->view->markup_fields(
 				array(
 					'field_id'       => esc_attr( $field_id ),
-					'settings_name'  => get_class( $this->model )::SETTINGS_NAME,
+					'settings_name'  => $this->get_model()->get_plugin_settings_option_key(),
 					'settings_value' => ! empty( $settings_value ) ? esc_attr( $settings_value ) : '',
 				)
 			);
