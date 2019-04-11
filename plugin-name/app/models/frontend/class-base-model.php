@@ -4,7 +4,7 @@ namespace Plugin_Name\App\Models\Frontend;
 use \Plugin_Name\Core\Model;
 
 /**
- * Defines/implements base methods for Frontend model classes
+ * Blueprint for Frontend related Models. All Frontend Models should extend this Base_Model
  *
  * @since      1.0.0
  * @package    Plugin_Name
@@ -13,6 +13,20 @@ use \Plugin_Name\Core\Model;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Base_Model' ) ) {
 	abstract class Base_Model extends Model {
+
+		/**
+		 * Constructor
+		 *
+		 * @since    1.0.0
+		 */
+		abstract protected function __construct();
+
+		/**
+		 * Register callbacks for actions and filters
+		 *
+		 * @since    1.0.0
+		 */
+		abstract protected function register_hook_callbacks();
 
 	}
 }

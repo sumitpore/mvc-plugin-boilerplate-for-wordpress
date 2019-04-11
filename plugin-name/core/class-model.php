@@ -32,20 +32,6 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Model' ) ) {
 			return $instance;
 		}
 
-		/**
-		 * Constructor
-		 *
-		 * @since    1.0.0
-		 */
-		abstract protected function __construct();
-
-		/**
-		 * Register callbacks for actions and filters
-		 *
-		 * @since    1.0.0
-		 */
-		abstract protected function register_hook_callbacks();
-
 	}
 
 }

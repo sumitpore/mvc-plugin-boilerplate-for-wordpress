@@ -16,6 +16,11 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Base_Controller' ) ) {
 		protected function __construct( $model_class_name = false, $view_class_name = false ) {
 			parent::__construct( $model_class_name, $view_class_name );
 		}
+
+		/**
+		 * Register callbacks for actions and filters
+		 */
+		abstract protected function register_hook_callbacks();
 	}
 
 }
