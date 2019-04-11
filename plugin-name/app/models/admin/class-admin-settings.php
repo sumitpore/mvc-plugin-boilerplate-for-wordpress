@@ -1,6 +1,7 @@
 <?php
 namespace Plugin_Name\App\Models\Admin;
 
+use \Plugin_Name\App\Models\Settings as Settings_Model;
 use \Plugin_Name\App\Models\Admin\Base_Model;
 use \Plugin_Name as Plugin_Name;
 /**
@@ -15,11 +16,6 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 
 	class Admin_Settings extends Base_Model {
 
-		protected static $settings;
-
-		const SETTINGS_NAME = Plugin_Name::PLUGIN_ID;
-
-
 		/**
 		 * Constructor
 		 *
@@ -27,7 +23,6 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 */
 		protected function __construct() {
 			$this->register_hook_callbacks();
-			static::get_settings();
 		}
 
 		/**
@@ -48,8 +43,8 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 
 			// The settings container
 			register_setting(
-				static::SETTINGS_NAME,     // Option group Name
-				static::SETTINGS_NAME,     // Option Name
+				Settings_Model::SETTINGS_NAME,     // Option group Name
+				Settings_Model::SETTINGS_NAME,     // Option Name
 				array( $this, 'sanitize' ) // Sanitize
 			);
 		}
@@ -70,6 +65,15 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 			return $new_input;
 		}
 
+		/**
+		 * Returns the option key used to store the settings in database
+		 *
+		 * @since 1.0.0
+		 * @return string
+		 */
+		public function get_plugin_settings_option_key(){
+			return Settings_Model::get_plugin_settings_option_key();
+		}
 
 		/**
 		 * Retrieves all of the settings from the database
@@ -77,57 +81,8 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 * @return array
 		 */
-		public static function get_settings( $setting_name = false ) {
-			if ( ! isset( static::$settings ) ) {
-				static::$settings = get_option( static::SETTINGS_NAME, array() );
-			}
-
-			if ( $setting_name ) {
-				return isset( static::$settings[ $setting_name ] ) ? static::$settings[ $setting_name ] : array();
-			}
-
-			return static::$settings;
-		}
-
-		/**
-		 * Helper to update Plugin Settings
-		 *
-		 * @since    1.0.0
-		 * @return boolean
-		 */
-		protected static function update_settings( $new_value, $setting_name = false ) {
-			if ( isset( $new_value ) ) {
-				if ( $setting_name ) {
-					static::get_settings();
-					static::$settings[ $setting_name ] = $new_value;
-
-					$new_value = static::$settings;
-				} else {
-					static::$settings = $new_value;
-				}
-
-				return update_option( static::SETTINGS_NAME, $new_value );
-			}
-
-			return false;
-		}
-
-		/**
-		 * Delete all plugin setings
-		 *
-		 * @since    1.0.0
-		 * @return boolean
-		 */
-		public static function delete_settings( $setting_name = false ) {
-			if ( $setting_name ) {
-				static::get_settings();
-
-				unset( static::$settings[ $setting_name ] );
-
-				return static::update_settings( static::$settings );
-			}
-
-			return delete_option( static::SETTINGS_NAME );
+		public function get_setting( $setting_name ) {
+			return Settings_Model::get_setting( $setting_name );
 		}
 
 	}
