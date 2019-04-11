@@ -9,5 +9,5 @@
 - [x] Tool to replace plugin name with developers plugin name
 - [ ] Add information about how to access saved settings
 - [ ] Get settings from settings model
-- [ ] @ in the controller name & model name
+- [ ] @ & :: support in the controller name & model name
 - [x] Proper place for activator, deactivator & uninstaller
