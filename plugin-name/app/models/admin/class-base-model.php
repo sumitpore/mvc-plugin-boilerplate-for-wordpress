@@ -14,12 +14,6 @@ use \Plugin_Name\Core\Model;
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Base_Model' ) ) {
 	abstract class Base_Model extends Model {
 
-		/**
-		 * Constructor
-		 *
-		 * @since    1.0.0
-		 */
-		abstract protected function __construct();
 
 		/**
 		 * Register callbacks for actions and filters. Most of your add_action/add_filter
