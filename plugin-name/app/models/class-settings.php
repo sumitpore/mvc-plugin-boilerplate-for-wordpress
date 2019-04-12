@@ -25,9 +25,6 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Settings' ) ) {
 		 */
 		protected static $settings;
 
-		protected function __construct(){}
-		protected function register_hook_callbacks(){}
-
 		/**
 		 * Retusn the Option name/key saved in the database
 		 *
