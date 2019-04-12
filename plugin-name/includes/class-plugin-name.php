@@ -3,6 +3,7 @@ use \Plugin_Name\Includes\i18n;
 use \Plugin_Name\Includes\Dependency_Loader;
 use \Plugin_Name\Core\Registry\Controller as Controller_Registry;
 use \Plugin_Name\Core\Registry\Controller as Model_Registry;
+use \Plugin_Name\App\Models\Settings;
 
 require_once plugin_dir_path( __FILE__ ) . '/class-dependency-loader.php';
 
@@ -163,6 +164,31 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 */
 		private function get_all_models() {
 			return (object) Model_Registry::get_all_objects();
+		}
+
+		/**
+		 * Method that retuns all Saved Settings related to Plugin.
+		 *
+		 * Only to be used by third party developers.
+		 *
+		 * @return array
+		 * @since 1.0.0
+		 */
+		public static function get_settings(){
+			return Settings::get_settings();
+		}
+
+		/**
+		 * Method that returns a individual setting
+		 *
+		 * Only to be used by third party developers.
+		 *
+		 * @param string $setting_name
+		 * @return mixed
+		 * @since 1.0.0
+		 */
+		public static function get_setting( $setting_name ) {
+			return Settings::get_setting($setting_name);
 		}
 	}
 
