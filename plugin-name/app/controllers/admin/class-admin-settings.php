@@ -3,6 +3,8 @@ namespace Plugin_Name\App\Controllers\Admin;
 
 use \Plugin_Name\App\Controllers\Admin\Base_Controller;
 use \Plugin_Name as Plugin_Name;
+use \Plugin_Name\Core\Model;
+use \Plugin_Name\Core\View;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 
@@ -27,8 +29,11 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		protected function __construct( $model_class_name = false, $view_class_name = false ) {
-			parent::__construct( $model_class_name, $view_class_name );
+		protected function __construct( Model $model, View $view ) {
+
+			// Every constructor must call init method. init method sets model & view properties
+			$this->init( $model, $view );
+
 			static::$hook_suffix = 'settings_page_' . Plugin_Name::PLUGIN_ID;
 
 			$this->register_hook_callbacks();

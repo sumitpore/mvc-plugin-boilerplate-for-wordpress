@@ -42,8 +42,25 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 
 			$instance = Controller_Registry::get( $key_in_registry );
 
+			// Create a object if no object is found
 			if ( $instance === null ) {
-				$instance = new $classname( $model_class_name, $view_class_name );
+
+				// Decide model to be passed to the constructor
+				if ( $model_class_name != false ) {
+					$model = $model_class_name::get_instance();
+				} else {
+					$model = new Model();
+				}
+
+				// Decide view to be passed to the constructor
+				if ( $view_class_name != false ) {
+					$view = new $view_class_name();
+				} else {
+					$view = new View();
+				}
+
+				$instance = new $classname( $model, $view );
+
 				Controller_Registry::set( $key_in_registry, $instance );
 			}
 
@@ -79,18 +96,41 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 		}
 
 		/**
-		 * Constructor
+		 * Sets the model to be used
+		 *
+		 * @return void
+		 * @since 1.0.0
 		 */
-		protected function __construct( $model_class_name = false, $view_class_name = false ) {
-			if ( $model_class_name != false ) {
-				$this->model = $model_class_name::get_instance();
-			}
-
-			if ( $view_class_name != false ) {
-				$this->view = new $view_class_name();
-			}
+		protected function set_model(Model $model){
+			$this->model = $model;
 		}
 
+		/**
+		 * Sets the view to be used
+		 *
+		 * @return void
+		 * @since 1.0.0
+		 */
+		protected function set_view(View $view){
+			$this->view = $view;
+		}
+		/**
+		 * Constructor
+		 */
+		protected function __construct( Model $model, $view = false ) {
+			$this->init( $model, $view );
+		}
+
+		final protected function init( Model $model, $view = false ) {
+
+			$this->set_model( $model );
+
+			if ( $view === false ) {
+				$view = new View();
+			}
+
+			$this->set_view( $view );
+		}
 	}
 
 }
