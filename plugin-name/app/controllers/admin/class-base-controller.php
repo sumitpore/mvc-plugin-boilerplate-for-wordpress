@@ -13,9 +13,6 @@ use \Plugin_Name\Core\Controller;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Base_Controller' ) ) {
 	abstract class Base_Controller extends Controller {
-		protected function __construct( $model_class_name = false, $view_class_name = false ) {
-			parent::__construct( $model_class_name, $view_class_name );
-		}
 
 		/**
 		 * Register callbacks for actions and filters. Most of your add_action/add_filter

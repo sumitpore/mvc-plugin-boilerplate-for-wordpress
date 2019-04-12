@@ -20,8 +20,10 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Sample_Shortcode' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		protected function __construct( $model_class_name = false, $view_class_name = false ) {
-			parent::__construct( $model_class_name, $view_class_name );
+		protected function __construct( Model $model, View $view ) {
+
+			// Every constructor must call init method. init method sets model & view properties
+			$this->init( $model, $view );
 
 			add_shortcode( 'plugin_name_hello_world', array( $this, 'hello_world_callback' ) );
 
