@@ -13,7 +13,9 @@ When these things are not clear in long term project to the developer, they end 
 
 The objective of this boilerplate is to separate concerns. Developer gets a chance to write individual `Model`, `View` & `Controller`. Also, the concern of whether to load a controller/model or not is delegated to `Router`, so that your controller & model can focus only on what they are supposed to do.
 
-> __NOTE: THIS IS NOT MVC FRAMEWORK. IT IS JUST A BOILERPLATE THAT GIVES THE DEVELOPER ABILITY TO WRITE CODE IN MVC STYLE.__ 
+> __NOTE: THIS IS NOT MVC FRAMEWORK. IT IS MERELY A BOILERPLATE THAT GIVES THE DEVELOPER ABILITY TO WRITE CODE IN MVC STYLE.__ 
+
+Because this project is meant to be a boilerplate, it has only those features which are required to build plugin in MVC way - No ORM - No Extra Goodies - No Huge Learning Curve 
 
 ## Architecture
 Here is a bird eye's view at the architecture
