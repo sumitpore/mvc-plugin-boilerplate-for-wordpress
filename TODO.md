@@ -11,7 +11,7 @@
 - [x] Get settings from settings model
 - [x] @ support in the controller name & model name
 - [x] Proper place for activator, deactivator & uninstaller
-- [ ] Explaination on package.json & how people can use boilerplate without airbnb style
+- [x] Separate branch for airbnb js style support
 - [ ] Writing Unit Tests
 - [ ] replacements.json - Json file that holds what is replaced with what
 - [ ] Tool to generate Model, View & Controller
