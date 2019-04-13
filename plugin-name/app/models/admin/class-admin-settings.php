@@ -31,7 +31,13 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 */
 		protected function register_hook_callbacks() {
-			add_action( 'admin_init', array( $this, 'register_settings' ) );
+			/**
+			 * If you think all model related add_actions & filters should be in
+			 * the model class only, then this this the place where you can place
+			 * them.
+			 *
+			 * You can remove this method if you are not going to use it.
+			 */
 		}
 
 		/**

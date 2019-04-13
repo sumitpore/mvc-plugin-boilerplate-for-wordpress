@@ -50,6 +50,9 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 			add_action( 'admin_print_styles-' . static::$hook_suffix, array( $this, 'enqueue_styles' ) );
 			add_action( 'load-' . static::$hook_suffix, array( $this, 'register_fields' ) );
 
+			// Register Settings
+			add_action( 'admin_init', array( $this->get_model(), 'register_settings' ) );
+
 			add_filter(
 				'plugin_action_links_' . Plugin_Name::PLUGIN_ID . '/' . Plugin_Name::PLUGIN_ID . '.php',
 				array( $this, 'add_plugin_action_links' )
