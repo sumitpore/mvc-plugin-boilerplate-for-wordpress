@@ -8,13 +8,13 @@ use \Plugin_Name\Core\View;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 
-/**
- * Controller class that implements Plugin Admin Settings configurations
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/controllers/admin
- */
+	/**
+	 * Controller class that implements Plugin Admin Settings configurations
+	 *
+	 * @since      1.0.0
+	 * @package    Plugin_Name
+	 * @subpackage Plugin_Name/controllers/admin
+	 */
 
 	class Admin_Settings extends Base_Controller {
 

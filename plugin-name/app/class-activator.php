@@ -31,7 +31,6 @@ class Activator {
 	 * @since    1.0.0
 	 */
 	public function activate() {
-
 	}
 
 }

@@ -101,7 +101,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 		 * @return void
 		 * @since 1.0.0
 		 */
-		protected function set_model(Model $model){
+		protected function set_model( Model $model ) {
 			$this->model = $model;
 		}
 
@@ -111,7 +111,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 		 * @return void
 		 * @since 1.0.0
 		 */
-		protected function set_view(View $view){
+		protected function set_view( View $view ) {
 			$this->view = $view;
 		}
 		/**
@@ -129,7 +129,6 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 		 * @return void
 		 */
 		final protected function init( Model $model, $view = false ) {
-
 			$this->set_model( $model );
 
 			if ( $view === false ) {

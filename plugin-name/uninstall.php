@@ -37,4 +37,4 @@ require_once( plugin_dir_path( __FILE__ ) . 'app/class-uninstaller.php' );
 new Plugin_Name();
 
 // Initiate Uninstall Procedure
-(new Plugin_Name\App\Uninstaller())->uninstall();
+( new Plugin_Name\App\Uninstaller() )->uninstall();

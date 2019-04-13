@@ -77,7 +77,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 * @since 1.0.0
 		 * @return string
 		 */
-		public function get_plugin_settings_option_key(){
+		public function get_plugin_settings_option_key() {
 			return Settings_Model::get_plugin_settings_option_key();
 		}
 

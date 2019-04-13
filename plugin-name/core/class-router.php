@@ -65,7 +65,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		 * @return void
 		 * @since 1.0.0
 		 */
-		public function register_generic_model_only_routes(){
+		public function register_generic_model_only_routes() {
 			$this->register_model_only_routes();
 		}
 
@@ -76,7 +76,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		 * @since 1.0.0
 		 */
 		public function register_late_frontend_model_only_routes() {
-			$this->register_model_only_routes( SELF::REGISTER_LATE_FRONTEND_ROUTES );
+			$this->register_model_only_routes( self::REGISTER_LATE_FRONTEND_ROUTES );
 		}
 
 		/**
@@ -96,7 +96,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		 * @since 1.0.0
 		 */
 		public function register_late_frontend_routes() {
-			$this->register_routes( SELF::REGISTER_LATE_FRONTEND_ROUTES );
+			$this->register_routes( self::REGISTER_LATE_FRONTEND_ROUTES );
 		}
 
 		/**
@@ -105,7 +105,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		 * @since 1.0.0
 		 * @return array
 		 */
-		public function generic_route_types(){
+		public function generic_route_types() {
 			return apply_filters(
 				'plugin_name_route_types', [
 					Route_Type::ANY,
@@ -125,7 +125,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		 * @since 1.0.0
 		 * @return array
 		 */
-		public function late_frontend_route_types(){
+		public function late_frontend_route_types() {
 			return apply_filters(
 				'plugin_name_late_frontend_route_types', [
 					Route_Type::LATE_FRONTEND,
@@ -284,7 +284,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Dispatches the route of specified $route_type by creating a controller object
 		 *
-		 * @param array $mvc_component Model-View-Controller triads for all registered routes
+		 * @param array  $mvc_component Model-View-Controller triads for all registered routes
 		 * @param string $route_type Route Type
 		 * @return void
 		 * @since 1.0.0
@@ -320,13 +320,13 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 				$view = $this->get_fully_qualified_class_name( $mvc_component['view'], 'view', $route_type );
 			}
 
-			@list($controller, $action) = explode('@', $mvc_component['controller']);
+			@list($controller, $action) = explode( '@', $mvc_component['controller'] );
 
 			$controller = $this->get_fully_qualified_class_name( $controller, 'controller', $route_type );
 
 			$controller_instance = $controller::get_instance( $model, $view );
 
-			if( $action !== null ){
+			if ( $action !== null ) {
 				$controller_instance->$action();
 			}
 		}
@@ -357,7 +357,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Dispatches the model only route by creating a Model object
 		 *
-		 * @param mix $model Model to be associated with the Route. Could be String or callback
+		 * @param mix    $model Model to be associated with the Route. Could be String or callback
 		 * @param string $route_type Route Type
 		 * @return void
 		 * @since 1.0.0
@@ -375,11 +375,11 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 				}
 			}
 
-			@list($model, $action) = explode('@', $model);
+			@list($model, $action) = explode( '@', $model );
 			$model = $this->get_fully_qualified_class_name( $model, 'model', $route_type );
 			$model_instance = $model::get_instance();
 
-			if( $action !== null ){
+			if ( $action !== null ) {
 				$model_instance->$action();
 			}
 		}
@@ -393,16 +393,15 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		 * @return string Retuns Full Qualified Class Name
 		 * @since 1.0.0
 		 */
-		private function get_fully_qualified_class_name( $class, $mvc_component_type, $route_type ){
+		private function get_fully_qualified_class_name( $class, $mvc_component_type, $route_type ) {
 
 			// If route type is admin or frontend
-			if( \strpos($route_type, 'admin') !== false || \strpos($route_type, 'frontend') !== false ) {
-
+			if ( \strpos( $route_type, 'admin' ) !== false || \strpos( $route_type, 'frontend' ) !== false ) {
 				$fqcn = '\Plugin_Name\App\\';
 				$fqcn .= \ucfirst( $mvc_component_type ) . 's\\';
-				$fqcn .= \strpos($route_type, 'admin') !== false ? 'Admin\\' : 'Frontend\\';
+				$fqcn .= \strpos( $route_type, 'admin' ) !== false ? 'Admin\\' : 'Frontend\\';
 
-				if( class_exists( $fqcn . $class ) ){
+				if ( class_exists( $fqcn . $class ) ) {
 					return $fqcn . $class;
 				}
 			}

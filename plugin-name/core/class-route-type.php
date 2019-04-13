@@ -11,7 +11,7 @@ namespace Plugin_Name\Core;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Route_Type' ) ) {
 
-	class Route_Type{
+	class Route_Type {
 
 		/**
 		 * Use this route type if a controller/model needs to be loaded on every
@@ -100,17 +100,17 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Route_Type' ) ) {
 		 * // with 'frontend' type. get_the_ID function will be accessible only if
 		 * // route is registered on Route_Type::LATE_FRONTEND or
 		 * // Route_Type::LATE_FRONTEND_WITH_POSSIBLE_AJAX
-		 * 	$router->
-		 * 		->register_route_of_type( Route_Type::LATE_FRONTEND )
-		 * 		->with_controller(
-		 * 			function() {
-		 * 				if ( get_the_ID() == '3367' ) {
-		 * 					return 'Sample_Shortcode';
-		 * 				}
-		 * 				return false;
-		 * 			}
-		 * 		)
-		 * 		->with_view( 'Sample_Shortcode' );
+		 *  $router->
+		 *      ->register_route_of_type( Route_Type::LATE_FRONTEND )
+		 *      ->with_controller(
+		 *          function() {
+		 *              if ( get_the_ID() == '3367' ) {
+		 *                  return 'Sample_Shortcode';
+		 *              }
+		 *              return false;
+		 *          }
+		 *      )
+		 *      ->with_view( 'Sample_Shortcode' );
 		 * </code>
 		 *
 		 * @since 1.0.0
@@ -135,17 +135,17 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Route_Type' ) ) {
 		 * // with 'frontend' type. get_the_ID function will be accessible only if
 		 * // route is registered on Route_Type::LATE_FRONTEND or
 		 * // Route_Type::LATE_FRONTEND_WITH_POSSIBLE_AJAX
-		 * 	$router->
-		 * 		->register_route_of_type( Route_Type::LATE_FRONTEND_WITH_POSSIBLE_AJAX )
-		 * 		->with_controller(
-		 * 			function() {
-		 * 				if ( get_the_ID() == '3367' ) {
-		 * 					return 'Sample_Controller';
-		 * 				}
-		 * 				return false;
-		 * 			}
-		 * 		)
-		 * 		->with_view( 'Sample_View' );
+		 *  $router->
+		 *      ->register_route_of_type( Route_Type::LATE_FRONTEND_WITH_POSSIBLE_AJAX )
+		 *      ->with_controller(
+		 *          function() {
+		 *              if ( get_the_ID() == '3367' ) {
+		 *                  return 'Sample_Controller';
+		 *              }
+		 *              return false;
+		 *          }
+		 *      )
+		 *      ->with_view( 'Sample_View' );
 		 * </code>
 		 *
 		 * @since 1.0.0
