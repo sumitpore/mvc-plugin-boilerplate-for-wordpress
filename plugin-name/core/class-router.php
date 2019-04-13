@@ -302,7 +302,6 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 				if ( $mvc_component['controller'] === false ) {
 					return;
 				}
-
 			}
 
 			if ( isset( $mvc_component['model'] ) && $mvc_component['model'] !== false ) {
@@ -321,10 +320,15 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 				$view = $this->get_fully_qualified_class_name( $mvc_component['view'], 'view', $route_type );
 			}
 
-			$controller = $this->get_fully_qualified_class_name( $mvc_component['controller'], 'controller', $route_type );
+			list($controller, $action) = explode('@', $mvc_component['controller']);
 
-			$controller::get_instance( $model, $view );
+			$controller = $this->get_fully_qualified_class_name( $controller, 'controller', $route_type );
 
+			$controller_instance = $controller::get_instance( $model, $view );
+
+			if( $action !== null ){
+				$controller_instance->$action();
+			}
 		}
 
 		/**
@@ -371,8 +375,13 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 				}
 			}
 
+			list($model, $action) = explode('@', $model);
 			$model = $this->get_fully_qualified_class_name( $model, 'model', $route_type );
-			$model::get_instance();
+			$model_instance = $model::get_instance();
+
+			if( $action !== null ){
+				$model_instance->$action();
+			}
 		}
 
 		/**

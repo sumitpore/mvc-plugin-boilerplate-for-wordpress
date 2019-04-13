@@ -23,7 +23,6 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		const SETTINGS_PAGE_URL = Plugin_Name::PLUGIN_ID;
 		const REQUIRED_CAPABILITY = 'manage_options';
 
-
 		/**
 		 * Constructor
 		 *
