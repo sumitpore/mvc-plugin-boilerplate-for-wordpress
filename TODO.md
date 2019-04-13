@@ -9,9 +9,9 @@
 - [x] Tool to replace plugin name with developers plugin name
 - [x] Add information about how to access saved settings
 - [x] Get settings from settings model
-- [ ] @ & :: support in the controller name & model name
+- [x] @ support in the controller name & model name
 - [x] Proper place for activator, deactivator & uninstaller
-- [ ] replacements.json - Json file that holds what is replaced with what
 - [ ] Explaination on package.json & how people can use boilerplate without airbnb style
 - [ ] Writing Unit Tests
+- [ ] replacements.json - Json file that holds what is replaced with what
 - [ ] Tool to generate Model, View & Controller
