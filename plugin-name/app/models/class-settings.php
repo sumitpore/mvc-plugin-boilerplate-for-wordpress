@@ -112,7 +112,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Settings' ) ) {
 		 * delete this method if you don't want this ability.
 		 *
 		 * @param string $setting_name Setting to be Updated
-		 * @param mix    $setting_value New value to set for that setting
+		 * @param mixed    $setting_value New value to set for that setting
 		 * @return void
 		 * @since 1.0.0
 		 */

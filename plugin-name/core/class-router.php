@@ -158,7 +158,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Enqueues a model to be associated with the Model only` Route
 		 *
-		 * @param mix $model Model to be associated with the Route. Could be String or callback
+		 * @param mixed $model Model to be associated with the Route. Could be String or callback
 		 * @return void
 		 * @since 1.0.0
 		 */
@@ -176,7 +176,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		 * is used while enqueueing models and views to associate them with the
 		 * controller.
 		 *
-		 * @param mix $controller Controller to be associated with the Route. Could be String or callback
+		 * @param mixed $controller Controller to be associated with the Route. Could be String or callback
 		 * @return string
 		 * @since 1.0.0
 		 */
@@ -208,7 +208,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Enqueues a controller to be associated with the Route
 		 *
-		 * @param mix $controller Controller to be associated with the Route. Could be String or callback
+		 * @param mixed $controller Controller to be associated with the Route. Could be String or callback
 		 * @return object Returns Router Object
 		 * @since 1.0.0
 		 */
@@ -229,7 +229,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		 *
 		 * The object of this model is passed to controller.
 		 *
-		 * @param mix $model Model to be associated with the Route. Could be String or callback
+		 * @param mixed $model Model to be associated with the Route. Could be String or callback
 		 * @return object Returns Router Object
 		 * @since 1.0.0
 		 */
@@ -243,7 +243,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Registers view with the Route. The object of this view is passed to controller
 		 *
-		 * @param mix $view View to be associated with the Route. Could be String or callback
+		 * @param mixed $view View to be associated with the Route. Could be String or callback
 		 * @return object Returns Router Object
 		 * @since 1.0.0
 		 */
@@ -357,7 +357,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Dispatches the model only route by creating a Model object
 		 *
-		 * @param mix    $model Model to be associated with the Route. Could be String or callback
+		 * @param mixed    $model Model to be associated with the Route. Could be String or callback
 		 * @param string $route_type Route Type
 		 * @return void
 		 * @since 1.0.0
