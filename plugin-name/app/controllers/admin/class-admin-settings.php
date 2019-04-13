@@ -45,14 +45,20 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 */
 		protected function register_hook_callbacks() {
+			// Create Menu
 			add_action( 'admin_menu', array( $this, 'plugin_menu' ) );
+
+			// Enqueue Styles & Scripts
 			add_action( 'admin_print_scripts-' . static::$hook_suffix, array( $this, 'enqueue_scripts' ) );
 			add_action( 'admin_print_styles-' . static::$hook_suffix, array( $this, 'enqueue_styles' ) );
+
+			// Register Fields
 			add_action( 'load-' . static::$hook_suffix, array( $this, 'register_fields' ) );
 
 			// Register Settings
 			add_action( 'admin_init', array( $this->get_model(), 'register_settings' ) );
 
+			// Settings Link on Plugin's Page
 			add_filter(
 				'plugin_action_links_' . Plugin_Name::PLUGIN_ID . '/' . Plugin_Name::PLUGIN_ID . '.php',
 				array( $this, 'add_plugin_action_links' )
