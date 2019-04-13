@@ -4,7 +4,7 @@ namespace Plugin_Name\App\Controllers\Frontend;
 use \Plugin_Name\Core\Controller;
 
 /**
- * Controller class that implements Plugin frontend side controller class
+ * Blueprint for Frontend related Controllers. All Frontend Controllers should extend this Base_Controller
  *
  * @since      1.0.0
  * @package    Plugin_Name
