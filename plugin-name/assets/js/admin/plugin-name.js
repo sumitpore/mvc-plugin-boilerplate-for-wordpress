@@ -2,7 +2,7 @@
 	'use strict';
 
 	/**
-	 * All of the code for your frontend-facing JavaScript source
+	 * All of the code for your admin-facing JavaScript source
 	 * should reside in this file.
 	 *
 	 * Note that this assume you're going to use jQuery, so it prepares
