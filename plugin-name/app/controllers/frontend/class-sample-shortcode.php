@@ -54,7 +54,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Sample_Shortcode' ) ) {
 
 			wp_enqueue_style(
 				Plugin_Name::PLUGIN_ID,
-				Plugin_Name::get_plugin_url() . 'views/css/' . Plugin_Name::PLUGIN_ID . '.css',
+				Plugin_Name::get_plugin_url() . 'assets/css/frontend/plugin-name.css',
 				array(),
 				Plugin_Name::PLUGIN_VERSION,
 				'all'
@@ -74,7 +74,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Sample_Shortcode' ) ) {
 
 			wp_enqueue_script(
 				Plugin_Name::PLUGIN_ID,
-				Plugin_Name::get_plugin_url() . 'views/js/' . Plugin_Name::PLUGIN_ID . '.js',
+				Plugin_Name::get_plugin_url() . 'assets/js/frontend/plugin-name.js',
 				array( 'jquery' ),
 				Plugin_Name::PLUGIN_VERSION,
 				false

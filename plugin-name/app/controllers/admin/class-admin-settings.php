@@ -92,7 +92,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 
 			wp_enqueue_script(
 				Plugin_Name::PLUGIN_ID . '_admin-js',
-				Plugin_Name::get_plugin_url() . 'views/admin/js/' . Plugin_Name::PLUGIN_ID . '-admin.js',
+				Plugin_Name::get_plugin_url() . 'assets/js/admin/plugin-name.js',
 				array( 'jquery' ),
 				Plugin_Name::PLUGIN_VERSION,
 				true
@@ -112,7 +112,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 
 			wp_enqueue_style(
 				Plugin_Name::PLUGIN_ID . '_admin-css',
-				Plugin_Name::get_plugin_url() . 'views/admin/css/' . Plugin_Name::PLUGIN_ID . '-admin.css',
+				Plugin_Name::get_plugin_url() . 'assets/css/admin/plugin-name.css',
 				array(),
 				Plugin_Name::PLUGIN_VERSION,
 				'all'
