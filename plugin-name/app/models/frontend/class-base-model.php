@@ -19,7 +19,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Base_Model' ) ) {
 		 * go into this method.
 		 *
 		 * NOTE: register_hook_callbacks method is not called automatically. You
-		 * as a developer has to call this method where you see fit. For Example,
+		 * as a developer have to call this method where you see fit. For Example,
 		 * You may want to call this in constructor, if you feel hooks/filters
 		 * callbacks should be registered when the new instance of the class
 		 * is created.
