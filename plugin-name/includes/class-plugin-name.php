@@ -82,7 +82,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 			$this->autoload_dependencies();
 			$this->set_locale();
 
-			if( $router_class_name !== false && $routes !== false ){
+			if ( $router_class_name !== false && $routes !== false ) {
 				$this->init_router( $router_class_name, $routes );
 			}
 
@@ -159,7 +159,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		/**
 		 * Returns all model objecs used for current requests
 		 *
-		 * @since	1.0.0
+		 * @since   1.0.0
 		 * @return object
 		 */
 		private function get_all_models() {
@@ -174,7 +174,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 * @return array
 		 * @since 1.0.0
 		 */
-		public static function get_settings(){
+		public static function get_settings() {
 			return Settings::get_settings();
 		}
 
@@ -188,7 +188,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 * @since 1.0.0
 		 */
 		public static function get_setting( $setting_name ) {
-			return Settings::get_setting($setting_name);
+			return Settings::get_setting( $setting_name );
 		}
 	}
 

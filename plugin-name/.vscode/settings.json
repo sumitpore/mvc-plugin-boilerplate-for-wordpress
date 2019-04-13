@@ -2,6 +2,7 @@
 	"search.usePCRE2": true,
 	"breadcrumbs.enabled": true,
     "phpcs.enable": true,
+    "phpcs.autoConfigSearch": true,
     "phpcs.showSources": true,
     "phpcs.ignorePatterns": [
         "*/vendor/*",

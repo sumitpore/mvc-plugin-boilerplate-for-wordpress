@@ -1,5 +1,6 @@
 <?php
 namespace Plugin_Name\Core;
+
 use \Plugin_Name as Plugin_Name;
 
 /**

@@ -64,13 +64,13 @@ function plugin_name_show_requirements_error() {
  * The code that runs during plugin activation.
  */
 function activate_plugin_name() {
-	(new Plugin_Name\App\Activator())->activate();
+	( new Plugin_Name\App\Activator() )->activate();
 }
 /**
  * The code that runs during plugin deactivation.
  */
 function deactivate_plugin_name() {
-	(new Plugin_Name\App\Deactivator())->deactivate();
+	( new Plugin_Name\App\Deactivator() )->deactivate();
 }
 
 /**
@@ -108,15 +108,12 @@ function run_plugin_name() {
 
 		register_activation_hook( __FILE__, 'activate_plugin_name' );
 		register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
-
 	} else {
-
 		add_action( 'admin_notices', 'plugin_name_show_requirements_error' );
 
 		// Deactivate plugin immediately if requirements are not met
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		deactivate_plugins( plugin_basename( __FILE__ ) );
-
 	}
 }
 run_plugin_name();

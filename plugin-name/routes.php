@@ -49,12 +49,10 @@ $router
 |-------------------------------------------------------------------------------------------
 */
 // $router
-// 	->register_route_of_type( ROUTE_TYPE::ADMIN )
-// 	->with_controller( 'Plugin_Name\App\Controllers\Admin\Admin_Settings' )
-// 	->with_model( 'Plugin_Name\App\Models\Admin\Admin_Settings' )
-// 	->with_view( 'Plugin_Name\App\Views\Admin\Admin_Settings' );
-
-
+// ->register_route_of_type( ROUTE_TYPE::ADMIN )
+// ->with_controller( 'Plugin_Name\App\Controllers\Admin\Admin_Settings' )
+// ->with_model( 'Plugin_Name\App\Models\Admin\Admin_Settings' )
+// ->with_view( 'Plugin_Name\App\Views\Admin\Admin_Settings' );
 /*
 |-------------------------------------------------------------------------------------------
 | Load controller if conditions match. Late Frontend Routes are triggerred on `wp`
@@ -63,37 +61,33 @@ $router
 |-------------------------------------------------------------------------------------------
 */
 // $router
-// 	->register_route_of_type( ROUTE_TYPE::LATE_FRONTEND )
-// 	->with_controller(
-// 		function() {
-// 			if ( get_the_ID() == '3367' ) {
-// 				  return 'Sample_Shortcode';
-// 			}
-// 			return false;
-// 		}
-// 	)
-// 	->with_view( 'Sample_Shortcode' );
-
-
+// ->register_route_of_type( ROUTE_TYPE::LATE_FRONTEND )
+// ->with_controller(
+// function() {
+// if ( get_the_ID() == '3367' ) {
+// return 'Sample_Shortcode';
+// }
+// return false;
+// }
+// )
+// ->with_view( 'Sample_Shortcode' );
 /*
 |-------------------------------------------------------------------------------------------
 | Load controller if conditions match with full class names
 |-------------------------------------------------------------------------------------------
 */
 // $router
-// 	->register_route_of_type( ROUTE_TYPE::LATE_FRONTEND )
-// 	->with_controller(
-// 		function() {
-// 				// Load controller only if current post id is 3367
-// 			if ( get_the_ID() == '3367' ) {
-// 				  return 'Plugin_Name\App\Controllers\Frontend\Sample_Shortcode';
-// 			}
-// 			return false;
-// 		}
-// 	)
-// 	->with_view( 'Plugin_Name\App\Views\Frontend\Sample_Shortcode' );
-
-
+// ->register_route_of_type( ROUTE_TYPE::LATE_FRONTEND )
+// ->with_controller(
+// function() {
+// Load controller only if current post id is 3367
+// if ( get_the_ID() == '3367' ) {
+// return 'Plugin_Name\App\Controllers\Frontend\Sample_Shortcode';
+// }
+// return false;
+// }
+// )
+// ->with_view( 'Plugin_Name\App\Views\Frontend\Sample_Shortcode' );
 /*
 |-------------------------------------------------------------------------------------------
 | If you want to load only model for specific route, you can use with_just_model

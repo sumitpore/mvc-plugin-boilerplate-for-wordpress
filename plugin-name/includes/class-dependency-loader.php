@@ -21,37 +21,38 @@ if ( ! class_exists( 'Dependency_Loader' ) ) {
 		 * @since    1.0.0
 		 */
 		public function load_dependencies( $class ) {
-			$parts = explode('\\', $class);
+			$parts = explode( '\\', $class );
 
-			//Run this autoloader for classes related to this plugin only
-			if ('Plugin_Name' !== $parts[0]) {
+			// Run this autoloader for classes related to this plugin only
+			if ( 'Plugin_Name' !== $parts[0] ) {
 				return;
 			}
 
-			//Remove 'Plugin_Name' from parts
-			array_shift($parts);
+			// Remove 'Plugin_Name' from parts
+			array_shift( $parts );
 
-			$parts = array_map(function ($part) {
-				return str_replace( '_', '-', strtolower( $part ) );
-			}, $parts);
+			$parts = array_map(
+				function ( $part ) {
+					return str_replace( '_', '-', strtolower( $part ) );
+				}, $parts
+			);
 
-			$class_file_name = '/class-' . array_pop($parts) . '.php';
+			$class_file_name = '/class-' . array_pop( $parts ) . '.php';
 
-			$file_path = Plugin_Name::get_plugin_path() . implode('/', $parts) . $class_file_name;
+			$file_path = Plugin_Name::get_plugin_path() . implode( '/', $parts ) . $class_file_name;
 
-			if( \file_exists( $file_path ) ) {
+			if ( \file_exists( $file_path ) ) {
 				require_once( $file_path );
 				return;
 			}
 
-			$trait_file_name = '/trait-' . array_pop($parts) . '.php';
+			$trait_file_name = '/trait-' . array_pop( $parts ) . '.php';
 
-			$file_path = Plugin_Name::get_plugin_path() . implode('/', $parts) . $trait_file_name;
+			$file_path = Plugin_Name::get_plugin_path() . implode( '/', $parts ) . $trait_file_name;
 
-			if( \file_exists( $file_path ) ) {
+			if ( \file_exists( $file_path ) ) {
 				require_once( $file_path );
 			}
-
 		}
 
 		/**
