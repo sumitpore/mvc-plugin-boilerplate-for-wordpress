@@ -3,15 +3,14 @@ namespace Plugin_Name\Core;
 
 use \Plugin_Name\Core\Registry\Controller as Controller_Registry;
 
-/**
- * Abstract class to define/implement base methods for all controller classes
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/controllers
- */
-
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
+	/**
+	 * Abstract class to define/implement base methods for all controller classes
+	 *
+	 * @since      1.0.0
+	 * @package    Plugin_Name
+	 * @subpackage Plugin_Name/controllers
+	 */
 	abstract class Controller {
 
 		/**

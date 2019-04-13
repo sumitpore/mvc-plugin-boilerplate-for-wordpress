@@ -2,15 +2,31 @@
 namespace Plugin_Name\Core\Registry;
 
 if ( ! trait_exists( 'Base_Registry' ) ) {
-
+	/**
+	 * Base Registry Trait
+	 *
+	 * Controller Registry and Model Registry use this trait to deal with all
+	 * objects.
+	 *
+	 * This trait provides methods to store & retrieve objects in Registry
+	 *
+	 * If you have not heard about the term Registry before, think of hashmaps.
+	 * So creating registry means creating hashmaps to store objects.
+	 *
+	 * @since      1.0.0
+	 * @package    Plugin_Name
+	 * @subpackage Plugin_Name/Core/Registry
+	 * @author     Your Name <email@example.com>
+	 */
 	trait Base_Registry {
 
 		protected static $stored_objects = [];
 
 		/**
-		 * @param string $key
-		 * @param mixed  $value
+		 * Add object to registry
 		 *
+		 * @param string $key Key to be used to map with Object
+		 * @param mixed  $value Object to Store
 		 * @return void
 		 * @since 1.0.0
 		 */
@@ -19,8 +35,9 @@ if ( ! trait_exists( 'Base_Registry' ) ) {
 		}
 
 		/**
-		 * @param string $key
+		 * Get object from registry
 		 *
+		 * @param string $key
 		 * @return mixed
 		 * @since 1.0.0
 		 */

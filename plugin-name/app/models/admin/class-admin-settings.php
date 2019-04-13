@@ -4,16 +4,15 @@ namespace Plugin_Name\App\Models\Admin;
 use \Plugin_Name\App\Models\Settings as Settings_Model;
 use \Plugin_Name\App\Models\Admin\Base_Model;
 use \Plugin_Name as Plugin_Name;
-/**
- * Model class that implements Plugin Admin Settings
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/models/admin
- */
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
-
+	/**
+	 * Model class that implements Plugin Admin Settings
+	 *
+	 * @since      1.0.0
+	 * @package    Plugin_Name
+	 * @subpackage Plugin_Name/models/admin
+	 */
 	class Admin_Settings extends Base_Model {
 
 		/**

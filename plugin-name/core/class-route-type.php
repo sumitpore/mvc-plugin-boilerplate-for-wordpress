@@ -1,16 +1,14 @@
 <?php
 namespace Plugin_Name\Core;
 
-/**
- * Class Responsible for registering Route Types supported by the Application
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/Route_Types
- */
-
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Route_Type' ) ) {
-
+	/**
+	 * Class Responsible for registering Route Types supported by the Application
+	 *
+	 * @since      1.0.0
+	 * @package    Plugin_Name
+	 * @subpackage Plugin_Name/Route_Types
+	 */
 	class Route_Type {
 
 		/**

@@ -7,15 +7,16 @@ use \Plugin_Name\App\Models\Settings;
 
 require_once plugin_dir_path( __FILE__ ) . '/class-dependency-loader.php';
 
-/**
- * The core plugin class.
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
- */
+
 if ( ! class_exists( 'Plugin_Name' ) ) {
 
+	/**
+	 * The main plugin class
+	 *
+	 * @since      1.0.0
+	 * @package    Plugin_Name
+	 * @subpackage Plugin_Name/includes
+	 */
 	class Plugin_Name extends  Dependency_Loader {
 
 		/**
