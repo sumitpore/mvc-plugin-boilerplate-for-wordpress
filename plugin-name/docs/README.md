@@ -34,5 +34,4 @@ API Index
     * Plugin_Name\Includes
         * [Dependency_Loader](Plugin_Name-Includes-Dependency_Loader.md)
         * [i18n](Plugin_Name-Includes-i18n.md)
-* [SampleTest](SampleTest.md)
 

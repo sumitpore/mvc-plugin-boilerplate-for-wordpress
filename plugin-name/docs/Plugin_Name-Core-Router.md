@@ -178,7 +178,7 @@ registered, this function should be called first on `$route` object
 
 ### with_just_model
 
-    void Plugin_Name\Core\Router::with_just_model(\Plugin_Name\Core\mix $model)
+    void Plugin_Name\Core\Router::with_just_model(mixed $model)
 
 Enqueues a model to be associated with the Model only` Route
 
@@ -188,13 +188,13 @@ Enqueues a model to be associated with the Model only` Route
 
 
 #### Arguments
-* $model **Plugin_Name\Core\mix** - &lt;p&gt;Model to be associated with the Route. Could be String or callback&lt;/p&gt;
+* $model **mixed** - &lt;p&gt;Model to be associated with the Route. Could be String or callback&lt;/p&gt;
 
 
 
 ### build_controller_unique_id
 
-    string Plugin_Name\Core\Router::build_controller_unique_id(\Plugin_Name\Core\mix $controller)
+    string Plugin_Name\Core\Router::build_controller_unique_id(mixed $controller)
 
 Generates a Unique id for each controller
 
@@ -206,13 +206,13 @@ controller.
 
 
 #### Arguments
-* $controller **Plugin_Name\Core\mix** - &lt;p&gt;Controller to be associated with the Route. Could be String or callback&lt;/p&gt;
+* $controller **mixed** - &lt;p&gt;Controller to be associated with the Route. Could be String or callback&lt;/p&gt;
 
 
 
 ### with_controller
 
-    object Plugin_Name\Core\Router::with_controller(\Plugin_Name\Core\mix $controller)
+    object Plugin_Name\Core\Router::with_controller(mixed $controller)
 
 Enqueues a controller to be associated with the Route
 
@@ -222,13 +222,13 @@ Enqueues a controller to be associated with the Route
 
 
 #### Arguments
-* $controller **Plugin_Name\Core\mix** - &lt;p&gt;Controller to be associated with the Route. Could be String or callback&lt;/p&gt;
+* $controller **mixed** - &lt;p&gt;Controller to be associated with the Route. Could be String or callback&lt;/p&gt;
 
 
 
 ### with_model
 
-    object Plugin_Name\Core\Router::with_model(\Plugin_Name\Core\mix $model)
+    object Plugin_Name\Core\Router::with_model(mixed $model)
 
 Enqueues a model to be associated with the Route
 
@@ -238,13 +238,13 @@ The object of this model is passed to controller.
 
 
 #### Arguments
-* $model **Plugin_Name\Core\mix** - &lt;p&gt;Model to be associated with the Route. Could be String or callback&lt;/p&gt;
+* $model **mixed** - &lt;p&gt;Model to be associated with the Route. Could be String or callback&lt;/p&gt;
 
 
 
 ### with_view
 
-    object Plugin_Name\Core\Router::with_view(\Plugin_Name\Core\mix $view)
+    object Plugin_Name\Core\Router::with_view(mixed $view)
 
 Registers view with the Route. The object of this view is passed to controller
 
@@ -254,7 +254,7 @@ Registers view with the Route. The object of this view is passed to controller
 
 
 #### Arguments
-* $view **Plugin_Name\Core\mix** - &lt;p&gt;View to be associated with the Route. Could be String or callback&lt;/p&gt;
+* $view **mixed** - &lt;p&gt;View to be associated with the Route. Could be String or callback&lt;/p&gt;
 
 
 
@@ -309,7 +309,7 @@ Registers `Model Only` Enqueued Routes
 
 ### dispatch_only_model
 
-    void Plugin_Name\Core\Router::dispatch_only_model(\Plugin_Name\Core\mix $model, string $route_type)
+    void Plugin_Name\Core\Router::dispatch_only_model(mixed $model, string $route_type)
 
 Dispatches the model only route by creating a Model object
 
@@ -319,7 +319,7 @@ Dispatches the model only route by creating a Model object
 
 
 #### Arguments
-* $model **Plugin_Name\Core\mix** - &lt;p&gt;Model to be associated with the Route. Could be String or callback&lt;/p&gt;
+* $model **mixed** - &lt;p&gt;Model to be associated with the Route. Could be String or callback&lt;/p&gt;
 * $route_type **string** - &lt;p&gt;Route Type&lt;/p&gt;
 
 

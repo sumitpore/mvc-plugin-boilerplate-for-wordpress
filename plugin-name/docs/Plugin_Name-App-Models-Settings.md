@@ -139,7 +139,7 @@ Helper method to Update Settings
 
 ### update_setting
 
-    void Plugin_Name\App\Models\Settings::update_setting(string $setting_name, \Plugin_Name\App\Models\mix $setting_value)
+    void Plugin_Name\App\Models\Settings::update_setting(string $setting_name, mixed $setting_value)
 
 Helper method Update Single Setting
 
@@ -153,7 +153,7 @@ delete this method if you don't want this ability.
 
 #### Arguments
 * $setting_name **string** - &lt;p&gt;Setting to be Updated&lt;/p&gt;
-* $setting_value **Plugin_Name\App\Models\mix** - &lt;p&gt;New value to set for that setting&lt;/p&gt;
+* $setting_value **mixed** - &lt;p&gt;New value to set for that setting&lt;/p&gt;
 
 
 
