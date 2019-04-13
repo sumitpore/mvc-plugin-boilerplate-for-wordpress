@@ -1,21 +1,21 @@
 {
-  "name": "mvc-wordpress-plugin-boilerplate",
+  "name": "mvc-plugin-boilerplate-for-wordpress",
   "version": "1.0.0",
-  "description": "Plugin Boilerplate for WordPress Development",
+  "description": "MVC Plugin Boilerplate for WordPress",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sumitpore/MVC-WordPress-Plugin-Boilerplate.git"
+    "url": "git+https://github.com/sumitpore/mvc-plugin-boilerplate-for-wordpress.git"
   },
   "author": "Sumit",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/sumitpore/MVC-WordPress-Plugin-Boilerplate/issues"
+    "url": "https://github.com/sumitpore/mvc-plugin-boilerplate-for-wordpress/issues"
   },
-  "homepage": "https://github.com/sumitpore/MVC-WordPress-Plugin-Boilerplate#readme",
+  "homepage": "https://github.com/sumitpore/mvc-plugin-boilerplate-for-wordpress#readme",
   "devDependencies": {
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.1.0",
