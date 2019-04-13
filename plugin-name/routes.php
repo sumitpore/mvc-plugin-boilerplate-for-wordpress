@@ -1,36 +1,39 @@
 <?php
 
 use \Plugin_Name\Core\Route_Type as Route_Type;
+
 /*
-|-------------------------------------------------------------------------------------------
-| Route Types
-|-------------------------------------------------------------------------------------------
-| ROUTE_TYPE::ANY - To be used if model/controller is required on all pages admin
-|                   as well as frontend
-|
-| ROUTE_TYPE::ADMIN - To be used if model/controller needs to be loaded on admin
-|                     pages only
-|
-| ROUTE_TYPE::ADMIN_WITH_POSSIBLE_AJAX - To be used if model/controller contains
-|                                        Ajax & needs to be loaded on admin pages only
-|
-| ROUTE_TYPE::AJAX - To be used if model/controller contains Ajax
-|
-| ROUTE_TYPE::CRON - To be used if model/controller contains Cron functionality
-|
-| ROUTE_TYPE::FRONTEND - To be used if model/controller needs to be loaded on
-|                        frontend pages only
-|
-| ROUTE_TYPE::FRONTEND_WITH_POSSIBLE_AJAX - To be used if model/controller contains
-|                                           Ajax & needs to be loaded on frontend pages only
-|
-| ROUTE_TYPE::LATE_FRONTEND - To be used if model/controller needs to be loaded
-|                             when specific conditions are matched
-|
-| ROUTE_TYPE::LATE_FRONTEND_WITH_POSSIBLE_AJAX - To be used if model/controller
-|                                                contains Ajax & needs to be loaded when
-|                                                specific conditions are matched
-|
+|---------------------------------------------------------------------------------------------------------
+| Available Route Types
++----------------------------------------------+---------------------------------------------------------+
+| ROUTE TYPE                                   | ROUTE DESCRIPTION                                       |
++----------------------------------------------+---------------------------------------------------------+
+| ROUTE_TYPE::ANY                              | To be used if model/controller is                       |
+|                                              | required on all pages admin as well as frontend         |
++----------------------------------------------+---------------------------------------------------------+
+| ROUTE_TYPE::ADMIN                            | To be used if model/controller needs to be loaded on    |
+|                                              | on admin pages only                                     |
++----------------------------------------------+---------------------------------------------------------+
+| ROUTE_TYPE::ADMIN_WITH_POSSIBLE_AJAX         | To be used if model/controller contains Ajax & needs    |
+|                                              | to be loaded on admin pages only                        |
++----------------------------------------------+---------------------------------------------------------+
+| ROUTE_TYPE::AJAX                             | To be used if model/controller contains Ajax            |
++----------------------------------------------+---------------------------------------------------------+
+| ROUTE_TYPE::CRON                             | To be used if model/controller contains Cron            |
+|                                              | functionality                                           |
++----------------------------------------------+---------------------------------------------------------+
+| ROUTE_TYPE::FRONTEND                         | To be used if model/controller needs to be loaded on    |
+|                                              | frontend pages only                                     |
++----------------------------------------------+---------------------------------------------------------+
+| ROUTE_TYPE::FRONTEND_WITH_POSSIBLE_AJAX      | To be used if model/controller contains Ajax & needs    |
+|                                              | to be loaded on frontend pages only                     |
++----------------------------------------------+---------------------------------------------------------+
+| ROUTE_TYPE::LATE_FRONTEND                    | To be used if model/controller needs to be loaded when  |
+|                                              | specific conditions are matched                         |
++----------------------------------------------+---------------------------------------------------------+
+| ROUTE_TYPE::LATE_FRONTEND_WITH_POSSIBLE_AJAX | To be used if model/controller contains Ajax & needs    |
+|                                              | to be loaded when specific conditions are matched       |
++----------------------------------------------+---------------------------------------------------------+
 */
 
 $router
