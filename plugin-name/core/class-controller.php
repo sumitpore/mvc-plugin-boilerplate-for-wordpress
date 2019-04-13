@@ -121,6 +121,13 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 			$this->init( $model, $view );
 		}
 
+		/**
+		 * Sets Model & View to be used with current controller
+		 *
+		 * @param Model $model Model to be associated with this controller
+		 * @param mixed $view Either View/its child class object or False
+		 * @return void
+		 */
 		final protected function init( Model $model, $view = false ) {
 
 			$this->set_model( $model );
