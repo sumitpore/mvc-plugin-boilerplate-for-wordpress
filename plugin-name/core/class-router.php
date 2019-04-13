@@ -320,7 +320,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 				$view = $this->get_fully_qualified_class_name( $mvc_component['view'], 'view', $route_type );
 			}
 
-			list($controller, $action) = explode('@', $mvc_component['controller']);
+			@list($controller, $action) = explode('@', $mvc_component['controller']);
 
 			$controller = $this->get_fully_qualified_class_name( $controller, 'controller', $route_type );
 
@@ -375,7 +375,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 				}
 			}
 
-			list($model, $action) = explode('@', $model);
+			@list($model, $action) = explode('@', $model);
 			$model = $this->get_fully_qualified_class_name( $model, 'model', $route_type );
 			$model_instance = $model::get_instance();
 
