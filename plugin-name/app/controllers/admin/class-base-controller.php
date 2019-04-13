@@ -3,15 +3,15 @@ namespace Plugin_Name\App\Controllers\Admin;
 
 use \Plugin_Name\Core\Controller;
 
-/**
- * Blueprint for Admin related Controllers. All Admin Controllers should extend this Base_Controller
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/controllers/admin
- */
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Base_Controller' ) ) {
+	/**
+	 * Blueprint for Admin related Controllers. All Admin Controllers should extend this Base_Controller
+	 *
+	 * @since      1.0.0
+	 * @package    Plugin_Name
+	 * @subpackage Plugin_Name/controllers/admin
+	 */
 	abstract class Base_Controller extends Controller {
 
 		/**

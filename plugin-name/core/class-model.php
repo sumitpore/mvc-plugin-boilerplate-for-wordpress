@@ -3,15 +3,14 @@ namespace Plugin_Name\Core;
 
 use \Plugin_Name\Core\Registry\Model as Model_Registry;
 
-/**
- * Abstract class to define/implement base methods for model classes
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/models
- */
-
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Model' ) ) {
+	/**
+	 * Abstract class to define/implement base methods for model classes
+	 *
+	 * @since      1.0.0
+	 * @package    Plugin_Name
+	 * @subpackage Plugin_Name/models
+	 */
 	abstract class Model {
 
 		/**

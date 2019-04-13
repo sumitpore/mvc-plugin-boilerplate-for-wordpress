@@ -4,15 +4,14 @@ namespace Plugin_Name\App\Models;
 use \Plugin_Name as Plugin_Name;
 use \Plugin_Name\Core\Model;
 
-/**
- * Implements operations related to Plugin Settings.
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/Models
- */
-
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Settings' ) ) {
+	/**
+	 * Implements operations related to Plugin Settings.
+	 *
+	 * @since      1.0.0
+	 * @package    Plugin_Name
+	 * @subpackage Plugin_Name/Models
+	 */
 	class Settings extends Model {
 
 		const SETTINGS_NAME = Plugin_Name::PLUGIN_ID;
@@ -112,7 +111,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Settings' ) ) {
 		 * delete this method if you don't want this ability.
 		 *
 		 * @param string $setting_name Setting to be Updated
-		 * @param mixed    $setting_value New value to set for that setting
+		 * @param mixed  $setting_value New value to set for that setting
 		 * @return void
 		 * @since 1.0.0
 		 */

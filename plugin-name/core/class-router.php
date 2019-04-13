@@ -3,16 +3,15 @@ namespace Plugin_Name\Core;
 
 use \Plugin_Name as Plugin_Name;
 use \Plugin_Name\Core\Route_Type as Route_Type;
-/**
- * Class Responsible for registering Routes
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/controllers
- */
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
-
+	/**
+	 * Class Responsible for registering Routes
+	 *
+	 * @since      1.0.0
+	 * @package    Plugin_Name
+	 * @subpackage Plugin_Name/controllers
+	 */
 	class Router {
 
 		/**
@@ -357,7 +356,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Dispatches the model only route by creating a Model object
 		 *
-		 * @param mixed    $model Model to be associated with the Route. Could be String or callback
+		 * @param mixed  $model Model to be associated with the Route. Could be String or callback
 		 * @param string $route_type Route Type
 		 * @return void
 		 * @since 1.0.0

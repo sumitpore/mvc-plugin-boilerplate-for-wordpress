@@ -3,15 +3,14 @@ namespace Plugin_Name\App\Models\Admin;
 
 use \Plugin_Name\Core\Model;
 
-/**
- * Blueprint for Admin related Models. All Admin Models should extend this Base_Model
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/Models/Admin
- */
-
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Base_Model' ) ) {
+	/**
+	 * Blueprint for Admin related Models. All Admin Models should extend this Base_Model
+	 *
+	 * @since      1.0.0
+	 * @package    Plugin_Name
+	 * @subpackage Plugin_Name/Models/Admin
+	 */
 	abstract class Base_Model extends Model {
 
 

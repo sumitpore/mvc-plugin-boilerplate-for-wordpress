@@ -3,15 +3,14 @@ namespace Plugin_Name\App\Controllers\Frontend;
 
 use \Plugin_Name\Core\Controller;
 
-/**
- * Blueprint for Frontend related Controllers. All Frontend Controllers should extend this Base_Controller
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/Controllers/Frontend
- */
-
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Base_Controller' ) ) {
+	/**
+	 * Blueprint for Frontend related Controllers. All Frontend Controllers should extend this Base_Controller
+	 *
+	 * @since      1.0.0
+	 * @package    Plugin_Name
+	 * @subpackage Plugin_Name/Controllers/Frontend
+	 */
 	abstract class Base_Controller extends Controller {
 
 		/**
