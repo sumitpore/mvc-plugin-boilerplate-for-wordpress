@@ -7,7 +7,11 @@
 - [ ] Verify get all controllers and get models return all running controllers and models
 - [x] Change paths in dependency loader from self::plugin_path to Plugin_Name::get_plugin_path()
 - [x] Tool to replace plugin name with developers plugin name
-- [ ] Add information about how to access saved settings
-- [ ] Get settings from settings model
+- [x] Add information about how to access saved settings
+- [x] Get settings from settings model
 - [ ] @ & :: support in the controller name & model name
 - [x] Proper place for activator, deactivator & uninstaller
+- [ ] replacements.json - Json file that holds what is replaced with what
+- [ ] Explaination on package.json & how people can use boilerplate without airbnb style
+- [ ] Writing Unit Tests
+- [ ] Tool to generate Model, View & Controller
