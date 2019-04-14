@@ -8,7 +8,6 @@
 	<exclude-pattern>/vendor/</exclude-pattern>
 	<exclude-pattern>/vendors/</exclude-pattern>
 	<exclude-pattern>/node_modules/</exclude-pattern>
-	<exclude-pattern>/templates/</exclude-pattern>
 
 	<!-- How to scan -->
 	<!-- Usage instructions: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Usage -->
@@ -33,6 +32,8 @@
 	<rule ref="WordPress">
 		<exclude name="WordPress.VIP"/>
 		<exclude name="Squiz.Commenting.FileComment.Missing"/>
+		<exclude name="WordPress.WP.I18n.NonSingularStringLiteralDomain"/>
+		<exclude name="Generic.Strings.UnnecessaryStringConcat.Found"/>
 	</rule>
 	<rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
 		<properties>
