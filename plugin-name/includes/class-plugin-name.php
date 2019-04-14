@@ -20,6 +20,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 	class Plugin_Name extends  Dependency_Loader {
 
 		/**
+		 * Holds instance of this class
 		 *
 		 * @since    1.0.0
 		 * @access   private
@@ -71,9 +72,10 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		/**
 		 * Define the core functionality of the plugin.
 		 *
-		 * Load the dependencies, define the locale, and set the hooks for the admin area and
-		 * the frontend-facing side of the site.
+		 * Load the dependencies, define the locale, and bootstraps Router.
 		 *
+		 * @param mixed $router_class_name Name of the Router class to load. Otherwise false.
+		 * @param mixed $routes File that contains list of all routes. Otherwise false.
 		 * @since    1.0.0
 		 */
 		public function __construct( $router_class_name = false, $routes = false ) {
@@ -83,7 +85,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 			$this->autoload_dependencies();
 			$this->set_locale();
 
-			if ( $router_class_name !== false && $routes !== false ) {
+			if ( false !== $router_class_name && false !== $routes ) {
 				$this->init_router( $router_class_name, $routes );
 			}
 
@@ -127,6 +129,9 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		/**
 		 * Init Router
 		 *
+		 * @param mixed $router_class_name Name of the Router class to load.
+		 * @param mixed $routes File that contains list of all routes.
+		 * @throws \InvalidArgumentException If Router class or Routes file is not found.
 		 * @since 1.0.0
 		 * @return void
 		 */
@@ -139,7 +144,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 				throw new \InvalidArgumentException( "Routes file {$routes} not found! Please pass a valid file." );
 			}
 
-			$this->router = $router = new $router_class_name();
+			$this->router = $router = new $router_class_name(); // @codingStandardsIgnoreLine.
 			add_action(
 				'plugins_loaded', function() use ( $router, $routes ) {
 					include_once( $routes );
@@ -184,7 +189,7 @@ if ( ! class_exists( 'Plugin_Name' ) ) {
 		 *
 		 * Only to be used by third party developers.
 		 *
-		 * @param string $setting_name
+		 * @param string $setting_name Setting to be retrieved.
 		 * @return mixed
 		 * @since 1.0.0
 		 */

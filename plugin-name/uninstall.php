@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Fired when the plugin is uninstalled.
  *
@@ -33,8 +32,8 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 require_once( plugin_dir_path( __FILE__ ) . 'includes/class-plugin-name.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'app/class-uninstaller.php' );
 
-// Bootstrap Plugin without router
+// Bootstrap Plugin without router.
 new Plugin_Name();
 
-// Initiate Uninstall Procedure
+// Initiate Uninstall Procedure.
 ( new Plugin_Name\App\Uninstaller() )->uninstall();

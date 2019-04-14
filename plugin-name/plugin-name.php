@@ -1,6 +1,6 @@
 <?php
-
 /**
+ * Main Plugin File
  *
  * @link              http://example.com
  * @since             1.0.0
@@ -24,9 +24,9 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'PLUGIN_NAME_REQUIRED_PHP_VERSION', '5.3' ); // because of get_called_class()
+define( 'PLUGIN_NAME_REQUIRED_PHP_VERSION', '5.3' ); // because of get_called_class().
 define( 'PLUGIN_NAME_REQUIRED_WP_VERSION', '4.8' );
-define( 'PLUGIN_NAME_REQUIRED_WP_NETWORK', false ); // because plugin is not compatible with WordPress multisite
+define( 'PLUGIN_NAME_REQUIRED_WP_NETWORK', false ); // because plugin is not compatible with WordPress multisite.
 
 /**
  * Checks if the system requirements are met
@@ -111,7 +111,7 @@ function run_plugin_name() {
 	} else {
 		add_action( 'admin_notices', 'plugin_name_show_requirements_error' );
 
-		// Deactivate plugin immediately if requirements are not met
+		// Deactivate plugin immediately if requirements are not met.
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		deactivate_plugins( plugin_basename( __FILE__ ) );
 	}
