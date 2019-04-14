@@ -1,7 +1,7 @@
 Plugin_Name\Core\Model
 ===============
 
-
+Abstract class to define/implement base methods for model classes
 
 
 

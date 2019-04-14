@@ -1,7 +1,7 @@
 Plugin_Name
 ===============
 
-Includes all methods required for loading Plugin Dependencies
+The main plugin class
 
 
 
@@ -48,7 +48,7 @@ Properties
 
     private \Plugin_Name $instance
 
-
+Holds instance of this class
 
 
 
@@ -86,19 +86,18 @@ Methods
 
 ### __construct
 
-    mixed Plugin_Name::__construct($router_class_name, $routes)
+    mixed Plugin_Name::__construct(mixed $router_class_name, mixed $routes)
 
 Define the core functionality of the plugin.
 
-Load the dependencies, define the locale, and set the hooks for the admin area and
-the frontend-facing side of the site.
+Load the dependencies, define the locale, and bootstraps Router.
 
 * Visibility: **public**
 
 
 #### Arguments
-* $router_class_name **mixed**
-* $routes **mixed**
+* $router_class_name **mixed** - &lt;p&gt;Name of the Router class to load. Otherwise false.&lt;/p&gt;
+* $routes **mixed** - &lt;p&gt;File that contains list of all routes. Otherwise false.&lt;/p&gt;
 
 
 
@@ -146,7 +145,7 @@ with WordPress.
 
 ### init_router
 
-    void Plugin_Name::init_router($router_class_name, $routes)
+    void Plugin_Name::init_router(mixed $router_class_name, mixed $routes)
 
 Init Router
 
@@ -156,8 +155,8 @@ Init Router
 
 
 #### Arguments
-* $router_class_name **mixed**
-* $routes **mixed**
+* $router_class_name **mixed** - &lt;p&gt;Name of the Router class to load.&lt;/p&gt;
+* $routes **mixed** - &lt;p&gt;File that contains list of all routes.&lt;/p&gt;
 
 
 
@@ -214,24 +213,25 @@ Only to be used by third party developers.
 
 
 #### Arguments
-* $setting_name **string**
+* $setting_name **string** - &lt;p&gt;Setting to be retrieved.&lt;/p&gt;
 
 
 
 ### load_dependencies
 
-    mixed Plugin_Name\Includes\Dependency_Loader::load_dependencies($class)
+    mixed Plugin_Name\Includes\Dependency_Loader::load_dependencies(string $class)
 
 Loads all Plugin dependencies
 
-
+Converts Class parameter passed to the method into the file path & then
+`require_once` that path. It works with Class as well as with Traits.
 
 * Visibility: **public**
 * This method is defined by [Plugin_Name\Includes\Dependency_Loader](Plugin_Name-Includes-Dependency_Loader.md)
 
 
 #### Arguments
-* $class **mixed**
+* $class **string** - &lt;p&gt;Class need to be loaded.&lt;/p&gt;
 
 
 

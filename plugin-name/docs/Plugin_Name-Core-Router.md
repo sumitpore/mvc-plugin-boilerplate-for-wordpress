@@ -1,7 +1,7 @@
 Plugin_Name\Core\Router
 ===============
 
-
+Class Responsible for registering Routes
 
 
 
@@ -41,7 +41,7 @@ Holds List of Models used for 'Model Only' Routes
 
 ### $mvc_components
 
-    private mixed $mvc_components = array()
+    private array $mvc_components = array()
 
 Holds Model, View & Controllers triad for All routes except 'Model Only' Routes
 
@@ -161,7 +161,7 @@ Returns list of Route types belonging to Frontend but registered late
 
 ### register_route_of_type
 
-    void Plugin_Name\Core\Router::register_route_of_type(string $type)
+    \Plugin_Name\Core\Router Plugin_Name\Core\Router::register_route_of_type(string $type)
 
 Type of Route to be registered. Every time a new route needs to be
 registered, this function should be called first on `$route` object
@@ -172,13 +172,13 @@ registered, this function should be called first on `$route` object
 
 
 #### Arguments
-* $type **string** - &lt;p&gt;Type of route to be registered&lt;/p&gt;
+* $type **string** - &lt;p&gt;Type of route to be registered.&lt;/p&gt;
 
 
 
 ### with_just_model
 
-    void Plugin_Name\Core\Router::with_just_model(mixed $model)
+    mixed Plugin_Name\Core\Router::with_just_model(mixed $model)
 
 Enqueues a model to be associated with the Model only` Route
 
@@ -188,7 +188,7 @@ Enqueues a model to be associated with the Model only` Route
 
 
 #### Arguments
-* $model **mixed** - &lt;p&gt;Model to be associated with the Route. Could be String or callback&lt;/p&gt;
+* $model **mixed** - &lt;p&gt;Model to be associated with the Route. Could be String or callback.&lt;/p&gt;
 
 
 
@@ -206,7 +206,7 @@ controller.
 
 
 #### Arguments
-* $controller **mixed** - &lt;p&gt;Controller to be associated with the Route. Could be String or callback&lt;/p&gt;
+* $controller **mixed** - &lt;p&gt;Controller to be associated with the Route. Could be String or callback.&lt;/p&gt;
 
 
 
@@ -222,7 +222,7 @@ Enqueues a controller to be associated with the Route
 
 
 #### Arguments
-* $controller **mixed** - &lt;p&gt;Controller to be associated with the Route. Could be String or callback&lt;/p&gt;
+* $controller **mixed** - &lt;p&gt;Controller to be associated with the Route. Could be String or callback.&lt;/p&gt;
 
 
 
@@ -238,7 +238,7 @@ The object of this model is passed to controller.
 
 
 #### Arguments
-* $model **mixed** - &lt;p&gt;Model to be associated with the Route. Could be String or callback&lt;/p&gt;
+* $model **mixed** - &lt;p&gt;Model to be associated with the Route. Could be String or callback.&lt;/p&gt;
 
 
 
@@ -254,7 +254,7 @@ Registers view with the Route. The object of this view is passed to controller
 
 
 #### Arguments
-* $view **mixed** - &lt;p&gt;View to be associated with the Route. Could be String or callback&lt;/p&gt;
+* $view **mixed** - &lt;p&gt;View to be associated with the Route. Could be String or callback.&lt;/p&gt;
 
 
 
@@ -270,7 +270,7 @@ Registers Enqueued Routes
 
 
 #### Arguments
-* $register_late_frontend_routes **boolean** - &lt;p&gt;Whether to register late frontend routes&lt;/p&gt;
+* $register_late_frontend_routes **boolean** - &lt;p&gt;Whether to register late frontend routes.&lt;/p&gt;
 
 
 
@@ -286,8 +286,8 @@ Dispatches the route of specified $route_type by creating a controller object
 
 
 #### Arguments
-* $mvc_component **array** - &lt;p&gt;Model-View-Controller triads for all registered routes&lt;/p&gt;
-* $route_type **string** - &lt;p&gt;Route Type&lt;/p&gt;
+* $mvc_component **array** - &lt;p&gt;Model-View-Controller triads for all registered routes.&lt;/p&gt;
+* $route_type **string** - &lt;p&gt;Route Type.&lt;/p&gt;
 
 
 
@@ -303,7 +303,7 @@ Registers `Model Only` Enqueued Routes
 
 
 #### Arguments
-* $register_late_frontend_routes **boolean** - &lt;p&gt;Whether to register late frontend routes&lt;/p&gt;
+* $register_late_frontend_routes **boolean** - &lt;p&gt;Whether to register late frontend routes.&lt;/p&gt;
 
 
 
@@ -319,8 +319,8 @@ Dispatches the model only route by creating a Model object
 
 
 #### Arguments
-* $model **mixed** - &lt;p&gt;Model to be associated with the Route. Could be String or callback&lt;/p&gt;
-* $route_type **string** - &lt;p&gt;Route Type&lt;/p&gt;
+* $model **mixed** - &lt;p&gt;Model to be associated with the Route. Could be String or callback.&lt;/p&gt;
+* $route_type **string** - &lt;p&gt;Route Type.&lt;/p&gt;
 
 
 
@@ -336,9 +336,9 @@ Returns the Full Qualified Class Name for given class name
 
 
 #### Arguments
-* $class **string** - &lt;p&gt;Class whose FQCN needs to be found out&lt;/p&gt;
-* $mvc_component_type **string** - &lt;p&gt;Could be between &#039;model&#039;, &#039;view&#039; or &#039;controller&#039;&lt;/p&gt;
-* $route_type **string** - &lt;p&gt;Could be &#039;admin&#039; or &#039;frontend&#039;&lt;/p&gt;
+* $class **string** - &lt;p&gt;Class whose FQCN needs to be found out.&lt;/p&gt;
+* $mvc_component_type **string** - &lt;p&gt;Could be between &#039;model&#039;, &#039;view&#039; or &#039;controller&#039;.&lt;/p&gt;
+* $route_type **string** - &lt;p&gt;Could be &#039;admin&#039; or &#039;frontend&#039;.&lt;/p&gt;
 
 
 
@@ -354,6 +354,6 @@ Identifies Request Type
 
 
 #### Arguments
-* $route_type **string** - &lt;p&gt;Route Type to identify&lt;/p&gt;
+* $route_type **string** - &lt;p&gt;Route Type to identify.&lt;/p&gt;
 
 

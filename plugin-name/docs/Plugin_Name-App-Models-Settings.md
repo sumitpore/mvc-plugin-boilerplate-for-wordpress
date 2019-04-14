@@ -1,7 +1,7 @@
 Plugin_Name\App\Models\Settings
 ===============
 
-
+Implements operations related to Plugin Settings.
 
 
 
@@ -85,7 +85,7 @@ Helper method that returns a individual setting
 
 
 #### Arguments
-* $setting_name **string**
+* $setting_name **string** - &lt;p&gt;Setting to be retrieved.&lt;/p&gt;
 
 
 
@@ -116,7 +116,7 @@ Helper method to delete a specific setting
 
 
 #### Arguments
-* $setting_name **string** - &lt;p&gt;Setting to be Deleted&lt;/p&gt;
+* $setting_name **string** - &lt;p&gt;Setting to be Deleted.&lt;/p&gt;
 
 
 
@@ -133,7 +133,7 @@ Helper method to Update Settings
 
 
 #### Arguments
-* $new_settings **array**
+* $new_settings **array** - &lt;p&gt;New Setting Values to store.&lt;/p&gt;
 
 
 
@@ -152,8 +152,8 @@ delete this method if you don't want this ability.
 
 
 #### Arguments
-* $setting_name **string** - &lt;p&gt;Setting to be Updated&lt;/p&gt;
-* $setting_value **mixed** - &lt;p&gt;New value to set for that setting&lt;/p&gt;
+* $setting_name **string** - &lt;p&gt;Setting to be Updated.&lt;/p&gt;
+* $setting_value **mixed** - &lt;p&gt;New value to set for that setting.&lt;/p&gt;
 
 
 

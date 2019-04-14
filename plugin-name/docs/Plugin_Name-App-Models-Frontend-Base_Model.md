@@ -1,7 +1,7 @@
 Plugin_Name\App\Models\Frontend\Base_Model
 ===============
 
-
+Blueprint for Frontend related Models. All Frontend Models should extend this Base_Model
 
 
 
