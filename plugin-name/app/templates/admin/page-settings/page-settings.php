@@ -2,14 +2,8 @@
 
 <div class="wrap">
 
-	<h2><?php esc_html_e( __( $page_title ) ); ?></h2>
+	<h2><?php echo esc_html( $page_title ); ?></h2>
 
-	<div id="message_update" class="updated notice is-dismissible" style="display:none;">
-		<p>
-			<strong><?php echo __( 'Plugin Name Settings Updated' ); ?>.</strong>
-		</p>
-	</div>
-	
 	<form id="plugin_name" method="post" action="options.php">
 		<?php
 			settings_fields( $settings_name );

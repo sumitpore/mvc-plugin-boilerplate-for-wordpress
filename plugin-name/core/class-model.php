@@ -23,7 +23,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Model' ) ) {
 			$classname = get_called_class();
 			$instance = Model_Registry::get( $classname );
 
-			if ( $instance === null ) {
+			if ( null === $instance ) {
 				$instance = new $classname();
 				Model_Registry::set( $classname, $instance );
 			}

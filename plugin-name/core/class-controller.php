@@ -32,6 +32,8 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 		/**
 		 * Provides access to a single instance of a module using the singleton pattern
 		 *
+		 * @param mixed $model_class_name Model Class to be associated with the controller.
+		 * @param mixed $view_class_name View Class to be associated with the controller.
 		 * @return object
 		 * @since    1.0.0
 		 */
@@ -41,18 +43,18 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 
 			$instance = Controller_Registry::get( $key_in_registry );
 
-			// Create a object if no object is found
-			if ( $instance === null ) {
+			// Create a object if no object is found.
+			if ( null === $instance ) {
 
-				// Decide model to be passed to the constructor
-				if ( $model_class_name != false ) {
+				// Decide model to be passed to the constructor.
+				if ( false != $model_class_name ) {
 					$model = $model_class_name::get_instance();
 				} else {
 					$model = new Model();
 				}
 
-				// Decide view to be passed to the constructor
-				if ( $view_class_name != false ) {
+				// Decide view to be passed to the constructor.
+				if ( false != $view_class_name ) {
 					$view = new $view_class_name();
 				} else {
 					$view = new View();
@@ -97,6 +99,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 		/**
 		 * Sets the model to be used
 		 *
+		 * @param Model $model Model object to be associated with the current controller object.
 		 * @return void
 		 * @since 1.0.0
 		 */
@@ -107,14 +110,19 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 		/**
 		 * Sets the view to be used
 		 *
+		 * @param View $view View object to be associated with the current controller object.
 		 * @return void
 		 * @since 1.0.0
 		 */
 		protected function set_view( View $view ) {
 			$this->view = $view;
 		}
+
 		/**
 		 * Constructor
+		 *
+		 * @param Model $model Model object to be used with current controller object.
+		 * @param mixed $view View object to be used with current controller object. Otherwise false.
 		 */
 		protected function __construct( Model $model, $view = false ) {
 			$this->init( $model, $view );
@@ -123,14 +131,14 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 		/**
 		 * Sets Model & View to be used with current controller
 		 *
-		 * @param Model $model Model to be associated with this controller
-		 * @param mixed $view Either View/its child class object or False
+		 * @param Model $model Model to be associated with this controller.
+		 * @param mixed $view Either View/its child class object or False.
 		 * @return void
 		 */
 		final protected function init( Model $model, $view = false ) {
 			$this->set_model( $model );
 
-			if ( $view === false ) {
+			if ( false === $view ) {
 				$view = new View();
 			}
 

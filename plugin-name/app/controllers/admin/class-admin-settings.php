@@ -15,9 +15,13 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 	 * @package    Plugin_Name
 	 * @subpackage Plugin_Name/controllers/admin
 	 */
-
 	class Admin_Settings extends Base_Controller {
-
+		/**
+		 * Holds suffix for dynamic add_action called on settings page.
+		 *
+		 * @var string
+		 * @since 1.0.0
+		 */
 		private static $hook_suffix = '';
 
 		const SETTINGS_PAGE_URL = Plugin_Name::PLUGIN_ID;
@@ -26,11 +30,13 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		/**
 		 * Constructor
 		 *
+		 * @param Model $model Model object to be associated with this controller.
+		 * @param View  $view View object to be associated with this controller.
 		 * @since    1.0.0
 		 */
 		protected function __construct( Model $model, View $view ) {
 
-			// Every constructor must call init method. init method sets model & view properties
+			// Every constructor must call init method. init method sets model & view properties.
 			$this->init( $model, $view );
 
 			static::$hook_suffix = 'settings_page_' . Plugin_Name::PLUGIN_ID;
@@ -44,20 +50,20 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 */
 		protected function register_hook_callbacks() {
-			// Create Menu
+			// Create Menu.
 			add_action( 'admin_menu', array( $this, 'plugin_menu' ) );
 
-			// Enqueue Styles & Scripts
+			// Enqueue Styles & Scripts.
 			add_action( 'admin_print_scripts-' . static::$hook_suffix, array( $this, 'enqueue_scripts' ) );
 			add_action( 'admin_print_styles-' . static::$hook_suffix, array( $this, 'enqueue_styles' ) );
 
-			// Register Fields
+			// Register Fields.
 			add_action( 'load-' . static::$hook_suffix, array( $this, 'register_fields' ) );
 
-			// Register Settings
+			// Register Settings.
 			add_action( 'admin_init', array( $this->get_model(), 'register_settings' ) );
 
-			// Settings Link on Plugin's Page
+			// Settings Link on Plugin's Page.
 			add_filter(
 				'plugin_action_links_' . Plugin_Name::PLUGIN_ID . '/' . Plugin_Name::PLUGIN_ID . '.php',
 				array( $this, 'add_plugin_action_links' )
@@ -70,13 +76,15 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 */
 		public function plugin_menu() {
+			// @codingStandardsIgnoreStart.
 			static::$hook_suffix = add_options_page(
-				__( Plugin_Name::PLUGIN_NAME, Plugin_Name::PLUGIN_ID ),        // Page Title
-				__( Plugin_Name::PLUGIN_NAME, Plugin_Name::PLUGIN_ID ),        // Menu Title
-				static::REQUIRED_CAPABILITY,           // Capability
-				static::SETTINGS_PAGE_URL,             // Menu URL
-				array( $this, 'markup_settings_page' ) // Callback
+				__( Plugin_Name::PLUGIN_NAME, Plugin_Name::PLUGIN_ID ),        // Page Title.
+				__( Plugin_Name::PLUGIN_NAME, Plugin_Name::PLUGIN_ID ),        // Menu Title.
+				static::REQUIRED_CAPABILITY,           // Capability.
+				static::SETTINGS_PAGE_URL,             // Menu URL.
+				array( $this, 'markup_settings_page' ) // Callback.
 			);
+			// @codingStandardsIgnoreEnd.
 		}
 
 		/**
@@ -84,7 +92,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		public function enqueue_scripts( $hook ) {
+		public function enqueue_scripts() {
 
 			/**
 			 * This function is provided for demonstration purposes only.
@@ -104,7 +112,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 *
 		 * @since    1.0.0
 		 */
-		public function enqueue_styles( $hook ) {
+		public function enqueue_styles() {
 
 			/**
 			 * This function is provided for demonstration purposes only.
@@ -133,7 +141,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 					)
 				);
 			} else {
-				wp_die( __( 'Access denied.' ) );
+				wp_die( __( 'Access denied.' ) ); // WPCS: XSS OK.
 			}
 		}
 
@@ -144,22 +152,22 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 */
 		public function register_fields() {
 
-			// Add Settings Page Section
+			// Add Settings Page Section.
 			add_settings_section(
-				'plugin_name_section',                    // Section ID
-				__( 'Settings', Plugin_Name::PLUGIN_ID ), // Section Title
-				array( $this, 'markup_section_headers' ), // Section Callback
-				static::SETTINGS_PAGE_URL                 // Page URL
+				'plugin_name_section',                    // Section ID.
+				__( 'Settings', Plugin_Name::PLUGIN_ID ), // Section Title.
+				array( $this, 'markup_section_headers' ), // Section Callback.
+				static::SETTINGS_PAGE_URL                 // Page URL.
 			);
 
-			// Add Settings Page Field
+			// Add Settings Page Field.
 			add_settings_field(
-				'plugin_name_field',                                // Field ID
-				__( 'Plugin Name Field:', Plugin_Name::PLUGIN_ID ), // Field Title
-				array( $this, 'markup_fields' ),                    // Field Callback
-				static::SETTINGS_PAGE_URL,                          // Page
-				'plugin_name_section',                              // Section ID
-				array(                                              // Field args
+				'plugin_name_field',                                // Field ID.
+				__( 'Plugin Name Field:', Plugin_Name::PLUGIN_ID ), // Field Title.
+				array( $this, 'markup_fields' ),                    // Field Callback.
+				static::SETTINGS_PAGE_URL,                          // Page.
+				'plugin_name_section',                              // Section ID.
+				array(                                              // Field args.
 					'id'        => 'plugin_name_field',
 					'label_for' => 'plugin_name_field',
 				)
@@ -169,7 +177,8 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		/**
 		 * Adds the section introduction text to the Settings page
 		 *
-		 * @param array $section
+		 * @param array $section Array containing information Section Id, Section
+		 *                       Title & Section Callback.
 		 *
 		 * @since    1.0.0
 		 */
@@ -185,7 +194,8 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		/**
 		 * Delivers the markup for settings fields
 		 *
-		 * @param array $args
+		 * @param array $field_args Field arguments passed in `add_settings_field`
+		 *                          function.
 		 *
 		 * @since    1.0.0
 		 */
@@ -204,7 +214,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		/**
 		 * Adds links to the plugin's action link section on the Plugins page
 		 *
-		 * @param array $links The links currently mapped to the plugin
+		 * @param array $links The links currently mapped to the plugin.
 		 * @return array
 		 *
 		 * @since    1.0.0

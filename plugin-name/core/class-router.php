@@ -25,6 +25,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Holds Model, View & Controllers triad for All routes except 'Model Only' Routes
 		 *
+		 * @var array
 		 * @since    1.0.0
 		 */
 		private static $mvc_components = [];
@@ -137,17 +138,17 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		 * Type of Route to be registered. Every time a new route needs to be
 		 * registered, this function should be called first on `$route` object
 		 *
-		 * @param string $type Type of route to be registered
-		 * @return void
+		 * @param string $type Type of route to be registered.
+		 * @return Router Returns `Router` object.
 		 * @since 1.0.0
 		 */
 		public function register_route_of_type( $type ) {
 			if ( in_array( $type, $this->late_frontend_route_types() ) && did_action( 'wp' ) ) {
-				trigger_error( __( 'Late Routes can not be registered after `wp` hook is triggered. Register your route before `wp` hook is triggered.', Plugin_Name::PLUGIN_ID ), E_USER_ERROR );
+				trigger_error( __( 'Late Routes can not be registered after `wp` hook is triggered. Register your route before `wp` hook is triggered.', Plugin_Name::PLUGIN_ID ), E_USER_ERROR ); // @codingStandardsIgnoreLine.
 			}
 
 			if ( in_array( $type, $this->generic_route_types() ) && did_action( 'init' ) ) {
-				trigger_error( __( 'Non-Late Routes can not be registered after `init` hook is triggered. Register your route before `init` hook is triggered.', Plugin_Name::PLUGIN_ID ), E_USER_ERROR );
+				trigger_error( __( 'Non-Late Routes can not be registered after `init` hook is triggered. Register your route before `init` hook is triggered.', Plugin_Name::PLUGIN_ID ), E_USER_ERROR ); // @codingStandardsIgnoreLine.
 			}
 
 			$this->route_type_to_register = $type;
@@ -157,12 +158,12 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Enqueues a model to be associated with the Model only` Route
 		 *
-		 * @param mixed $model Model to be associated with the Route. Could be String or callback
-		 * @return void
+		 * @param mixed $model Model to be associated with the Route. Could be String or callback.
+		 * @return mixed
 		 * @since 1.0.0
 		 */
 		public function with_just_model( $model ) {
-			if ( $model === false ) {
+			if ( false === $model ) {
 				return $this;
 			}
 			static::$models[ $this->route_type_to_register ][] = $model;
@@ -175,7 +176,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		 * is used while enqueueing models and views to associate them with the
 		 * controller.
 		 *
-		 * @param mixed $controller Controller to be associated with the Route. Could be String or callback
+		 * @param mixed $controller Controller to be associated with the Route. Could be String or callback.
 		 * @return string
 		 * @since 1.0.0
 		 */
@@ -187,19 +188,19 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 			}
 
 			if ( is_object( $controller ) ) {
-				// Closures are currently implemented as objects
+				// Closures are currently implemented as objects.
 				$controller = array( $controller, '' );
 			} else {
 				$controller = (array) $controller;
 			}
 
 			if ( is_object( $controller[0] ) ) {
-				// Object Class Calling
+				// Object Class Calling.
 				return $prefix . spl_object_hash( $controller[0] ) . $controller[1];
 			}
 
 			if ( is_string( $controller[0] ) ) {
-				// Static Calling
+				// Static Calling.
 				return $prefix . $controller[0] . '::' . $controller[1];
 			}
 		}
@@ -207,12 +208,12 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Enqueues a controller to be associated with the Route
 		 *
-		 * @param mixed $controller Controller to be associated with the Route. Could be String or callback
+		 * @param mixed $controller Controller to be associated with the Route. Could be String or callback.
 		 * @return object Returns Router Object
 		 * @since 1.0.0
 		 */
 		public function with_controller( $controller ) {
-			if ( $controller === false ) {
+			if ( false === $controller ) {
 				return $this;
 			}
 
@@ -228,7 +229,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		 *
 		 * The object of this model is passed to controller.
 		 *
-		 * @param mixed $model Model to be associated with the Route. Could be String or callback
+		 * @param mixed $model Model to be associated with the Route. Could be String or callback.
 		 * @return object Returns Router Object
 		 * @since 1.0.0
 		 */
@@ -242,7 +243,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Registers view with the Route. The object of this view is passed to controller
 		 *
-		 * @param mixed $view View to be associated with the Route. Could be String or callback
+		 * @param mixed $view View to be associated with the Route. Could be String or callback.
 		 * @return object Returns Router Object
 		 * @since 1.0.0
 		 */
@@ -256,7 +257,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Registers Enqueued Routes
 		 *
-		 * @param boolean $register_late_frontend_routes Whether to register late frontend routes
+		 * @param boolean $register_late_frontend_routes Whether to register late frontend routes.
 		 * @return void
 		 * @since 1.0.0
 		 */
@@ -283,27 +284,28 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Dispatches the route of specified $route_type by creating a controller object
 		 *
-		 * @param array  $mvc_component Model-View-Controller triads for all registered routes
-		 * @param string $route_type Route Type
+		 * @param array  $mvc_component Model-View-Controller triads for all registered routes.
+		 * @param string $route_type Route Type.
 		 * @return void
 		 * @since 1.0.0
 		 */
 		private function dispatch( $mvc_component, $route_type ) {
-			$model = $view = false;
+			$model = false;
+			$view = false;
 
-			if ( isset( $mvc_component['controller'] ) && $mvc_component['controller'] === false ) {
+			if ( isset( $mvc_component['controller'] ) && false === $mvc_component['controller'] ) {
 				return;
 			}
 
 			if ( is_callable( $mvc_component['controller'] ) ) {
 				$mvc_component['controller'] = call_user_func( $mvc_component['controller'] );
 
-				if ( $mvc_component['controller'] === false ) {
+				if ( false === $mvc_component['controller'] ) {
 					return;
 				}
 			}
 
-			if ( isset( $mvc_component['model'] ) && $mvc_component['model'] !== false ) {
+			if ( isset( $mvc_component['model'] ) && false !== $mvc_component['model'] ) {
 				if ( is_callable( $mvc_component['model'] ) ) {
 					$mvc_component['model'] = call_user_func( $mvc_component['model'] );
 				}
@@ -311,7 +313,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 				$model = $this->get_fully_qualified_class_name( $mvc_component['model'], 'model', $route_type );
 			}
 
-			if ( isset( $mvc_component['view'] ) && $mvc_component['view'] !== false ) {
+			if ( isset( $mvc_component['view'] ) && false !== $mvc_component['view'] ) {
 				if ( is_callable( $mvc_component['view'] ) ) {
 					$mvc_component['view'] = call_user_func( $mvc_component['view'] );
 				}
@@ -325,7 +327,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 
 			$controller_instance = $controller::get_instance( $model, $view );
 
-			if ( $action !== null ) {
+			if ( null !== $action ) {
 				$controller_instance->$action();
 			}
 		}
@@ -333,14 +335,14 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Registers `Model Only` Enqueued Routes
 		 *
-		 * @param boolean $register_late_frontend_routes Whether to register late frontend routes
+		 * @param boolean $register_late_frontend_routes Whether to register late frontend routes.
 		 * @return void
 		 * @since 1.0.0
 		 */
 		public function register_model_only_routes( $register_late_frontend_routes = false ) {
-			if ( $register_late_frontend_routes && empty( $route_types = $this->late_frontend_route_types() ) ) {
+			if ( $register_late_frontend_routes && empty( $route_types = $this->late_frontend_route_types() ) ) { // @codingStandardsIgnoreLine.
 				return;
-			} elseif ( empty( $route_types = $this->generic_route_types() ) ) {
+			} elseif ( empty( $route_types = $this->generic_route_types() ) ) { // @codingStandardsIgnoreLine.
 				return;
 			}
 
@@ -356,20 +358,20 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Dispatches the model only route by creating a Model object
 		 *
-		 * @param mixed  $model Model to be associated with the Route. Could be String or callback
-		 * @param string $route_type Route Type
+		 * @param mixed  $model Model to be associated with the Route. Could be String or callback.
+		 * @param string $route_type Route Type.
 		 * @return void
 		 * @since 1.0.0
 		 */
 		private function dispatch_only_model( $model, $route_type ) {
-			if ( $model === false ) {
+			if ( false === $model ) {
 				return;
 			}
 
 			if ( is_callable( $model ) ) {
 				$model = call_user_func( $model );
 
-				if ( $model === false ) {
+				if ( false === $model ) {
 					return;
 				}
 			}
@@ -378,7 +380,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 			$model = $this->get_fully_qualified_class_name( $model, 'model', $route_type );
 			$model_instance = $model::get_instance();
 
-			if ( $action !== null ) {
+			if ( null !== $action ) {
 				$model_instance->$action();
 			}
 		}
@@ -386,15 +388,15 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Returns the Full Qualified Class Name for given class name
 		 *
-		 * @param string $class Class whose FQCN needs to be found out
-		 * @param string $mvc_component_type Could be between 'model', 'view' or 'controller'
-		 * @param string $route_type Could be 'admin' or 'frontend'
-		 * @return string Retuns Full Qualified Class Name
+		 * @param string $class Class whose FQCN needs to be found out.
+		 * @param string $mvc_component_type Could be between 'model', 'view' or 'controller'.
+		 * @param string $route_type Could be 'admin' or 'frontend'.
+		 * @return string Retuns Full Qualified Class Name.
 		 * @since 1.0.0
 		 */
 		private function get_fully_qualified_class_name( $class, $mvc_component_type, $route_type ) {
 
-			// If route type is admin or frontend
+			// If route type is admin or frontend.
 			if ( \strpos( $route_type, 'admin' ) !== false || \strpos( $route_type, 'frontend' ) !== false ) {
 				$fqcn = '\Plugin_Name\App\\';
 				$fqcn .= \ucfirst( $mvc_component_type ) . 's\\';
@@ -411,7 +413,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 		/**
 		 * Identifies Request Type
 		 *
-		 * @param string $route_type Route Type to identify
+		 * @param string $route_type Route Type to identify.
 		 * @return boolean
 		 * @since 1.0.0
 		 */

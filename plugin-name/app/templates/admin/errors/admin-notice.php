@@ -1,5 +1,5 @@
 <div class="error">
-	
-	<p><?php echo $admin_notice; ?></p>
-	
+
+	<p><?php echo esc_html( $admin_notice ); ?></p>
+
 </div>

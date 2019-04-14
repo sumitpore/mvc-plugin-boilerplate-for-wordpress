@@ -46,19 +46,19 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 */
 		public function register_settings() {
 
-			// The settings container
+			// The settings container.
 			register_setting(
-				Settings_Model::SETTINGS_NAME,     // Option group Name
-				Settings_Model::SETTINGS_NAME,     // Option Name
-				array( $this, 'sanitize' ) // Sanitize
+				Settings_Model::SETTINGS_NAME,     // Option group Name.
+				Settings_Model::SETTINGS_NAME,     // Option Name.
+				array( $this, 'sanitize' ) // Sanitize.
 			);
 		}
 
 		/**
 		 * Validates submitted setting values before they get saved to the database.
 		 *
+		 * @param array $input Settings Being Saved.
 		 * @since    1.0.0
-		 * @param array $settings
 		 * @return array
 		 */
 		public function sanitize( $input ) {
@@ -83,6 +83,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		/**
 		 * Retrieves all of the settings from the database
 		 *
+		 * @param string $setting_name Setting to be retrieved.
 		 * @since    1.0.0
 		 * @return array
 		 */

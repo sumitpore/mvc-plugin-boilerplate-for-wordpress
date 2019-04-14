@@ -18,17 +18,21 @@ if ( ! class_exists( 'Dependency_Loader' ) ) {
 		/**
 		 * Loads all Plugin dependencies
 		 *
+		 * Converts Class parameter passed to the method into the file path & then
+		 * `require_once` that path. It works with Class as well as with Traits.
+		 *
+		 * @param string $class Class need to be loaded.
 		 * @since    1.0.0
 		 */
 		public function load_dependencies( $class ) {
 			$parts = explode( '\\', $class );
 
-			// Run this autoloader for classes related to this plugin only
+			// Run this autoloader for classes related to this plugin only.
 			if ( 'Plugin_Name' !== $parts[0] ) {
 				return;
 			}
 
-			// Remove 'Plugin_Name' from parts
+			// Remove 'Plugin_Name' from parts.
 			array_shift( $parts );
 
 			$parts = array_map(

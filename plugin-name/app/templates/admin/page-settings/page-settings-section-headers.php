@@ -1,3 +1,3 @@
 <p>
-	<?php echo $text_example; ?>
+	<?php echo esc_html( $text_example ); ?>
 </p>

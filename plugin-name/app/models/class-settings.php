@@ -51,7 +51,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Settings' ) ) {
 		/**
 		 * Helper method that returns a individual setting
 		 *
-		 * @param string $setting_name
+		 * @param string $setting_name Setting to be retrieved.
 		 * @return mixed
 		 * @since 1.0.0
 		 */
@@ -75,7 +75,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Settings' ) ) {
 		/**
 		 * Helper method to delete a specific setting
 		 *
-		 * @param string $setting_name Setting to be Deleted
+		 * @param string $setting_name Setting to be Deleted.
 		 * @return void
 		 * @since 1.0.0
 		 */
@@ -92,7 +92,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Settings' ) ) {
 		/**
 		 * Helper method to Update Settings
 		 *
-		 * @param array $new_settings
+		 * @param array $new_settings New Setting Values to store.
 		 * @return void
 		 * @since 1.0.0
 		 */
@@ -110,8 +110,8 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Settings' ) ) {
 		 * This is a custom helper function to delete individual setting. You can
 		 * delete this method if you don't want this ability.
 		 *
-		 * @param string $setting_name Setting to be Updated
-		 * @param mixed  $setting_value New value to set for that setting
+		 * @param string $setting_name Setting to be Updated.
+		 * @param mixed  $setting_value New value to set for that setting.
 		 * @return void
 		 * @since 1.0.0
 		 */
