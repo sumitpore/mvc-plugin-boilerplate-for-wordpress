@@ -1,9 +1,9 @@
 Plugin_Name\Core\Registry\Model
 ===============
 
+Model Registry
 
-
-
+Maintains the list of all models objects
 
 
 * Class name: Model
@@ -19,9 +19,9 @@ Properties
 
 ### $stored_objects
 
-    protected mixed $stored_objects = array()
+    protected array $stored_objects = array()
 
-
+Variable that holds all objects in registry.
 
 
 
@@ -37,7 +37,7 @@ Methods
 
     void Plugin_Name\Core\Registry\Model::set(string $key, mixed $value)
 
-
+Add object to registry
 
 
 
@@ -46,8 +46,8 @@ Methods
 
 
 #### Arguments
-* $key **string**
-* $value **mixed**
+* $key **string** - &lt;p&gt;Key to be used to map with Object.&lt;/p&gt;
+* $value **mixed** - &lt;p&gt;Object to Store.&lt;/p&gt;
 
 
 
@@ -55,7 +55,7 @@ Methods
 
     mixed Plugin_Name\Core\Registry\Model::get(string $key)
 
-
+Get object from registry
 
 
 
@@ -64,7 +64,7 @@ Methods
 
 
 #### Arguments
-* $key **string**
+* $key **string** - &lt;p&gt;Key of the object to restore.&lt;/p&gt;
 
 
 

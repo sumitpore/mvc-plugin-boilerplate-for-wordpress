@@ -1,7 +1,7 @@
 Plugin_Name\App\Controllers\Frontend\Base_Controller
 ===============
 
-
+Blueprint for Frontend related Controllers. All Frontend Controllers should extend this Base_Controller
 
 
 
@@ -69,7 +69,7 @@ find add_action/add_filter is register_hook_callbacks method.
 
 ### get_instance
 
-    object Plugin_Name\Core\Controller::get_instance($model_class_name, $view_class_name)
+    object Plugin_Name\Core\Controller::get_instance(mixed $model_class_name, mixed $view_class_name)
 
 Provides access to a single instance of a module using the singleton pattern
 
@@ -81,8 +81,8 @@ Provides access to a single instance of a module using the singleton pattern
 
 
 #### Arguments
-* $model_class_name **mixed**
-* $view_class_name **mixed**
+* $model_class_name **mixed** - &lt;p&gt;Model Class to be associated with the controller.&lt;/p&gt;
+* $view_class_name **mixed** - &lt;p&gt;View Class to be associated with the controller.&lt;/p&gt;
 
 
 
@@ -131,7 +131,7 @@ Sets the model to be used
 
 
 #### Arguments
-* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)**
+* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)** - &lt;p&gt;Model object to be associated with the current controller object.&lt;/p&gt;
 
 
 
@@ -148,13 +148,13 @@ Sets the view to be used
 
 
 #### Arguments
-* $view **[Plugin_Name\Core\View](Plugin_Name-Core-View.md)**
+* $view **[Plugin_Name\Core\View](Plugin_Name-Core-View.md)** - &lt;p&gt;View object to be associated with the current controller object.&lt;/p&gt;
 
 
 
 ### __construct
 
-    mixed Plugin_Name\Core\Controller::__construct(\Plugin_Name\Core\Model $model, $view)
+    mixed Plugin_Name\Core\Controller::__construct(\Plugin_Name\Core\Model $model, mixed $view)
 
 Constructor
 
@@ -165,8 +165,8 @@ Constructor
 
 
 #### Arguments
-* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)**
-* $view **mixed**
+* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)** - &lt;p&gt;Model object to be used with current controller object.&lt;/p&gt;
+* $view **mixed** - &lt;p&gt;View object to be used with current controller object. Otherwise false.&lt;/p&gt;
 
 
 
@@ -183,7 +183,7 @@ Sets Model & View to be used with current controller
 
 
 #### Arguments
-* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)** - &lt;p&gt;Model to be associated with this controller&lt;/p&gt;
-* $view **mixed** - &lt;p&gt;Either View/its child class object or False&lt;/p&gt;
+* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)** - &lt;p&gt;Model to be associated with this controller.&lt;/p&gt;
+* $view **mixed** - &lt;p&gt;Either View/its child class object or False.&lt;/p&gt;
 
 

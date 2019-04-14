@@ -1,7 +1,7 @@
 Plugin_Name\App\Models\Admin\Admin_Settings
 ===============
 
-
+Model class that implements Plugin Admin Settings
 
 
 
@@ -78,7 +78,7 @@ Register settings
 
 ### sanitize
 
-    array Plugin_Name\App\Models\Admin\Admin_Settings::sanitize($input)
+    array Plugin_Name\App\Models\Admin\Admin_Settings::sanitize(array $input)
 
 Validates submitted setting values before they get saved to the database.
 
@@ -88,7 +88,7 @@ Validates submitted setting values before they get saved to the database.
 
 
 #### Arguments
-* $input **mixed**
+* $input **array** - &lt;p&gt;Settings Being Saved.&lt;/p&gt;
 
 
 
@@ -107,7 +107,7 @@ Returns the option key used to store the settings in database
 
 ### get_setting
 
-    array Plugin_Name\App\Models\Admin\Admin_Settings::get_setting($setting_name)
+    array Plugin_Name\App\Models\Admin\Admin_Settings::get_setting(string $setting_name)
 
 Retrieves all of the settings from the database
 
@@ -117,7 +117,7 @@ Retrieves all of the settings from the database
 
 
 #### Arguments
-* $setting_name **mixed**
+* $setting_name **string** - &lt;p&gt;Setting to be retrieved.&lt;/p&gt;
 
 
 

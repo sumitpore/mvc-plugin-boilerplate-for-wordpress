@@ -1,7 +1,7 @@
 Plugin_Name\Core\Route_Type
 ===============
 
-
+Class Responsible for registering Route Types supported by the Application
 
 
 

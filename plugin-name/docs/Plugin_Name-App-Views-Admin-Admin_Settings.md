@@ -1,7 +1,7 @@
 Plugin_Name\App\Views\Admin\Admin_Settings
 ===============
 
-Class Responsible for Loading Templates
+View class to load all templates related to Plugin&#039;s Admin Settings Page
 
 
 
@@ -22,9 +22,9 @@ Methods
 
 ### admin_settings_page
 
-    mixed Plugin_Name\App\Views\Admin\Admin_Settings::admin_settings_page($args)
+    void Plugin_Name\App\Views\Admin\Admin_Settings::admin_settings_page(array $args)
 
-
+Prints Settings Page.
 
 
 
@@ -32,15 +32,15 @@ Methods
 
 
 #### Arguments
-* $args **mixed**
+* $args **array** - &lt;p&gt;Arguments passed by &lt;code&gt;markup_settings_page&lt;/code&gt; method from &lt;code&gt;Plugin_Name\App\Controllers\Admin\Admin_Settings&lt;/code&gt; controller.&lt;/p&gt;
 
 
 
 ### section_headers
 
-    mixed Plugin_Name\App\Views\Admin\Admin_Settings::section_headers($args)
+    void Plugin_Name\App\Views\Admin\Admin_Settings::section_headers(array $args)
 
-
+Prints Section's Description.
 
 
 
@@ -48,15 +48,15 @@ Methods
 
 
 #### Arguments
-* $args **mixed**
+* $args **array** - &lt;p&gt;Arguments passed by &lt;code&gt;markup_section_headers&lt;/code&gt; method from  &lt;code&gt;Plugin_Name\App\Controllers\Admin\Admin_Settings&lt;/code&gt; controller.&lt;/p&gt;
 
 
 
 ### markup_fields
 
-    mixed Plugin_Name\App\Views\Admin\Admin_Settings::markup_fields($args)
+    void Plugin_Name\App\Views\Admin\Admin_Settings::markup_fields(array $args)
 
-
+Prints text field
 
 
 
@@ -64,7 +64,7 @@ Methods
 
 
 #### Arguments
-* $args **mixed**
+* $args **array** - &lt;p&gt;Arguments passed by &lt;code&gt;markup_fields&lt;/code&gt; method from &lt;code&gt;Plugin_Name\App\Controllers\Admin\Admin_Settings&lt;/code&gt; controller.&lt;/p&gt;
 
 
 

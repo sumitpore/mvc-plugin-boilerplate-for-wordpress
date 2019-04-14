@@ -21,17 +21,18 @@ Methods
 
 ### load_dependencies
 
-    mixed Plugin_Name\Includes\Dependency_Loader::load_dependencies($class)
+    mixed Plugin_Name\Includes\Dependency_Loader::load_dependencies(string $class)
 
 Loads all Plugin dependencies
 
-
+Converts Class parameter passed to the method into the file path & then
+`require_once` that path. It works with Class as well as with Traits.
 
 * Visibility: **public**
 
 
 #### Arguments
-* $class **mixed**
+* $class **string** - &lt;p&gt;Class need to be loaded.&lt;/p&gt;
 
 
 

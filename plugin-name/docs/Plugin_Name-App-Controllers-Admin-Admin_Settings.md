@@ -38,9 +38,9 @@ Properties
 
 ### $hook_suffix
 
-    private mixed $hook_suffix = ''
+    private string $hook_suffix = ''
 
-
+Holds suffix for dynamic add_action called on settings page.
 
 
 
@@ -76,7 +76,7 @@ Methods
 
 ### __construct
 
-    mixed Plugin_Name\Core\Controller::__construct(\Plugin_Name\Core\Model $model, $view)
+    mixed Plugin_Name\Core\Controller::__construct(\Plugin_Name\Core\Model $model, mixed $view)
 
 Constructor
 
@@ -87,8 +87,8 @@ Constructor
 
 
 #### Arguments
-* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)**
-* $view **mixed**
+* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)** - &lt;p&gt;Model object to be used with current controller object.&lt;/p&gt;
+* $view **mixed** - &lt;p&gt;View object to be used with current controller object. Otherwise false.&lt;/p&gt;
 
 
 
@@ -130,7 +130,7 @@ Create menu for Plugin inside Settings menu
 
 ### enqueue_scripts
 
-    mixed Plugin_Name\App\Controllers\Admin\Admin_Settings::enqueue_scripts($hook)
+    mixed Plugin_Name\App\Controllers\Admin\Admin_Settings::enqueue_scripts()
 
 Register the JavaScript for the admin area.
 
@@ -138,15 +138,12 @@ Register the JavaScript for the admin area.
 
 * Visibility: **public**
 
-
-#### Arguments
-* $hook **mixed**
 
 
 
 ### enqueue_styles
 
-    mixed Plugin_Name\App\Controllers\Admin\Admin_Settings::enqueue_styles($hook)
+    mixed Plugin_Name\App\Controllers\Admin\Admin_Settings::enqueue_styles()
 
 Register the JavaScript for the admin area.
 
@@ -154,9 +151,6 @@ Register the JavaScript for the admin area.
 
 * Visibility: **public**
 
-
-#### Arguments
-* $hook **mixed**
 
 
 
@@ -198,13 +192,14 @@ Adds the section introduction text to the Settings page
 
 
 #### Arguments
-* $section **array**
+* $section **array** - &lt;p&gt;Array containing information Section Id, Section
+                      Title &amp; Section Callback.&lt;/p&gt;
 
 
 
 ### markup_fields
 
-    mixed Plugin_Name\App\Controllers\Admin\Admin_Settings::markup_fields($field_args)
+    mixed Plugin_Name\App\Controllers\Admin\Admin_Settings::markup_fields(array $field_args)
 
 Delivers the markup for settings fields
 
@@ -214,7 +209,8 @@ Delivers the markup for settings fields
 
 
 #### Arguments
-* $field_args **mixed**
+* $field_args **array** - &lt;p&gt;Field arguments passed in &lt;code&gt;add_settings_field&lt;/code&gt;
+function.&lt;/p&gt;
 
 
 
@@ -230,13 +226,13 @@ Adds links to the plugin's action link section on the Plugins page
 
 
 #### Arguments
-* $links **array** - &lt;p&gt;The links currently mapped to the plugin&lt;/p&gt;
+* $links **array** - &lt;p&gt;The links currently mapped to the plugin.&lt;/p&gt;
 
 
 
 ### get_instance
 
-    object Plugin_Name\Core\Controller::get_instance($model_class_name, $view_class_name)
+    object Plugin_Name\Core\Controller::get_instance(mixed $model_class_name, mixed $view_class_name)
 
 Provides access to a single instance of a module using the singleton pattern
 
@@ -248,8 +244,8 @@ Provides access to a single instance of a module using the singleton pattern
 
 
 #### Arguments
-* $model_class_name **mixed**
-* $view_class_name **mixed**
+* $model_class_name **mixed** - &lt;p&gt;Model Class to be associated with the controller.&lt;/p&gt;
+* $view_class_name **mixed** - &lt;p&gt;View Class to be associated with the controller.&lt;/p&gt;
 
 
 
@@ -298,7 +294,7 @@ Sets the model to be used
 
 
 #### Arguments
-* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)**
+* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)** - &lt;p&gt;Model object to be associated with the current controller object.&lt;/p&gt;
 
 
 
@@ -315,7 +311,7 @@ Sets the view to be used
 
 
 #### Arguments
-* $view **[Plugin_Name\Core\View](Plugin_Name-Core-View.md)**
+* $view **[Plugin_Name\Core\View](Plugin_Name-Core-View.md)** - &lt;p&gt;View object to be associated with the current controller object.&lt;/p&gt;
 
 
 
@@ -332,7 +328,7 @@ Sets Model & View to be used with current controller
 
 
 #### Arguments
-* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)** - &lt;p&gt;Model to be associated with this controller&lt;/p&gt;
-* $view **mixed** - &lt;p&gt;Either View/its child class object or False&lt;/p&gt;
+* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)** - &lt;p&gt;Model to be associated with this controller.&lt;/p&gt;
+* $view **mixed** - &lt;p&gt;Either View/its child class object or False.&lt;/p&gt;
 
 

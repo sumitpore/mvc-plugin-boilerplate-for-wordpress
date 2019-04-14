@@ -1,9 +1,9 @@
 Plugin_Name\Core\Registry\Controller
 ===============
 
+Controller Registry
 
-
-
+Maintains the list of all controllers objects
 
 
 * Class name: Controller
@@ -19,9 +19,9 @@ Properties
 
 ### $stored_objects
 
-    protected mixed $stored_objects = array()
+    protected array $stored_objects = array()
 
-
+Variable that holds all objects in registry.
 
 
 
@@ -35,9 +35,9 @@ Methods
 
 ### get_key
 
-    mixed Plugin_Name\Core\Registry\Controller::get_key($controller_class_name, $model_class_name, $view_class_name)
+    string Plugin_Name\Core\Registry\Controller::get_key(string $controller_class_name, string $model_class_name, string $view_class_name)
 
-
+Returns key used to store a particular Controller Object
 
 
 
@@ -46,9 +46,9 @@ Methods
 
 
 #### Arguments
-* $controller_class_name **mixed**
-* $model_class_name **mixed**
-* $view_class_name **mixed**
+* $controller_class_name **string** - &lt;p&gt;Controller Class Name.&lt;/p&gt;
+* $model_class_name **string** - &lt;p&gt;Model Class Name.&lt;/p&gt;
+* $view_class_name **string** - &lt;p&gt;View Class Name.&lt;/p&gt;
 
 
 
@@ -56,7 +56,7 @@ Methods
 
     void Plugin_Name\Core\Registry\Controller::set(string $key, mixed $value)
 
-
+Add object to registry
 
 
 
@@ -65,8 +65,8 @@ Methods
 
 
 #### Arguments
-* $key **string**
-* $value **mixed**
+* $key **string** - &lt;p&gt;Key to be used to map with Object.&lt;/p&gt;
+* $value **mixed** - &lt;p&gt;Object to Store.&lt;/p&gt;
 
 
 
@@ -74,7 +74,7 @@ Methods
 
     mixed Plugin_Name\Core\Registry\Controller::get(string $key)
 
-
+Get object from registry
 
 
 
@@ -83,7 +83,7 @@ Methods
 
 
 #### Arguments
-* $key **string**
+* $key **string** - &lt;p&gt;Key of the object to restore.&lt;/p&gt;
 
 
 

@@ -1,7 +1,7 @@
 Plugin_Name\App\Models\Admin\Base_Model
 ===============
 
-
+Blueprint for Admin related Models. All Admin Models should extend this Base_Model
 
 
 
