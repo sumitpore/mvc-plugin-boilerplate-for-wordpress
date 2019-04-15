@@ -11,7 +11,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Model' ) ) {
 	 * @package    Plugin_Name
 	 * @subpackage Plugin_Name/models
 	 */
-	abstract class Model {
+	class Model {
 
 		/**
 		 * Provides access to a single instance of a module using the singleton pattern
