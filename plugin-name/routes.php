@@ -54,13 +54,17 @@ use \Plugin_Name\Core\Route_Type as Route_Type;
 * method. It can be a public method.
 */
 
-// Route for Settings Page.
-$router
-	->register_route_of_type( ROUTE_TYPE::ADMIN )
-	->with_controller( 'Admin_Settings' ) // Resolved by Router to 'Plugin_Name\App\Controllers\Admin\Admin_Settings'.
-	->with_model( 'Admin_Settings' ) // Resolved by Router to 'Plugin_Name\App\Models\Admin\Admin_Settings'.
-	->with_view( 'Admin_Settings' ); // Resolved by Router to 'Plugin_Name\App\Views\Admin\Admin_Settings'.
-
+/*
+|-------------------------------------------------------------------------------------------
+| Simple Example - This example creates a admin route (triggered only when it is a dashboard)
+|-------------------------------------------------------------------------------------------
+|	$router
+|		->register_route_of_type( ROUTE_TYPE::ADMIN )
+|		>with_controller( 'Admin_Settings' ) // Resolved by Router to 'Plugin_Name\App\Controllers\Admin\Admin_Settings'.
+|		->with_model( 'Admin_Settings' ) // Resolved by Router to 'Plugin_Name\App\Models\Admin\Admin_Settings'.
+|		->with_view( 'Admin_Settings' ); // Resolved by Router to 'Plugin_Name\App\Views\Admin\Admin_Settings'.
+|-------------------------------------------------------------------------------------------
+*/
 
 /*
 |-------------------------------------------------------------------------------------------
@@ -110,7 +114,6 @@ $router
 |-------------------------------------------------------------------------------------------
 */
 
-
 /*
 |-------------------------------------------------------------------------------------------
 | If you want to load only model for specific route, you can use with_just_model.
@@ -125,3 +128,11 @@ $router
 |-------------------------------------------------------------------------------------------
 */
 
+/* That's all, start creating your own routes below this line! Happy coding. */
+
+// Route for Settings Page.
+$router
+	->register_route_of_type( ROUTE_TYPE::ADMIN )
+	->with_controller( 'Admin_Settings' ) // Resolved by Router to 'Plugin_Name\App\Controllers\Admin\Admin_Settings'.
+	->with_model( 'Admin_Settings' ) // Resolved by Router to 'Plugin_Name\App\Models\Admin\Admin_Settings'.
+	->with_view( 'Admin_Settings' ); // Resolved by Router to 'Plugin_Name\App\Views\Admin\Admin_Settings'.
