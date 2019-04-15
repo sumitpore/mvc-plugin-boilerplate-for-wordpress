@@ -4,7 +4,10 @@ use \Plugin_Name\Core\Route_Type as Route_Type;
 
 /*
 |---------------------------------------------------------------------------------------------------------
-| Available Route Types
+| Available Route Types:-
+|
+| NOTE - Except Late Frontend Routes, all other routes are triggerred on 'init' hook.
+|
 +----------------------------------------------+---------------------------------------------------------+
 | ROUTE TYPE                                   | ROUTE DESCRIPTION                                       |
 +----------------------------------------------+---------------------------------------------------------+
@@ -43,14 +46,20 @@ use \Plugin_Name\Core\Route_Type as Route_Type;
 * 4. $router->register_route_of_type(...)->with_controller(...);
 * 5. $router->register_route_of_type(...)->with_just_model(...);
 *
+* with_controller, with_model, with_view, with_just_model methods accept either a string or
+* a callback. But the callback must return respective Controller/Model or View name.
+*
+* with_controlller & with_just_model methods supports '@' in the Controller/Model passed to
+* them allowing you to call a particular method. That method does not need to be a static
+* method. It can be a public method.
 */
 
 // Route for Settings Page.
 $router
 	->register_route_of_type( ROUTE_TYPE::ADMIN )
-	->with_controller( 'Admin_Settings' ) // Resolvedd by Router to 'Plugin_Name\App\Controllers\Admin\Admin_Settings'.
-	->with_model( 'Admin_Settings' ) // Resolvedd by Router to 'Plugin_Name\App\Models\Admin\Admin_Settings'.
-	->with_view( 'Admin_Settings' ); // Resolvedd by Router to 'Plugin_Name\App\Views\Admin\Admin_Settings'.
+	->with_controller( 'Admin_Settings' ) // Resolved by Router to 'Plugin_Name\App\Controllers\Admin\Admin_Settings'.
+	->with_model( 'Admin_Settings' ) // Resolved by Router to 'Plugin_Name\App\Models\Admin\Admin_Settings'.
+	->with_view( 'Admin_Settings' ); // Resolved by Router to 'Plugin_Name\App\Views\Admin\Admin_Settings'.
 
 
 /*
@@ -62,6 +71,20 @@ $router
 |		->with_controller( 'Plugin_Name\App\Controllers\Admin\Admin_Settings' )
 |		->with_model( 'Plugin_Name\App\Models\Admin\Admin_Settings' )
 |		->with_view( 'Plugin_Name\App\Views\Admin\Admin_Settings' );
+|-------------------------------------------------------------------------------------------
+*/
+
+/*
+|-------------------------------------------------------------------------------------------
+| '@' Symbol Example :-
+|
+|  Again, @ is supported in with_controller & with_just_model methods only.
+|-------------------------------------------------------------------------------------------
+|	$router
+|		->register_route_of_type( ROUTE_TYPE::LATE_FRONTEND )
+|		->with_controller( 'Sample_Shortcode@register_shortcode' )
+|		->with_model( 'Sample_Shortcode' )
+|		->with_view( 'Sample_Shortcode' );
 |-------------------------------------------------------------------------------------------
 */
 
