@@ -41,7 +41,7 @@ wget -O boilerplate-generator.sh https://raw.githubusercontent.com/sumitpore/mvc
 
 ## Getting Started
 
-We'll try to create a shortcode that prints 10 posts
+We'll try to create a shortcode that prints 10 posts. The guide assumes that you have gone through Installation steps and created `Example Me` Plugin.
 
 ### Writing your first Router
 Routes can be defined inside `routes.php` file. Here is how a route can be defined for our examples
@@ -50,88 +50,174 @@ Routes can be defined inside `routes.php` file. Here is how a route can be defin
 // Full Class Name with Namespace
 $router
     ->register_route_of_type( ROUTE_TYPE::FRONTEND )
-    ->with_controller( 'Plugin_Name\App\Controllers\Frontend\Sample_Shortcode' )
-    ->with_model( 'Plugin_Name\App\Models\Frontend\Sample_Shortcode' )
-    ->with_view( 'Plugin_Name\App\Views\Frontend\Sample_Shortcode' );
+    ->with_controller( 'Example_Me\App\Controllers\Frontend\Print_Posts_Shortcode@register_shortcode' )
+    ->with_model( 'Example_Me\App\Models\Frontend\Print_Posts_Shortcode' );
 
 // ------------- OR --------------------
 
 // Class Name Without Namespace
 $router
     ->register_route_of_type( ROUTE_TYPE::FRONTEND )
-    ->with_controller( 'Sample_Shortcode' )
-    ->with_model( 'Sample_Shortcode' )
-    ->with_view( 'Sample_Shortcode' );
+    ->with_controller( 'Print_Posts_Shortcode@register_shortcode' )
+    ->with_model( 'Print_Posts_Shortcode' );
 
 ```
-> You can get to know list of all available route types in [`routes.php`](https://github.com/sumitpore/wordpress-mvc-plugin-boilerplate/blob/master/plugin-name/routes.php)
+> It is highly recommended to go through [`routes.php`](https://github.com/sumitpore/wordpress-mvc-plugin-boilerplate/blob/master/plugin-name/routes.php) You will get to know list of all available route types & examples in that file.
+
 
 ### Writing your first Controller
 The boilerplate converts Class Name to a file name & loads that file automatically. 
 
-We have passed `Plugin_Name\App\Controllers\Frontend\Sample_Shortcode` as a controller in our `routes.php`. Boilerplate resolves this class name to file `plugin-name\app\controllers\frontend\class-sample-shortcode.php`
+We have passed `Example_Me\App\Controllers\Frontend\Print_Posts_Shortcode` as a controller in our `routes.php`. Boilerplate resolves this class name to file `example-me/app/controllers/frontend/class-print-posts-shortcode.php`
 
 Here is how this file would look for our example
-```
+```php
 <?php
-namespace Plugin_Name\App\Controllers\Frontend;
+// file: example-me/app/controllers/frontend/class-print-posts-shortcode.php
 
-use \Plugin_Name\App\Controllers\Frontend\Base_Controller;
-use \Plugin_Name as Plugin_Name;
+namespace Example_Me\App\Controllers\Frontend;
 
-/**
- * Controller class that handles Sample Shortcode
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/controllers
- */
-
-if ( ! class_exists( __NAMESPACE__ . '\\' . 'Sample_Shortcode' ) ) {
-
-	class Sample_Shortcode extends Base_Controller {
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Print_Posts_Shortcode' ) ) {
+	/**
+	 * Class that handles `example_me_print_posts` shortcode
+	 *
+	 * @since      1.0.0
+	 * @package    Example_Me
+	 * @subpackage Example_Me/Controllers/Frontend
+	 */
+	class Print_Posts_Shortcode extends Base_Controller {
 
 		/**
-		 * Constructor
+		 * Registers the `example_me_print_posts` shortcode
 		 *
-		 * @since    1.0.0
+		 * @return void
+		 * @since 1.0.0
 		 */
-		protected function __construct( $model_class_name = false, $view_class_name = false ) {
-			parent::__construct( $model_class_name, $view_class_name );
-
-			// Register Shortcode
-			add_shortcode( 'plugin_name_print_10_posts', array( $this, 'print_10_posts_callback' ) );
-
-			$this->register_hook_callbacks();
+		public function register_shortcode() {
+			add_shortcode( 'example_me_print_posts', array( $this, 'print_posts_callback' ) );
 		}
 
 		/**
-		 * Register callbacks for actions and filters
-		 *
-		 * @since    1.0.0
+		 * @ignore Blank Method
 		 */
-		protected function register_hook_callbacks() {
-			// Write all add_action here
-			// e.g. - add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-		}
-
+		protected function register_hook_callbacks(){}
 
 		/**
-		 * Print 10 Posts Shortcode's Callback
+		 * Callback to handle `example_me_print_posts` shortcode
 		 *
-		 * @param array $atts Arguments Array
-		 * @return string
+		 * @return void
+		 * @since 1.0.0
 		 */
-		public function print_10_posts_callback( $atts ) {
-			return $this->view->shortcode_html(
+		public function print_posts_callback( $atts ) {
+			return 	$this->get_view()->render_template(
+				'frontend/print-posts-shortcode.php',
+				[
+					'fetched_posts'	=>	$this->get_model()->get_posts_for_shortcode( 'example_me_print_posts', $atts )
+				]
+			);
+
+		}
+
+	}
+}
+
+```
+### Writing your first Model
+Create a file `example-me/app/models/frontend/class-print-posts-shortcode.php` because we have to create `Example_Me\App\Models\Frontend\Print_Posts_Shortcode` class.
+
+Here is how this file would look for our example
+
+```php
+<?php
+// file: `example-me/app/models/frontend/class-print-posts-shortcode.php`
+
+namespace Example_Me\App\Models\Frontend;
+
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Print_Posts_Shortcode' ) ) {
+	/**
+	 * Class to handle data related operations of `example_me_print_posts` shortcode
+	 *
+	 * @since      1.0.0
+	 * @package    Example_Me
+	 * @subpackage Example_Me/Models/Frontend
+	 */
+	class Print_Posts_Shortcode extends Base_Model {
+		/**
+		 * Fetches posts from database
+		 *
+		 * @param string $shortcode Shortcode for which posts should be fetched
+		 * @param array $atts Arguments passed to shortcode
+		 * @return \WP_Query WP_Query Object
+		 */
+		public function get_posts_for_shortcode( $shortcode, $atts ) {
+			$atts = shortcode_atts(
 				array(
-					'results' => $this->model->get_posts( $atts );
-				)
+					'number_of_posts' => '10',
+				), $atts, $shortcode
+			);
+
+			$args = array(
+				'post_type' => 'post',
+				'posts_per_page' => is_int( $atts['number_of_posts'] ) ? $atts['number_of_posts'] : 10,
+			);
+
+			return new \WP_Query( $args );
+		}
+	}
+}
+
+```
+
+### Writing a View
+In our example, we did not have to create a separate View Class. In the controller itself we are calling a `render_template` method of base `View` class. 
+
+However, if you are going to deal with partial views, it is strongly recommended to create a separate class that extends `View` class.
+
+It gives us another advantage & that is controller does not get tied to template file directly & thus allowing us to reduce the coupling.
+
+If we had created a separate class for the view, then it would have looked like this
+
+```php
+<?php
+// file: routes.php
+$router
+	->register_route_of_type( ROUTE_TYPE::FRONTEND )
+	->with_controller( 'Print_Posts_Shortcode@register_shortcode' )
+	->with_model( 'Print_Posts_Shortcode' )
+	->with_view( 'Print_Posts_Shortcode' );
+
+
+
+// file: `example-me/app/views/frontend/class-print-posts-shortcode.php`
+
+namespace Example_Me\App\Views\Frontend;
+
+use \Example_Me\Core\View;
+use \Example_Me as Example_Me;
+
+if ( ! class_exists( __NAMESPACE__ . '\\' . 'Print_Posts_Shortcode' ) ) {
+	/**
+	 * Class Responsibile for rendering the view of `example_me_print_posts` shortcode
+	 *
+	 * @since      1.0.0
+	 * @package    Example_Me
+	 * @subpackage Example_Me/Views/Frontend
+	 */
+	class Print_Posts_Shortcode extends View {
+		/**
+		 * Method that prints html for the `example_me_print_posts` shortcode
+		 *
+		 * @param array $args Arguments passed by controller's get_posts_for_shortcode method.
+		 * @return void
+		 */
+		public function shortcode_html( $args ){
+			return 	$this->render_template(
+				'frontend/print-posts-shortcode.php',
+				$args
 			);
 		}
 
 	}
-
 }
 
 ```
