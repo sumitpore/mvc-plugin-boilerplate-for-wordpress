@@ -103,18 +103,26 @@ replace_text_in_files(){
             # Set Plugin Name variable
             PLUGIN_NAME=$REPLACEMENT_TEXT
         fi
+
+        # Save replacement being done for Plugin_Name class in a variable, it will be used while renaming files too
+        if [ "$1" == "Plugin_Name" ]; then
+            REPLACEMENT_FOR_PLUGIN_NAME_CLASS=$REPLACEMENT_TEXT
+        fi
     fi
 }
 
-rename_files(){
-    # Rename Plugin Folder 
-    mv $1 $PLUGIN_SLUG
+rename_plugin_folder(){
+    mv 'plugin-name' $PLUGIN_SLUG
+}
 
-    # Rename Files inside a folder
-    find . -type f -name "*$1*" | while read FILE ; do
-        newfile="$(echo ${FILE} |sed -e 's/'"$1"'/'"$PLUGIN_SLUG"'/')" ;
-        mv "${FILE}" "${newfile}" ;
-    done 
+rename_files(){
+    if [ ! -z "$2" ]; then
+        # Rename Files inside a folder
+        find . -type f -name "*$1*" | while read FILE ; do
+            newfile="$(echo ${FILE} |sed -e 's/'"$1"'/'"$2"'/')" ;
+            mv "${FILE}" "${newfile}" ;
+        done 
+    fi
 }
 
 take_consent_to_execute_script
@@ -125,14 +133,19 @@ download_original_plugin
 bring_plugin_outside
 delete_git_repo_dir
 switch_to_generated_plugin_dir
+
 echo ''
+
 set_plugin_slug
 replace_text_in_files 'plugin-name'
 replace_text_in_files 'Plugin Name'
 replace_text_in_files 'plugin_name'
 replace_text_in_files 'Plugin_Name'
 replace_text_in_files 'PLUGIN_NAME_'
-rename_files 'plugin-name'
+rename_plugin_folder
+rename_files 'plugin-name' $PLUGIN_SLUG
+rename_files 'Plugin_Name' $REPLACEMENT_FOR_PLUGIN_NAME_CLASS
+
 echo ''
 echo -e "\033[0;32mPlugin $PLUGIN_NAME is generated successfully inside $GENERATED_PLUGIN_DIR! \033[39m"
 echo '';
