@@ -148,7 +148,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Print_Posts_Shortcode' ) ) {
 
 </details>
 
-### Writing your first Model ![DNA](https://cdn.emojidex.com/emoji/mdpi/DNA.png "DNA")
+### Writing your first Model ![DNA](https://raw.githubusercontent.com/sumitpore/repo-assets/master/DNA.png)
 
 All models should extend `Base_Model` class.
 
