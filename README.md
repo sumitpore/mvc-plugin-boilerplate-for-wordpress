@@ -13,9 +13,9 @@ When these things are not clear in long term project to the developer, they end 
 
 The objective of this boilerplate is to separate concerns. Developer gets a chance to write individual `Model`, `View` & `Controller`. Also, the concern of whether to load a controller/model or not is delegated to `Router`, so that your controller & model can focus only on what they are supposed to do.
 
-> __NOTE: THIS IS NOT MVC FRAMEWORK. IT IS MERELY A BOILERPLATE THAT GIVES THE DEVELOPER ABILITY TO WRITE CODE IN MVC STYLE.__ 
+> __NOTE: THIS IS NOT FULL FLEDGED MVC FRAMEWORK. IT IS A BOILERPLATE THAT GIVES THE DEVELOPER ABILITY TO WRITE CODE IN MVC STYLE.__ 
 
-Because this project is meant to be a boilerplate, it has only those features which are required to build plugin in MVC way - No ORM - No Extra Goodies - No Huge Learning Curve 
+Because this project is meant to be a boilerplate, it has only those features which are required to build plugin in MVC way - No ORM - No Extra Goodies - No Huge Learning Curve. 
 
 ## Architecture
 Here is a bird eye's view at the architecture
@@ -36,14 +36,14 @@ It's safe to activate the plugin at this point. Because the Boilerplate has no r
 
 If you don't want to do search & replace manually, you can download the generator script & execute it.
 ```bash
-wget -O boilerplate-generator.sh https://raw.githubusercontent.com/sumitpore/mvc-plugin-boilerplate-for-wordpress/dev/boilerplate-generator.sh && bash boilerplate-generator.sh
+wget -O boilerplate-generator.sh https://raw.githubusercontent.com/sumitpore/mvc-plugin-boilerplate-for-wordpress/master/boilerplate-generator.sh && bash boilerplate-generator.sh
 ```
 
 ## Getting Started
 
 We'll try to create a shortcode that prints 10 posts that will help you understand how this boilerplate works. The guide assumes that you have gone through Installation steps and created `Example Me` Plugin.
 
-### Writing your first Router
+### Writing your first Router 📡
 Routes can be defined inside `routes.php` file. Here is how a route can be defined for our example
 ```php
 
@@ -65,7 +65,7 @@ $router
 > It is highly recommended to go through [`routes.php`](https://github.com/sumitpore/wordpress-mvc-plugin-boilerplate/blob/master/plugin-name/routes.php). You will get to know list of all available route types & examples in that file.
 
 
-### Writing your first Controller
+### Writing your first Controller 🎮
 The boilerplate converts Class Name to a file name & loads that file automatically. 
 
 We have passed `Example_Me\App\Controllers\Frontend\Print_Posts_Shortcode` as a controller in our `routes.php`. Boilerplate resolves this class name to file `example-me/app/controllers/frontend/class-print-posts-shortcode.php`
@@ -148,7 +148,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Print_Posts_Shortcode' ) ) {
 
 </details>
 
-### Writing your first Model
+### Writing your first Model ![DNA](https://cdn.emojidex.com/emoji/mdpi/DNA.png "DNA")
 
 All models should extend `Base_Model` class.
 
@@ -214,7 +214,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Print_Posts_Shortcode' ) ) {
 ```
 </details>
 
-### Writing a View
+### Writing a View 👸
 In our example, we did not have to create a separate View Class (Hint: we did not call `with_view` method in the route.). In the controller itself we are calling a `render_template` method of base `View` class. 
 
 However, if you are going to deal with partial views, it is recommended to create a separate class that extends `View` class & that class will call templates for you.
@@ -274,7 +274,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Print_Posts_Shortcode' ) ) {
 ```
 </details>
 
-### Writing your first template
+### Writing your first template 👶
 Templates are the actual files which generate html for the module you are writing. 
 
 A template file can be called by invoking `render_template` method on any `View` class's (parent as well as child) object.
@@ -310,13 +310,16 @@ This is how it would look
 ```
 </details>
 
-### Interacting with Settings
+### Interacting with Settings ⚙️
 While developing the plugin, we sometimes need a way to manually interact with the settings information (Side Note - Settings are saved automatically by WordPress if Settings API is used to create settings page)
+
+Replace `Plugin_Name` with your plugin's namespace in below methods.
 
 `Plugin_Name\App\Models\Settings` provide some helper methods to interact with settings data.
 
 | Method | Description |
 | --- | --- |
+| `Plugin_Name\App\Models\Settings::get_plugin_settings_option_key()` | Returns the option key used in wp_options table to save the settings |
 | `Plugin_Name\App\Models\Settings::get_settings()` | Returns all saved settings |
 | `Plugin_Name\App\Models\Settings::get_setting( $setting_name )` | Returns a value of single setting |
 | `Plugin_Name\App\Models\Settings::delete_settings()` | Deletes All Settings |
@@ -324,15 +327,44 @@ While developing the plugin, we sometimes need a way to manually interact with t
 | `Plugin_Name\App\Models\Settings::update_settings()` | Updates All Settings |
 | `Plugin_Name\App\Models\Settings::update_setting( $setting_name )` | Updates an individual setting |
 
+### Activation, Deactivation & Uninstall Procedures? ✨
+Activation, Deactivation & Uninstall procedures of your plugin go into `Plugin_Name\App\Activator::activate()`, `Plugin_Name\App\Deactivator::deactivate()` & `Plugin_Name\App\Uninstaller::uninstall()` methods.
+
+### Folder Structure 📁
+| Folder Name | Description |
+| --- | --- |
+| `plugin-name/app` | Functionality shared between the models, controllers and views resides here. Almost everything you write will go into this folder. |
+| `plugin-name/app/models` | The Model component corresponds to all the data-related logic that the user works with. This can represent either the data that is being transferred between the View and Controller components or any other business logic-related data. ( It represents data objects, such as settings, values stored on the database, etc...) |
+| `plugin-name/app/models/admin` | Represents the admin side of the models.
+| `plugin-name/app/models/frontend` | Represents the frontend side of the models.
+| `plugin-name/app/contollers` | Acts as an interface between Model and View components to process all the business logic and incoming requests, manipulate data using the Model component and interact with the Views to render the final output |
+| `plugin-name/app/contollers/admin` | Represents the admin side of the controllers.
+| `plugin-name/app/contollers/frontend` | Represents the frontend side of the controllers.
+| `plugin-name/app/views` | The View component is used for all the UI logic of. It calls required templates.
+| `plugin-name/app/views/admin` | Calls admin side templates
+| `plugin-name/app/views/frontend` | Calls frontend side templates
+| `plugin-name/app/templates` | Represents html code for the feature
+| `plugin-name/app/templates/admin` | Represents html code for admin side features
+| `plugin-name/app/templates/frontend` | Represents html code for frontend side features 
+| `plugin-name/assets` | Stores assets required for plugin
+| `plugin-name/core` | Main MVC Framework
+| `plugin-name/docs` | Represents Docs of the plugin
+| `plugin-name/includes` | Contains main class file of the plugin & i18n class
+| `plugin-name/languages` | All .po, .pot & .mo goes here 
+
+### INSPIRED?
+
+![Build a Fort](https://raw.githubusercontent.com/sumitpore/repo-assets/master/build-a-fort.gif)
 
 ## Contents
 
-The MVC WordPress Plugin Boilerplate includes the following files:
+MVC Plugin Boilerplate for WordPress includes the following files:
 
 * `.gitignore`. Used to exclude certain files from the repository.
 * `README.md`. The file that you’re currently reading.
 * `TODO.md` . Contains list of tasks to be completed in future.
 * `plugin-name` directory that contains the source code - a fully executable WordPress plugin.
+* `boilerplate-generator.sh` Boilerplate Generator
 
 ## Features
 
@@ -340,12 +372,13 @@ The MVC WordPress Plugin Boilerplate includes the following files:
 * All classes, functions, and variables are documented so that you know what you need to be changed.
 * The project includes a `.pot` file as a starting point for internationalization.
 * Separation of concern between Model, View & Controller.
+* With the appropriate usage of router, plugin's footprint can be kept low.
 
 ## Recommended Tools
 
 ### i18n Tools
 
-The WordPress Plugin Boilerplate uses a variable to store the text domain used when internationalizing strings throughout the Boilerplate. To take advantage of this method, there are tools that are recommended for providing correct, translatable files:
+MVC Plugin Boilerplate for WordPress uses a variable to store the text domain used when internationalizing strings throughout the Boilerplate. To take advantage of this method, there are tools that are recommended for providing correct, translatable files:
 
 * [Poedit](http://www.poedit.net/)
 * [makepot](http://i18n.svn.wordpress.org/tools/trunk/)
@@ -365,29 +398,8 @@ MVC Plugin Boilerplate for WordPress is licensed under the GPL v2 or later.
 
 A copy of the license is included in the root of the plugin’s directory. The file is named `LICENSE`.
 
-## Important Notes
+## Credits
 
-### Includes
-
-Note that if you include your own classes, or third-party libraries, there are three locations in which said files may go:
-
-* `plugin-name/app` is where functionality shared between the models, controllers and views resides
-* `plugin-name/app/models` is for representing data objects, such as settings, values stored on the database, etc...
-* `plugin-name/app/models/admin` represents the admin side of the models.
-* `plugin-name/app/models/frontend` represents the frontend side of the models.
-* `plugin-name/app/contollers` is for updating the state of the model, it can also send commands to its associated views to change the view's presentation of the model.
-* `plugin-name/app/contollers/admin` represents the admin side of the controllers.
-* `plugin-name/app/contollers/frontend` represents the frontend side of the controllers.
-* `plugin-name/app/views` calls required templates
-* `plugin-name/app/views/admin` calls admin side templates
-* `plugin-name/app/views/frontend` calls frontend side templates
-* `plugin-name/app/templates` represents html code for the feature
-* `plugin-name/app/templates/admin` represents html code for admin side features
-* `plugin-name/app/templates/frontend` represents html code for frontend side features 
-
-
-# Credits
-
-The `MVC Plugin Boilerplate for WordPress` is a forked version of the `WordPress Plugin Boilerplate` project started by [Roger Rodrigo](https://ca.linkedin.com/in/rogerrodrigo) which also was a forked version of the `WordPress Plugin Boilerplate` project started in 2011 by [Tom McFarlin](http://twitter.com/tommcfarlin/) and has since included a number of great contributions. In March of 2015 the project was handed over by Tom to Devin Vinson.
+The `MVC Plugin Boilerplate for WordPress` is a forked version of the `WordPress Plugin Boilerplate` project initiated by [Roger Rodrigo](https://ca.linkedin.com/in/rogerrodrigo) which also was a forked version of the `WordPress Plugin Boilerplate` project started in 2011 by [Tom McFarlin](http://twitter.com/tommcfarlin/) and has since included a number of great contributions. In March of 2015 the project was handed over by Tom to Devin Vinson.
 
 This `MVC Plugin Boilerplate for WordPress` was developed and is being maintained by [Sumit Pore](https://twitter.com/sumitpore)
