@@ -25,7 +25,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Settings' ) ) {
 		protected static $settings;
 
 		/**
-		 * Retusn the Option name/key saved in the database
+		 * Returns the Option name/key saved in the database
 		 *
 		 * @return string
 		 * @since 1.0.0
