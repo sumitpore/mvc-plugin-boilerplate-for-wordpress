@@ -1,7 +1,7 @@
 <?php
 namespace Plugin_Name\Includes;
 
-use \Plugin_Name as Plugin_Name;
+use Plugin_Name as Plugin_Name;
 
 if ( ! class_exists( 'Dependency_Loader' ) ) {
 

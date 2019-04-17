@@ -1,7 +1,7 @@
 <?php
 namespace Plugin_Name\App\Controllers\Frontend;
 
-use \Plugin_Name\Core\Controller;
+use Plugin_Name\Core\Controller;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Base_Controller' ) ) {
 	/**

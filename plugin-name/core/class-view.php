@@ -1,7 +1,7 @@
 <?php
 namespace Plugin_Name\Core;
 
-use \Plugin_Name as Plugin_Name;
+use Plugin_Name as Plugin_Name;
 
 /**
  * Class Responsible for Loading Templates

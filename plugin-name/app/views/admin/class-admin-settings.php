@@ -1,8 +1,8 @@
 <?php
 namespace Plugin_Name\App\Views\Admin;
 
-use \Plugin_Name\Core\View;
-use \Plugin_Name as Plugin_Name;
+use Plugin_Name\Core\View;
+use Plugin_Name as Plugin_Name;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 	/**
