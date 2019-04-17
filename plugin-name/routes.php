@@ -1,6 +1,6 @@
 <?php
 
-use \Plugin_Name\Core\Route_Type as Route_Type;
+use Plugin_Name\Core\Route_Type as Route_Type;
 
 /*
 |---------------------------------------------------------------------------------------------------------

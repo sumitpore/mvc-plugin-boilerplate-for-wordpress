@@ -1,8 +1,8 @@
 <?php
 namespace Plugin_Name\Core;
 
-use \Plugin_Name as Plugin_Name;
-use \Plugin_Name\Core\Route_Type as Route_Type;
+use Plugin_Name as Plugin_Name;
+use Plugin_Name\Core\Route_Type as Route_Type;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Router' ) ) {
 	/**

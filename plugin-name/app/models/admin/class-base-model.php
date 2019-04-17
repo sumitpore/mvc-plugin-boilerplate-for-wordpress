@@ -1,7 +1,7 @@
 <?php
 namespace Plugin_Name\App\Models\Admin;
 
-use \Plugin_Name\Core\Model;
+use Plugin_Name\Core\Model;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Base_Model' ) ) {
 	/**

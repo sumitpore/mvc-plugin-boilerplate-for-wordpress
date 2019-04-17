@@ -1,7 +1,7 @@
 <?php
 namespace Plugin_Name\Core;
 
-use \Plugin_Name\Core\Registry\Model as Model_Registry;
+use Plugin_Name\Core\Registry\Model as Model_Registry;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Model' ) ) {
 	/**

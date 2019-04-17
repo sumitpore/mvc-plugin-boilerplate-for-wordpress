@@ -1,7 +1,7 @@
 <?php
 namespace Plugin_Name\Core;
 
-use \Plugin_Name\Core\Registry\Controller as Controller_Registry;
+use Plugin_Name\Core\Registry\Controller as Controller_Registry;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Controller' ) ) {
 	/**

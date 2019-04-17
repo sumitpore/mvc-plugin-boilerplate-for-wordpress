@@ -1,9 +1,9 @@
 <?php
-use \Plugin_Name\Includes\i18n;
-use \Plugin_Name\Includes\Dependency_Loader;
-use \Plugin_Name\Core\Registry\Controller as Controller_Registry;
-use \Plugin_Name\Core\Registry\Controller as Model_Registry;
-use \Plugin_Name\App\Models\Settings;
+use Plugin_Name\Includes\i18n;
+use Plugin_Name\Includes\Dependency_Loader;
+use Plugin_Name\Core\Registry\Controller as Controller_Registry;
+use Plugin_Name\Core\Registry\Controller as Model_Registry;
+use Plugin_Name\App\Models\Settings;
 
 require_once plugin_dir_path( __FILE__ ) . '/class-dependency-loader.php';
 

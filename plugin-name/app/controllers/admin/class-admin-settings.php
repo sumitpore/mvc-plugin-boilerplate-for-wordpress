@@ -1,10 +1,10 @@
 <?php
 namespace Plugin_Name\App\Controllers\Admin;
 
-use \Plugin_Name\App\Controllers\Admin\Base_Controller;
-use \Plugin_Name as Plugin_Name;
-use \Plugin_Name\Core\Model;
-use \Plugin_Name\Core\View;
+use Plugin_Name\App\Controllers\Admin\Base_Controller;
+use Plugin_Name as Plugin_Name;
+use Plugin_Name\Core\Model;
+use Plugin_Name\Core\View;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 

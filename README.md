@@ -402,4 +402,6 @@ A copy of the license is included in the root of the plugin’s directory. The f
 
 The `MVC Plugin Boilerplate for WordPress` is a forked version of the `WordPress Plugin Boilerplate` project initiated by [Roger Rodrigo](https://ca.linkedin.com/in/rogerrodrigo) which also was a forked version of the `WordPress Plugin Boilerplate` project started in 2011 by [Tom McFarlin](http://twitter.com/tommcfarlin/) and has since included a number of great contributions. In March of 2015 the project was handed over by Tom to Devin Vinson.
 
-This `MVC Plugin Boilerplate for WordPress` was developed and is being maintained by [Sumit Pore](https://twitter.com/sumitpore)
+This `MVC Plugin Boilerplate for WordPress` was developed and is being maintained by [Sumit Pore](https://www.linkedin.com/in/sumitpore/)
+
+To show support for the project, Star the repository or [follow me on Twitter](https://twitter.com/sumitpore), and say Hi!
