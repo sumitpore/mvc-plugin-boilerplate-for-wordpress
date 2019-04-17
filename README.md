@@ -43,7 +43,7 @@ wget -O boilerplate-generator.sh https://raw.githubusercontent.com/sumitpore/mvc
 
 We'll try to create a shortcode that prints 10 posts that will help you understand how this boilerplate works. The guide assumes that you have gone through Installation steps and created `Example Me` Plugin.
 
-### Writing your first Router 📡
+### 1. Writing your first Router 📡
 Routes can be defined inside `routes.php` file. Here is how a route can be defined for our example
 ```php
 
@@ -65,7 +65,7 @@ $router
 > It is highly recommended to go through [`routes.php`](https://github.com/sumitpore/wordpress-mvc-plugin-boilerplate/blob/master/plugin-name/routes.php). You will get to know list of all available route types & examples in that file.
 
 
-### Writing your first Controller 🎮
+### 2. Writing your first Controller 🎮
 The boilerplate converts Class Name to a file name & loads that file automatically. 
 
 We have passed `Example_Me\App\Controllers\Frontend\Print_Posts_Shortcode` as a controller in our `routes.php`. Boilerplate resolves this class name to file `example-me/app/controllers/frontend/class-print-posts-shortcode.php`
@@ -148,7 +148,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Print_Posts_Shortcode' ) ) {
 
 </details>
 
-### Writing your first Model ![DNA](https://raw.githubusercontent.com/sumitpore/repo-assets/master/DNA.png)
+### 3. Writing your first Model ![DNA](https://raw.githubusercontent.com/sumitpore/repo-assets/master/DNA.png)
 
 All models should extend `Base_Model` class.
 
@@ -214,7 +214,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Print_Posts_Shortcode' ) ) {
 ```
 </details>
 
-### Writing a View 👸
+### 4. Writing a View 👸
 In our example, we did not have to create a separate View Class (Hint: we did not call `with_view` method in the route.). In the controller itself we are calling a `render_template` method of base `View` class. 
 
 However, if you are going to deal with partial views, it is recommended to create a separate class that extends `View` class & that class will call templates for you.
@@ -274,7 +274,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Print_Posts_Shortcode' ) ) {
 ```
 </details>
 
-### Writing your first template 👶
+### 5. Writing your first template 👶
 Templates are the actual files which generate html for the module you are writing. 
 
 A template file can be called by invoking `render_template` method on any `View` class's (parent as well as child) object.
@@ -310,7 +310,7 @@ This is how it would look
 ```
 </details>
 
-### Interacting with Settings ⚙️
+### 6. Interacting with Settings ⚙️
 While developing the plugin, we sometimes need a way to manually interact with the settings information (Side Note - Settings are saved automatically by WordPress if Settings API is used to create settings page)
 
 Replace `Plugin_Name` with your plugin's namespace in below methods.
@@ -327,10 +327,10 @@ Replace `Plugin_Name` with your plugin's namespace in below methods.
 | `Plugin_Name\App\Models\Settings::update_settings()` | Updates All Settings |
 | `Plugin_Name\App\Models\Settings::update_setting( $setting_name )` | Updates an individual setting |
 
-### Activation, Deactivation & Uninstall Procedures? ✨
+### 7. Activation, Deactivation & Uninstall Procedures? ✨
 Activation, Deactivation & Uninstall procedures of your plugin go into `Plugin_Name\App\Activator::activate()`, `Plugin_Name\App\Deactivator::deactivate()` & `Plugin_Name\App\Uninstaller::uninstall()` methods.
 
-### Folder Structure 📁
+### 8. Folder Structure 📁
 | Folder Name | Description |
 | --- | --- |
 | `plugin-name/app` | Functionality shared between the models, controllers and views resides here. Almost everything you write will go into this folder. |
