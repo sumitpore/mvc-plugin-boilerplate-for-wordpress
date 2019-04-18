@@ -3,7 +3,6 @@ namespace Plugin_Name\App\Models\Admin;
 
 use Plugin_Name\App\Models\Settings as Settings_Model;
 use Plugin_Name\App\Models\Admin\Base_Model;
-use Plugin_Name as Plugin_Name;
 
 if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 	/**
