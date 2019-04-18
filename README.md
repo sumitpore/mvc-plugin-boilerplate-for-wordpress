@@ -356,6 +356,8 @@ Activation, Deactivation & Uninstall procedures of your plugin go into `Plugin_N
 
 ![Build a Fort](https://raw.githubusercontent.com/sumitpore/repo-assets/master/build-a-fort.gif)
 
+If you like this approach of development, star this repository!
+
 ## Contents
 
 MVC Plugin Boilerplate for WordPress includes the following files:
@@ -400,8 +402,8 @@ A copy of the license is included in the root of the plugin’s directory. The f
 
 ## Credits
 
-The `MVC Plugin Boilerplate for WordPress` is a forked version of the `WordPress Plugin Boilerplate` project initiated by [Roger Rodrigo](https://ca.linkedin.com/in/rogerrodrigo) which also was a forked version of the `WordPress Plugin Boilerplate` project started in 2011 by [Tom McFarlin](http://twitter.com/tommcfarlin/) and has since included a number of great contributions. In March of 2015 the project was handed over by Tom to Devin Vinson.
+The `MVC Plugin Boilerplate for WordPress` is built upon the `WordPress Plugin Boilerplate` project forked by [Roger Rodrigo](https://ca.linkedin.com/in/rogerrodrigo). The original `WordPress Plugin Boilerplate` project was started in 2011 by [Tom McFarlin](http://twitter.com/tommcfarlin/) and has since included a number of great contributions. In March of 2015 the project was handed over by Tom to Devin Vinson.
 
-This `MVC Plugin Boilerplate for WordPress` was developed and is being maintained by [Sumit Pore](https://www.linkedin.com/in/sumitpore/)
+This `MVC Plugin Boilerplate for WordPress` was developed and is being maintained by [Sumit Pore](https://www.linkedin.com/in/sumitpore/).
 
 To show support for the project, Star the repository or [follow me on Twitter](https://twitter.com/sumitpore), and say Hi!
