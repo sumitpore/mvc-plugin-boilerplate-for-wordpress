@@ -133,6 +133,6 @@ use Plugin_Name\Core\Route_Type as Route_Type;
 // Route for Settings Page.
 $router
 	->register_route_of_type( ROUTE_TYPE::ADMIN )
-	->with_controller( 'Admin_Settings' ) // Resolved by Router to 'Plugin_Name\App\Controllers\Admin\Admin_Settings'.
+	->with_controller( 'Admin_Settings@register_hook_callbacks' ) // Resolved by Router to 'Plugin_Name\App\Controllers\Admin\Admin_Settings'.
 	->with_model( 'Admin_Settings' ) // Resolved by Router to 'Plugin_Name\App\Models\Admin\Admin_Settings'.
 	->with_view( 'Admin_Settings' ); // Resolved by Router to 'Plugin_Name\App\Views\Admin\Admin_Settings'.
