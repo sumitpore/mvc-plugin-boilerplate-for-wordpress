@@ -90,6 +90,8 @@ is created. This way, we don't have to pollute constructor with add_action & add
 The purpose of this method is to set the convention that first place to
 find add_action/add_filter is register_hook_callbacks method.
 
+> NOTE: If you create a constructor inside a controller extending `Base_Controller`, then make sure you call `init` method inside that constructor. That means your custom constructors need to have this line `$this->init( $model, $view );` to set `Model` & `View` for your controller object.
+
 <details>
 	<summary><b>SHOW CONTROLLER EXAMPLE CODE</b></summary>
 	Here is how this file would look for our example
