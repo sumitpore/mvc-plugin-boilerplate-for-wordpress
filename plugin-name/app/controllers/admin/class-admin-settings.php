@@ -16,40 +16,35 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 	 * @subpackage Plugin_Name/controllers/admin
 	 */
 	class Admin_Settings extends Base_Controller {
+
 		/**
 		 * Holds suffix for dynamic add_action called on settings page.
 		 *
 		 * @var string
 		 * @since 1.0.0
 		 */
-		private static $hook_suffix = '';
-
-		const SETTINGS_PAGE_URL = Plugin_Name::PLUGIN_ID;
-		const REQUIRED_CAPABILITY = 'manage_options';
+		private static $hook_suffix = 'settings_page_' . Plugin_Name::PLUGIN_ID;
 
 		/**
-		 * Constructor
+		 * Slug of the Settings Page
 		 *
-		 * @param Model $model Model object to be associated with this controller.
-		 * @param View  $view View object to be associated with this controller.
 		 * @since    1.0.0
 		 */
-		protected function __construct( Model $model, View $view ) {
+		const SETTINGS_PAGE_SLUG = Plugin_Name::PLUGIN_ID;
 
-			// Every constructor must call init method. init method sets model & view properties.
-			$this->init( $model, $view );
-
-			static::$hook_suffix = 'settings_page_' . Plugin_Name::PLUGIN_ID;
-
-			$this->register_hook_callbacks();
-		}
+		/**
+		 * Capability required to access settings page
+		 *
+		 * @since 1.0.0
+		 */
+		const REQUIRED_CAPABILITY = 'manage_options';
 
 		/**
 		 * Register callbacks for actions and filters
 		 *
 		 * @since    1.0.0
 		 */
-		protected function register_hook_callbacks() {
+		public function register_hook_callbacks() {
 			// Create Menu.
 			add_action( 'admin_menu', array( $this, 'plugin_menu' ) );
 
@@ -81,7 +76,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 				__( Plugin_Name::PLUGIN_NAME, Plugin_Name::PLUGIN_ID ),        // Page Title.
 				__( Plugin_Name::PLUGIN_NAME, Plugin_Name::PLUGIN_ID ),        // Menu Title.
 				static::REQUIRED_CAPABILITY,           // Capability.
-				static::SETTINGS_PAGE_URL,             // Menu URL.
+				static::SETTINGS_PAGE_SLUG,             // Menu URL.
 				array( $this, 'markup_settings_page' ) // Callback.
 			);
 			// @codingStandardsIgnoreEnd.
@@ -157,7 +152,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 				'plugin_name_section',                    // Section ID.
 				__( 'Settings', Plugin_Name::PLUGIN_ID ), // Section Title.
 				array( $this, 'markup_section_headers' ), // Section Callback.
-				static::SETTINGS_PAGE_URL                 // Page URL.
+				static::SETTINGS_PAGE_SLUG                 // Page URL.
 			);
 
 			// Add Settings Page Field.
@@ -165,7 +160,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 				'plugin_name_field',                                // Field ID.
 				__( 'Plugin Name Field:', Plugin_Name::PLUGIN_ID ), // Field Title.
 				array( $this, 'markup_fields' ),                    // Field Callback.
-				static::SETTINGS_PAGE_URL,                          // Page.
+				static::SETTINGS_PAGE_SLUG,                          // Page.
 				'plugin_name_section',                              // Section ID.
 				array(                                              // Field args.
 					'id'        => 'plugin_name_field',
@@ -220,7 +215,7 @@ if ( ! class_exists( __NAMESPACE__ . '\\' . 'Admin_Settings' ) ) {
 		 * @since    1.0.0
 		 */
 		public function add_plugin_action_links( $links ) {
-			$settings_link = '<a href="options-general.php?page=' . static::SETTINGS_PAGE_URL . '">' . __( 'Settings', Plugin_Name::PLUGIN_ID ) . '</a>';
+			$settings_link = '<a href="options-general.php?page=' . static::SETTINGS_PAGE_SLUG . '">' . __( 'Settings', Plugin_Name::PLUGIN_ID ) . '</a>';
 			array_unshift( $links, $settings_link );
 
 			return $links;
