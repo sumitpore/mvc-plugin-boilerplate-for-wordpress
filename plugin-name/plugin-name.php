@@ -31,20 +31,19 @@ define( 'PLUGIN_NAME_SUPPORTS_WP_MULTISITE', false ); // because plugin is not c
 /**
  * Checks if the system requirements are met
  *
+ * @return boolean True if system requirements are met, false if not
  * @since    1.0.0
- * @return bool True if system requirements are met, false if not
  */
 function plugin_name_requirements_met() {
-
-	if( ! is_php_version_dependency_met() ){
+	if ( ! is_php_version_dependency_met() ) {
 		return false;
 	}
 
-	if( ! is_wp_version_dependency_met() ){
+	if ( ! is_wp_version_dependency_met() ) {
 		return false;
 	}
 
-	if( ! is_wp_multisite_dependency_met() ){
+	if ( ! is_wp_multisite_dependency_met() ) {
 		return false;
 	}
 
@@ -57,7 +56,7 @@ function plugin_name_requirements_met() {
  * @return boolean
  * @since 1.0.0
  */
-function is_php_version_dependency_met(){
+function is_php_version_dependency_met() {
 	return version_compare( PHP_VERSION, PLUGIN_NAME_REQUIRED_PHP_VERSION, '>=' );
 }
 
@@ -67,7 +66,7 @@ function is_php_version_dependency_met(){
  * @return boolean
  * @since 1.0.0
  */
-function is_wp_version_dependency_met(){
+function is_wp_version_dependency_met() {
 	global $wp_version;
 	return version_compare( $wp_version, PLUGIN_NAME_REQUIRED_WP_VERSION, '>=' );
 }
@@ -79,7 +78,7 @@ function is_wp_version_dependency_met(){
  * @since 1.0.0
  */
 function is_wp_multisite_dependency_met() {
-	return is_multisite() && ( false === PLUGIN_NAME_SUPPORTS_WP_MULTISITE  ) ? false : true;
+	return is_multisite() && ( false === PLUGIN_NAME_SUPPORTS_WP_MULTISITE ) ? false : true;
 }
 
 /**
@@ -94,12 +93,17 @@ function plugin_name_show_requirements_error() {
 
 /**
  * The code that runs during plugin activation.
+ *
+ * @since 1.0.0
  */
 function activate_plugin_name() {
 	( new Plugin_Name\App\Activator() )->activate();
 }
+
 /**
  * The code that runs during plugin deactivation.
+ *
+ * @since 1.0.0
  */
 function deactivate_plugin_name() {
 	( new Plugin_Name\App\Deactivator() )->deactivate();
