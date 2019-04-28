@@ -24,9 +24,9 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'PLUGIN_NAME_REQUIRED_PHP_VERSION', '5.3' ); // because of get_called_class().
-define( 'PLUGIN_NAME_REQUIRED_WP_VERSION', '4.8' );
-define( 'PLUGIN_NAME_REQUIRED_WP_NETWORK', false ); // because plugin is not compatible with WordPress multisite.
+define( 'PLUGIN_NAME_REQUIRED_PHP_VERSION', '7.1' ); // because of get_called_class().
+define( 'PLUGIN_NAME_REQUIRED_WP_VERSION', '5.0' );
+define( 'PLUGIN_NAME_SUPPORTS_WP_MULTISITE', false ); // because plugin is not compatible with WordPress multisite.
 
 /**
  * Checks if the system requirements are met
@@ -35,19 +35,51 @@ define( 'PLUGIN_NAME_REQUIRED_WP_NETWORK', false ); // because plugin is not com
  * @return bool True if system requirements are met, false if not
  */
 function plugin_name_requirements_met() {
-	global $wp_version;
 
-	if ( version_compare( PHP_VERSION, PLUGIN_NAME_REQUIRED_PHP_VERSION, '<' ) ) {
+	if( ! is_php_version_dependency_met() ){
 		return false;
 	}
-	if ( version_compare( $wp_version, PLUGIN_NAME_REQUIRED_WP_VERSION, '<' ) ) {
+
+	if( ! is_wp_version_dependency_met() ){
 		return false;
 	}
-	if ( is_multisite() != PLUGIN_NAME_REQUIRED_WP_NETWORK ) {
+
+	if( ! is_wp_multisite_dependency_met() ){
 		return false;
 	}
 
 	return true;
+}
+
+/**
+ * Checks if Installed PHP Version is higher than required PHP Version
+ *
+ * @return boolean
+ * @since 1.0.0
+ */
+function is_php_version_dependency_met(){
+	return version_compare( PHP_VERSION, PLUGIN_NAME_REQUIRED_PHP_VERSION, '>=' );
+}
+
+/**
+ * Checks if Installed WP Version is higher than required WP Version
+ *
+ * @return boolean
+ * @since 1.0.0
+ */
+function is_wp_version_dependency_met(){
+	global $wp_version;
+	return version_compare( $wp_version, PLUGIN_NAME_REQUIRED_WP_VERSION, '>=' );
+}
+
+/**
+ * Checks if Multisite Dependencies are met
+ *
+ * @return boolean
+ * @since 1.0.0
+ */
+function is_wp_multisite_dependency_met() {
+	return is_multisite() && ( false === PLUGIN_NAME_SUPPORTS_WP_MULTISITE  ) ? false : true;
 }
 
 /**
