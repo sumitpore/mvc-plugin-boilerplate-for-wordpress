@@ -1,6 +1,6 @@
 <div class="error">
 
-	<p>Plugin Name error: Your environment doesn't meet the system requirements listed below.</p>
+	<p>Your environment doesn't meet the system requirements listed below. Therefore <strong>Plugin Name</strong> has been <strong>deactivated.</strong></p>
 
 	<ul class="ul-disc">
 		<?php foreach ( $errors as $error ) : ?>
