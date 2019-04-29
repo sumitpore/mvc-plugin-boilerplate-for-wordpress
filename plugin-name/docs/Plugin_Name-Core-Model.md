@@ -8,7 +8,6 @@ Abstract class to define/implement base methods for model classes
 
 * Class name: Model
 * Namespace: Plugin_Name\Core
-* This is an **abstract** class
 
 
 

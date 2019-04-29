@@ -48,7 +48,7 @@ Methods
 
     string Plugin_Name\App\Models\Settings::get_plugin_settings_option_key()
 
-Retusn the Option name/key saved in the database
+Returns the Option name/key saved in the database
 
 
 

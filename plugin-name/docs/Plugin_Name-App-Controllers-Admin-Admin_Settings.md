@@ -16,9 +16,9 @@ Constants
 ----------
 
 
-### SETTINGS_PAGE_URL
+### SETTINGS_PAGE_SLUG
 
-    const SETTINGS_PAGE_URL = \Plugin_Name::PLUGIN_ID
+    const SETTINGS_PAGE_SLUG = \Plugin_Name::PLUGIN_ID
 
 
 
@@ -38,7 +38,7 @@ Properties
 
 ### $hook_suffix
 
-    private string $hook_suffix = ''
+    private string $hook_suffix = 'settings_page_' . \Plugin_Name::PLUGIN_ID
 
 Holds suffix for dynamic add_action called on settings page.
 
@@ -72,24 +72,6 @@ Holds View Object
 
 Methods
 -------
-
-
-### __construct
-
-    mixed Plugin_Name\Core\Controller::__construct(\Plugin_Name\Core\Model $model, mixed $view)
-
-Constructor
-
-
-
-* Visibility: **protected**
-* This method is defined by [Plugin_Name\Core\Controller](Plugin_Name-Core-Controller.md)
-
-
-#### Arguments
-* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)** - &lt;p&gt;Model object to be used with current controller object.&lt;/p&gt;
-* $view **mixed** - &lt;p&gt;View object to be used with current controller object. Otherwise false.&lt;/p&gt;
-
 
 
 ### register_hook_callbacks
@@ -312,6 +294,24 @@ Sets the view to be used
 
 #### Arguments
 * $view **[Plugin_Name\Core\View](Plugin_Name-Core-View.md)** - &lt;p&gt;View object to be associated with the current controller object.&lt;/p&gt;
+
+
+
+### __construct
+
+    mixed Plugin_Name\Core\Controller::__construct(\Plugin_Name\Core\Model $model, mixed $view)
+
+Constructor
+
+
+
+* Visibility: **protected**
+* This method is defined by [Plugin_Name\Core\Controller](Plugin_Name-Core-Controller.md)
+
+
+#### Arguments
+* $model **[Plugin_Name\Core\Model](Plugin_Name-Core-Model.md)** - &lt;p&gt;Model object to be used with current controller object.&lt;/p&gt;
+* $view **mixed** - &lt;p&gt;View object to be used with current controller object. Otherwise false.&lt;/p&gt;
 
 
 
