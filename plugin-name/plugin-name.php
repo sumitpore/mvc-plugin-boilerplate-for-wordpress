@@ -35,7 +35,7 @@ function plugin_requirements_checker() {
 
 	if ( null === $requirements_checker ) {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-requirements-checker.php';
-		$requirements_conf = apply_filters( 'plugin_name_minimum_requirements', include_once( plugin_dir_path( __FILE__ ) . 'requirements.php' ) );
+		$requirements_conf = apply_filters( 'plugin_name_minimum_requirements', include_once( plugin_dir_path( __FILE__ ) . 'requirements-config.php' ) );
 		$requirements_checker = new Plugin_Name\Includes\Requirements_Checker( $requirements_conf );
 	}
 
