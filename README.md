@@ -43,6 +43,8 @@ wget -O boilerplate-generator.sh https://raw.githubusercontent.com/sumitpore/mvc
 
 We'll try to create a shortcode that prints 10 posts that will help you understand how this boilerplate works. The guide assumes that you have gone through Installation steps and created `Example Me` Plugin.
 
+If you prefer watching videos over reading, then here is a [playlist to get started.](https://www.youtube.com/watch?v=vxR6X8nFbXs&list=PLynzWOMAmxrOtGo6ptsdOaxYoANjOSV8h)
+
 ### 1. Writing your first Router 📡
 Routes can be defined inside `routes.php` file. Here is how a route can be defined for our example
 ```php
