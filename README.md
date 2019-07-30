@@ -11,9 +11,7 @@ The original [WordPress Plugin Boilerplate](https://github.com/DevinVinson/WordP
 point for creating small plugins. So if your plugin is small, I definitely recommend using that boilerplate. However, as the plugin starts growing & we add more-n-more features to it, it somewhat becomes challenging to decide where a certain piece of code should go OR how/when to separate different functionalities.
 When these things are not clear in long term project to the developer, they end up creating GOD classes that try to do everything.
 
-The objective of this boilerplate is to separate concerns. Developer gets a chance to write individual `Model`, `View` & `Controller`. Also, the concern of whether to load a controller/model or not is delegated to `Router`, so that your controller & model can focus only on what they are supposed to do.
-
-> __NOTE: THIS IS NOT FULL FLEDGED MVC FRAMEWORK. IT IS A BOILERPLATE THAT GIVES THE DEVELOPER ABILITY TO WRITE CODE IN MVC STYLE.__ 
+The objective of this boilerplate is to separate concerns. Developer gets a chance to write individual `Model`, `View` & `Controller`. Also, the concern of whether to load a controller/model or not is delegated to `Router`, so that your controller & model can focus only on what they are supposed to do. 
 
 Because this project is meant to be a boilerplate, it has only those features which are required to build plugin in MVC way - No ORM - No Extra Goodies - No Huge Learning Curve. 
 
@@ -44,6 +42,7 @@ wget -O boilerplate-generator.sh https://raw.githubusercontent.com/sumitpore/mvc
 We'll try to create a shortcode that prints 10 posts that will help you understand how this boilerplate works. The guide assumes that you have gone through Installation steps and created `Example Me` Plugin.
 
 If you prefer watching videos over reading, then here is a [playlist to get started.](https://www.youtube.com/watch?v=vxR6X8nFbXs&list=PLynzWOMAmxrOtGo6ptsdOaxYoANjOSV8h)
+[![YouTube Playlist on Writing a WordPress Plugin in MVC Way](https://raw.githubusercontent.com/sumitpore/repo-assets/master/mvc-playlist-preview-image.png)](https://www.youtube.com/watch?v=vxR6X8nFbXs&list=PLynzWOMAmxrOtGo6ptsdOaxYoANjOSV8h)
 
 ### 1. Writing your first Router 📡
 Routes can be defined inside `routes.php` file. Here is how a route can be defined for our example
