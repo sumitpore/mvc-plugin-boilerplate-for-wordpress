@@ -1,4 +1,5 @@
 <?php
+
 namespace Plugin_Name\App;
 
 /**
@@ -11,7 +12,8 @@ namespace Plugin_Name\App;
  * @subpackage Plugin_Name/App
  * @author     Your Name <email@example.com>
  */
-class Activator {
+class Activator
+{
 
 	/**
 	 * Short Description. (use period)
@@ -20,7 +22,8 @@ class Activator {
 	 *
 	 * @since    1.0.0
 	 */
-	public function activate() {
+	public function activate()
+	{
+		wp_schedule_event(time(), 'hourly', 'my_hourly_event');
 	}
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Plugin_Name\App;
 
 /**
@@ -11,7 +12,8 @@ namespace Plugin_Name\App;
  * @subpackage Plugin_Name/App
  * @author     Your Name <email@example.com>
  */
-class Deactivator {
+class Deactivator
+{
 
 	/**
 	 * Short Description. (use period)
@@ -20,7 +22,8 @@ class Deactivator {
 	 *
 	 * @since    1.0.0
 	 */
-	public function deactivate() {
+	public function deactivate()
+	{
+		wp_clear_scheduled_hook('my_hourly_event');
 	}
-
 }
